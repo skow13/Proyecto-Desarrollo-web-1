@@ -34,7 +34,7 @@ const UsuarioSchema = new mongoose.Schema({
   usuario: String,
   password: String,
   fechaNacimiento: Date,
-  saldo: { type: Number, default: 1000000 },
+  saldo: { type: Number, default: 0 },
   transacciones: [
     {
       fecha: { type: Date, default: Date.now },
@@ -44,6 +44,7 @@ const UsuarioSchema = new mongoose.Schema({
     }
   ]
 });
+
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
 // -------------------- RUTAS GET (vistas) --------------------
@@ -57,8 +58,6 @@ app.get('/Retiro', (req, res) => res.render('Retiro'));
 app.get('/Inicio', (req, res) => res.render('Inicio'));
 app.get('/Info', (req, res) => res.render('Info'));
 app.get('/Info_ruleta', (req, res) => res.render('Info_ruleta'));
-app.get('/Perfil', (req, res) => res.render('Perfil'));
-
 
 // -------------------- REGISTRO --------------------
 app.post('/register', async (req, res) => {
@@ -69,6 +68,11 @@ app.post('/register', async (req, res) => {
   }
 
   try {
+    const existe = await Usuario.findOne({ usuario });
+    if (existe) {
+      return res.render('Registro', { error: 'El nombre de usuario ya existe' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const nuevoUsuario = new Usuario({
       nombre,
@@ -99,7 +103,8 @@ app.post('/login', async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.render('Login', { error: 'Contraseña incorrecta' });
 
-    res.cookie('usuario', user.usuario, { httpOnly: true });
+    // Cookie accesible para el navegador
+    res.cookie('usuario', user.usuario, { httpOnly: false });
     res.redirect('/Perfil');
   } catch (err) {
     console.error('Error en login:', err);
@@ -116,6 +121,9 @@ app.get('/Perfil', async (req, res) => {
     const usuario = await Usuario.findOne({ usuario: username });
     if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
 
+    // Solo mostrar las últimas 5 transacciones
+    const ultimasTransacciones = usuario.transacciones.slice(-5).reverse();
+
     res.render('Perfil', {
       nombre: usuario.nombre,
       usuario: usuario.usuario,
@@ -124,11 +132,43 @@ app.get('/Perfil', async (req, res) => {
         ? usuario.fechaNacimiento.toLocaleDateString('es-CL')
         : 'No registrada',
       saldo: usuario.saldo.toLocaleString('es-CL'),
-      transacciones: usuario.transacciones
+      transacciones: ultimasTransacciones
     });
   } catch (err) {
     console.error('Error al cargar perfil:', err);
     res.render('Login', { error: 'Error interno del servidor.' });
+  }
+});
+
+// -------------------- REGISTRO DE TRANSACCIONES --------------------
+// Ejemplo: POST desde Ruleta, Deposito o Retiro
+app.post('/transaccion', async (req, res) => {
+  try {
+    const username = req.cookies.usuario;
+    const { detalle, monto, positivo } = req.body;
+
+    const usuario = await Usuario.findOne({ usuario: username });
+    if (!usuario) return res.status(404).send('Usuario no encontrado');
+
+    const montoNum = Number(monto);
+    usuario.transacciones.push({
+      detalle,
+      monto: montoNum,
+      positivo: positivo === 'true'
+    });
+
+    // Actualiza el saldo según el tipo de transacción
+    if (positivo === 'true') {
+      usuario.saldo += montoNum;
+    } else {
+      usuario.saldo -= montoNum;
+    }
+
+    await usuario.save();
+    res.redirect('/Perfil');
+  } catch (err) {
+    console.error('Error al registrar transacción:', err);
+    res.status(500).send('Error al registrar transacción');
   }
 });
 
