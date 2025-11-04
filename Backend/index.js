@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, '../Public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-mongoose.connect('mongodb+srv://ruletadiego:L02Mda1AyQWCrpPb@cluster0.n28spxy.mongodb.net/?appName=Cluster')
+mongoose.connect('mongodb+srv://ruletareal:diegochristianjesus@cluster0.n28spxy.mongodb.net/?appName=Cluster0')
   .then(() => console.log('✅ Conexión exitosa a MongoDB Atlas'))
   .catch(err => console.error('❌ Error conectando a MongoDB:', err));
 
