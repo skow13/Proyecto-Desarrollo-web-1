@@ -11,34 +11,34 @@
     </ul>
   </section>
 
-  <h2>Últimas 5 transacciones:</h2>
+<h2>Últimas 5 transacciones:</h2>
 
-  {{#if transacciones}}
-    <table class="tabla-transacciones">
-      <thead>
+<table class="tabla-transacciones">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Detalle</th>
+      <th>Importe</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#if transacciones}}
+      {{#each transacciones}}
         <tr>
-          <th>Fecha</th>
-          <th>Detalle</th>
-          <th class="monto">Importe</th>
+          <td>{{this.fecha}}</td>
+          <td>{{this.detalle}}</td>
+          <td style="color: {{#if this.positivo}}#00ff7f{{else}}#ff4d4d{{/if}};">
+            {{#if this.positivo}}+{{else}}-{{/if}} ${{this.monto}}
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        {{#each transacciones}}
-          <tr>
-            <td>{{this.fecha}}</td>
-            <td>{{this.detalle}}</td>
-            {{#if this.positivo}}
-              <td class="monto positivo">+ ${{this.monto}}</td>
-            {{else}}
-              <td class="monto negativo">− ${{this.monto}}</td>
-            {{/if}}
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  {{else}}
-    <p>No hay transacciones registradas aún.</p>
-  {{/if}}
+      {{/each}}
+    {{else}}
+      <tr>
+        <td colspan="3">No hay transacciones registradas aún.</td>
+      </tr>
+    {{/if}}
+  </tbody>
+</table>
 
   <div class="botones">
     <a href="/Ruleta">Ir a la Ruleta</a>
