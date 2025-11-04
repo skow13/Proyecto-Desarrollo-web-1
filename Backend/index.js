@@ -26,16 +26,64 @@ mongoose.connect('mongodb+srv://ruletadiego:dmmfh2014@cluster0.n28spxy.mongodb.n
 
 // -------------------- MODELO DE USUARIO --------------------
 const UsuarioSchema = new mongoose.Schema({
-  username: String,
-  password: String
+  nombre: String,
+  email: String,
+  usuario: String,
+  password: String,
+  fechaNacimiento: Date,
+  saldo: { type: Number, default: 0 },
+  transacciones: [
+    {
+      fecha: Date,
+      detalle: String,
+      monto: Number,
+      positivo: Boolean
+    }
+  ]
 });
+
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
+
+// -------------------- REGISTRO --------------------
+app.post('/register', async (req, res) => {
+  const { nombre, email, usuario, password, repassword, birthdate } = req.body;
+
+  // Verificar que las contraseñas coincidan
+  if (password !== repassword) {
+    return res.render('registro', { error: 'Las contraseñas no coinciden' });
+  }
+
+  try {
+    // Revisar si ya existe el usuario o el correo
+    const existente = await Usuario.findOne({ $or: [{ usuario }, { email }] });
+    if (existente) {
+      return res.render('registro', { error: 'Usuario o correo ya registrados' });
+    }
+
+    // Encriptar contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const nuevoUsuario = new Usuario({
+      nombre,
+      email,
+      usuario,
+      password: hashedPassword,
+      fechaNacimiento: birthdate
+    });
+
+    await nuevoUsuario.save();
+    res.render('login', { success: 'Usuario registrado con éxito, inicia sesión' });
+  } catch (err) {
+    console.error('Error al registrar usuario:', err);
+    res.render('registro', { error: 'Error interno del servidor' });
+  }
+});
 
 // -------------------- RUTAS --------------------
 
 // Página principal
 app.get('/', (req, res) => {
-  res.render('Inicio'); // Renderiza Frontend/Inicio.handlebars
+  res.render('Inicio');
 });
 
 // Página de registro
@@ -68,18 +116,74 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const usuario = await Usuario.findOne({ username });
-    if (!usuario) return res.render('login', { error: 'Usuario no encontrado' });
+    const usuario = await Usuario.findOne({ usuario: username });
+
+    if (!usuario) {
+      return res.render('login', { error: 'Usuario no encontrado.' });
+    }
 
     const match = await bcrypt.compare(password, usuario.password);
-    if (!match) return res.render('login', { error: 'Contraseña incorrecta' });
+    if (!match) {
+      return res.render('login', { error: 'Contraseña incorrecta.' });
+    }
 
-    res.render('Perfil', { username });
+    res.cookie('usuario', usuario.usuario, { httpOnly: true });
+
+    res.redirect('/Perfil');
   } catch (err) {
-    console.error('Error al iniciar sesión:', err);
-    res.render('login', { error: 'Error interno del servidor' });
+    console.error('Error en login:', err);
+    res.render('login', { error: 'Error interno del servidor.' });
   }
 });
+
+app.post('/recuperar', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const usuario = await Usuario.findOne({ email });
+
+    if (!usuario) {
+      return res.render('recuperarc', { error: 'No existe una cuenta con ese correo electrónico.' });
+    }
+
+    res.render('recuperarc', {
+      success: 'Se ha enviado un enlace de recuperación (simulado). Revisa tu correo.'
+    });
+  } catch (err) {
+    console.error('Error en recuperación:', err);
+    res.render('recuperarc', { error: 'Error interno del servidor.' });
+  }
+});
+
+app.get('/Perfil', async (req, res) => {
+  try {
+    const username = req.cookies.usuario;
+    if (!username) {
+      return res.redirect('/login');
+    }
+
+    const usuario = await Usuario.findOne({ usuario: username });
+    if (!usuario) {
+      return res.render('login', { error: 'Usuario no encontrado.' });
+    }
+
+    res.render('Perfil', {
+      nombre: usuario.nombre,
+      usuario: usuario.usuario,
+      email: usuario.email,
+      fechaNacimiento: usuario.fechaNacimiento
+        ? usuario.fechaNacimiento.toLocaleDateString('es-CL')
+        : 'No registrada',
+      saldo: usuario.saldo.toLocaleString('es-CL'),
+      transacciones: usuario.transacciones
+    });
+  } catch (err) {
+    console.error('Error al cargar perfil:', err);
+    res.render('login', { error: 'Error interno del servidor.' });
+  }
+});
+
+
 
 // -------------------- INICIAR SERVIDOR --------------------
 app.listen(port, () => {

@@ -1,17 +1,19 @@
-  <div class="perfil">
-    <h1>Perfil de usuario</h1>
+<div class="perfil">
+  <h1>Perfil de usuario</h1>
 
-    <section>
-      <ul>
-        <li>Nombre: josecito</li>
-        <li>Fecha de nacimiento: 14/04/2000</li>  
-        <li>Nombre de usuario: josecitogamer</li>
-        <li>Correo electrónico: josecito@gmail.com</li>
-        <li>Saldo Actual: $1.000.000</li>
-      </ul>
-    </section>
+  <section>
+    <ul>
+      <li><strong>Nombre:</strong> {{nombre}}</li>
+      <li><strong>Fecha de nacimiento:</strong> {{fechaNacimiento}}</li>
+      <li><strong>Nombre de usuario:</strong> {{usuario}}</li>
+      <li><strong>Correo electrónico:</strong> {{email}}</li>
+      <li><strong>Saldo actual:</strong> ${{saldo}}</li>
+    </ul>
+  </section>
 
-    <h2>Últimas 5 transacciones:</h2>
+  <h2>Últimas 5 transacciones:</h2>
+
+  {{#if transacciones}}
     <table class="tabla-transacciones">
       <thead>
         <tr>
@@ -21,35 +23,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>15 agosto 2025</td>
-          <td>Depósito</td>
-          <td class="monto positivo">+ $15.000</td>
-        </tr>
-        <tr>
-          <td>5 agosto 2025</td>
-          <td>Retiro</td>
-          <td class="monto negativo">− $150.000</td>
-        </tr>
-        <tr>
-          <td>1 agosto 2025</td>
-          <td>Depósito</td>
-          <td class="monto positivo">+ $150.000</td>
-        </tr>
-        <tr>
-          <td>23 junio 2025</td>
-          <td>Retiro</td>
-          <td class="monto negativo">− $15.000</td>
-        </tr>
-        <tr>
-          <td>15 junio 2025</td>
-          <td>Depósito</td>
-          <td class="monto positivo">+ $1.000.000</td>
-        </tr>
+        {{#each transacciones}}
+          <tr>
+            <td>{{this.fecha}}</td>
+            <td>{{this.detalle}}</td>
+            {{#if this.positivo}}
+              <td class="monto positivo">+ ${{this.monto}}</td>
+            {{else}}
+              <td class="monto negativo">− ${{this.monto}}</td>
+            {{/if}}
+          </tr>
+        {{/each}}
       </tbody>
     </table>
+  {{else}}
+    <p>No hay transacciones registradas aún.</p>
+  {{/if}}
 
-    <div class="botones">
-      <a href="Ruleta.html">Ir a la Ruleta</a>
-    </div>
+  <div class="botones">
+    <a href="/Ruleta">Ir a la Ruleta</a>
   </div>
+</div>
+
