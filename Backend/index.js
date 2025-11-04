@@ -10,7 +10,10 @@ const app = express();
 const port = 80;
 
 // -------------------- CONFIGURACIÓN DE HANDLEBARS --------------------
-app.engine('handlebars', engine());
+app.engine('handlebars', engine({
+  layoutsDir: path.join(__dirname, '../Frontend/layouts'),
+  defaultLayout: 'main',
+}));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, '../Frontend'));
 app.use(express.static(path.join(__dirname, '../Public')));
