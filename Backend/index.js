@@ -11,7 +11,7 @@ const port = 80;
 
 // -------------------- CONFIGURACIÓN DE HANDLEBARS --------------------
 app.engine('handlebars', engine({
-  layoutsDir: path.join(__dirname, '../Frontend/layouts'),
+  layoutsDir: path.join(__dirname, '../Frontend/Layouts'),
   defaultLayout: 'main',
 }));
 app.set('view engine', 'handlebars');
