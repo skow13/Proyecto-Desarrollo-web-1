@@ -12,7 +12,8 @@ const port = 80;
 // -------------------- CONFIGURACIÓN DE HANDLEBARS --------------------
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, '../Frontend')); // Carpeta de tus vistas .handlebars
+app.set('views', path.join(__dirname, '../Frontend'));
+console.log('✅ Vistas desde:', path.join(__dirname, '../Frontend'));
 
 // -------------------- MIDDLEWARES --------------------
 app.use(bodyParser.urlencoded({ extended: true }));
