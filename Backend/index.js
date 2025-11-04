@@ -9,38 +9,41 @@ const path = require('path');
 const app = express();
 const port = 80;
 
-// Configurar Handlebars
+// -------------------- CONFIGURACIÓN DE HANDLEBARS --------------------
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, '../views'));
+app.set('views', path.join(__dirname, '../Frontend')); // Carpeta de tus vistas .handlebars
 
-// Middleware
+// -------------------- MIDDLEWARES --------------------
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../Public'))); // Carpeta con CSS, JS, imágenes, etc.
 
-// Conexión MongoDB Atlas
+// -------------------- CONEXIÓN A MONGODB ATLAS --------------------
 mongoose.connect('mongodb+srv://ruletadiego:dmmfh2014@cluster0.n28spxy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
-  .then(() => console.log('Conexión exitosa a MongoDB Atlas'))
-  .catch(err => console.error('Error conectando a MongoDB', err));
+  .then(() => console.log('✅ Conexión exitosa a MongoDB Atlas'))
+  .catch(err => console.error('❌ Error conectando a MongoDB', err));
 
-// Modelo Usuario
+// -------------------- MODELO DE USUARIO --------------------
 const UsuarioSchema = new mongoose.Schema({
   username: String,
   password: String
 });
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
-// Rutas principales
+// -------------------- RUTAS --------------------
+
+// Página principal
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('Inicio'); // Renderiza Frontend/Inicio.handlebars
 });
 
+// Página de registro
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('registro');
 });
 
-// Registro de usuario con bcrypt
+// Procesar registro
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
@@ -51,15 +54,16 @@ app.post('/register', async (req, res) => {
     res.render('login', { success: 'Usuario registrado con éxito' });
   } catch (err) {
     console.error('Error al registrar:', err);
-    res.render('register', { error: 'Error al registrar usuario' });
+    res.render('registro', { error: 'Error al registrar usuario' });
   }
 });
 
+// Página de login
 app.get('/login', (req, res) => {
   res.render('login');
 });
 
-// Login con bcrypt
+// Procesar login
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -70,14 +74,14 @@ app.post('/login', async (req, res) => {
     const match = await bcrypt.compare(password, usuario.password);
     if (!match) return res.render('login', { error: 'Contraseña incorrecta' });
 
-    res.render('welcome', { username });
+    res.render('Perfil', { username });
   } catch (err) {
     console.error('Error al iniciar sesión:', err);
     res.render('login', { error: 'Error interno del servidor' });
   }
 });
 
-// Arrancar servidor
+// -------------------- INICIAR SERVIDOR --------------------
 app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
 });
