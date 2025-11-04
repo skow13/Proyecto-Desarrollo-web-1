@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+  <div class="formulario">
+    <h1>Registro</h1>
+    <form>
+      <div class="input-box">
+        <input type="text" name="nombre" required>
+        <label>Nombre Completo</label>
+      </div>
+      <div class="input-box">
+        <input type="email" name="email" required>
+        <label>Correo electrónico</label>
+      </div>
+      <div class="input-box">
+        <input type="text" name="usuario" required>
+        <label>Nombre de usuario</label>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" required>
+        <label>Contraseña</label>
+      </div>
+      <div class="input-box">
+        <input type="password" name="repassword" required>
+        <label>Confirmar Contraseña</label>
+      </div>
+      <div>
+        <label for="birthdate"><strong>Fecha de Nacimiento</strong></label>
+        <input type="date" name="birthdate" id="birthdate">
+      </div>
+      <input type="submit" value="Registrarse">
+      <div class="volver">
+        <a href="Inicio.html">Volver al inicio</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
