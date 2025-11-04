@@ -47,7 +47,7 @@ const UsuarioSchema = new mongoose.Schema({
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
 // -------------------- RUTAS GET (vistas) --------------------
-app.get('/', (req, res) => res.redirect('/login'));
+app.get('/', (req, res) => res.redirect('inicio'));
 app.get('/login', (req, res) => res.render('login'));
 app.get('/register', (req, res) => res.render('registro'));
 app.get('/Recuperar', (req, res) => res.render('recuperarc'));
