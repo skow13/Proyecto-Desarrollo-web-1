@@ -49,7 +49,7 @@ const Usuario = mongoose.model('Usuario', UsuarioSchema);
 // -------------------- RUTAS GET (vistas) --------------------
 app.get('/', (req, res) => res.redirect('Inicio'));
 app.get('/Login', (req, res) => res.render('Login'));
-app.get('/Register', (req, res) => res.render('Registro'));
+app.get('/Registro', (req, res) => res.render('Registro'));
 app.get('/Recuperar', (req, res) => res.render('Recuperarc'));
 app.get('/Ruleta', (req, res) => res.render('Ruleta'));
 app.get('/Deposito', (req, res) => res.render('Deposito'));
@@ -65,7 +65,7 @@ app.post('/register', async (req, res) => {
   const { nombre, email, usuario, password, repassword, birthdate } = req.body;
 
   if (password !== repassword) {
-    return res.render('registro', { error: 'Las contraseñas no coinciden' });
+    return res.render('Registro', { error: 'Las contraseñas no coinciden' });
   }
 
   try {
@@ -76,15 +76,15 @@ app.post('/register', async (req, res) => {
       usuario,
       password: hashedPassword,
       fechaNacimiento: birthdate,
-      saldo: 1000000,
+      saldo: 0,
       transacciones: []
     });
 
     await nuevoUsuario.save();
-    res.render('login', { success: 'Usuario registrado con éxito. Ahora puedes iniciar sesión.' });
+    res.render('Login', { success: 'Usuario registrado con éxito. Ahora puedes iniciar sesión.' });
   } catch (err) {
     console.error('Error en registro:', err);
-    res.render('registro', { error: 'Error al registrar el usuario.' });
+    res.render('Registro', { error: 'Error al registrar el usuario.' });
   }
 });
 
@@ -94,16 +94,16 @@ app.post('/login', async (req, res) => {
 
   try {
     const user = await Usuario.findOne({ usuario });
-    if (!user) return res.render('login', { error: 'Usuario no encontrado' });
+    if (!user) return res.render('Login', { error: 'Usuario no encontrado' });
 
     const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.render('login', { error: 'Contraseña incorrecta' });
+    if (!match) return res.render('Login', { error: 'Contraseña incorrecta' });
 
     res.cookie('usuario', user.usuario, { httpOnly: true });
     res.redirect('/Perfil');
   } catch (err) {
     console.error('Error en login:', err);
-    res.render('login', { error: 'Error interno del servidor' });
+    res.render('Login', { error: 'Error interno del servidor' });
   }
 });
 
@@ -111,12 +111,12 @@ app.post('/login', async (req, res) => {
 app.get('/Perfil', async (req, res) => {
   try {
     const username = req.cookies.usuario;
-    if (!username) return res.redirect('/login');
+    if (!username) return res.redirect('/Login');
 
     const usuario = await Usuario.findOne({ usuario: username });
-    if (!usuario) return res.render('login', { error: 'Usuario no encontrado' });
+    if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
 
-    res.render('perfil', {
+    res.render('Perfil', {
       nombre: usuario.nombre,
       usuario: usuario.usuario,
       email: usuario.email,
@@ -128,14 +128,14 @@ app.get('/Perfil', async (req, res) => {
     });
   } catch (err) {
     console.error('Error al cargar perfil:', err);
-    res.render('login', { error: 'Error interno del servidor.' });
+    res.render('Login', { error: 'Error interno del servidor.' });
   }
 });
 
 // -------------------- CERRAR SESIÓN --------------------
 app.get('/logout', (req, res) => {
   res.clearCookie('usuario');
-  res.redirect('/login');
+  res.redirect('/Login');
 });
 
 // -------------------- INICIAR SERVIDOR --------------------
