@@ -107,8 +107,15 @@ app.get('/Perfil', async (req, res) => {
 
     const usuario = await Usuario.findOne({ usuario: username });
     if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
-
-    const ultimasTransacciones = usuario.transacciones.slice(-5).reverse();
+    const ultimasTransacciones = usuario.transacciones
+      .slice(-5)
+      .reverse()
+      .map(t => ({
+        fecha: new Date(t.fecha).toLocaleString('es-CL'),
+        detalle: t.detalle || 'Sin detalle',
+        monto: t.monto?.toLocaleString('es-CL') || 0,
+        positivo: t.positivo
+      }));
 
     res.render('Perfil', {
       nombre: usuario.nombre,
