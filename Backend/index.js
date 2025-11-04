@@ -48,15 +48,18 @@ const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
 // -------------------- RUTAS GET (vistas) --------------------
 app.get('/', (req, res) => res.redirect('Inicio'));
-app.get('/login', (req, res) => res.render('login'));
-app.get('/register', (req, res) => res.render('registro'));
-app.get('/Recuperar', (req, res) => res.render('recuperarc'));
+app.get('/Login', (req, res) => res.render('Login'));
+app.get('/Register', (req, res) => res.render('Registro'));
+app.get('/Recuperar', (req, res) => res.render('Recuperarc'));
 app.get('/Ruleta', (req, res) => res.render('Ruleta'));
 app.get('/Deposito', (req, res) => res.render('Deposito'));
 app.get('/Retiro', (req, res) => res.render('Retiro'));
 app.get('/Inicio', (req, res) => res.render('Inicio'));
-app.get('/Info', (req, res) => res.render('info'));
-app.get('/Info_ruleta', (req, res) => res.render('info_ruleta'));
+app.get('/Info', (req, res) => res.render('Info'));
+app.get('/Info_ruleta', (req, res) => res.render('Info_ruleta'));
+app.get('/Perfil', (req, res) => res.render('Perfil'));
+
+
 // -------------------- REGISTRO --------------------
 app.post('/register', async (req, res) => {
   const { nombre, email, usuario, password, repassword, birthdate } = req.body;
