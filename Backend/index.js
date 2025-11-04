@@ -54,7 +54,9 @@ app.get('/Recuperar', (req, res) => res.render('recuperarc'));
 app.get('/Ruleta', (req, res) => res.render('Ruleta'));
 app.get('/Deposito', (req, res) => res.render('Deposito'));
 app.get('/Retiro', (req, res) => res.render('Retiro'));
-
+app.get('/inicio', (req, res) => res.render('inicio'));
+app.get('/info', (req, res) => res.render('info'));
+app.get('/info_ruleta', (req, res) => res.render('info_ruleta'));
 // -------------------- REGISTRO --------------------
 app.post('/register', async (req, res) => {
   const { nombre, email, usuario, password, repassword, birthdate } = req.body;
