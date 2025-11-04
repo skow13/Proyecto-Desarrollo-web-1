@@ -1,12 +1,13 @@
-<h2>Depósito</h2>
+<h1>Retiro</h1>
 <p>Saldo actual: ${{saldo}}</p>
 
-<form action="/Deposito" method="POST">
-  <label for="monto">Monto a depositar:</label>
+<form action="/Retiro" method="POST">
+  <label for="monto">Monto a retirar:</label>
   <input type="number" name="monto" required min="1">
-  <button type="submit">Depositar</button>
+  <button type="submit">Retirar</button>
 </form>
 
 {{#if error}}
   <p style="color:red">{{error}}</p>
 {{/if}}
+
