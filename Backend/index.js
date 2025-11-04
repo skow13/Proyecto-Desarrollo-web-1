@@ -47,16 +47,16 @@ const UsuarioSchema = new mongoose.Schema({
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
 // -------------------- RUTAS GET (vistas) --------------------
-app.get('/', (req, res) => res.redirect('inicio'));
+app.get('/', (req, res) => res.redirect('Inicio'));
 app.get('/login', (req, res) => res.render('login'));
 app.get('/register', (req, res) => res.render('registro'));
 app.get('/Recuperar', (req, res) => res.render('recuperarc'));
 app.get('/Ruleta', (req, res) => res.render('Ruleta'));
 app.get('/Deposito', (req, res) => res.render('Deposito'));
 app.get('/Retiro', (req, res) => res.render('Retiro'));
-app.get('/inicio', (req, res) => res.render('inicio'));
-app.get('/info', (req, res) => res.render('info'));
-app.get('/info_ruleta', (req, res) => res.render('info_ruleta'));
+app.get('/Inicio', (req, res) => res.render('Inicio'));
+app.get('/Info', (req, res) => res.render('info'));
+app.get('/Info_ruleta', (req, res) => res.render('info_ruleta'));
 // -------------------- REGISTRO --------------------
 app.post('/register', async (req, res) => {
   const { nombre, email, usuario, password, repassword, birthdate } = req.body;
