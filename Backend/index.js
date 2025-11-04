@@ -52,7 +52,6 @@ app.get('/', (req, res) => res.redirect('Inicio'));
 app.get('/Login', (req, res) => res.render('Login'));
 app.get('/Registro', (req, res) => res.render('Registro'));
 app.get('/Recuperar', (req, res) => res.render('Recuperarc'));
-app.get('/Ruleta', (req, res) => res.render('Ruleta'));
 app.get('/Deposito', (req, res) => res.render('Deposito'));
 app.get('/Retiro', (req, res) => res.render('Retiro'));
 app.get('/Inicio', (req, res) => res.render('Inicio'));
@@ -182,4 +181,22 @@ app.get('/logout', (req, res) => {
 app.listen(port, () => {
   console.log(`💫 Servidor corriendo en http://localhost:${port}`);
   console.log('🟢 Vistas configuradas en:', path.join(__dirname, '../Frontend'));
+});
+
+app.get('/Ruleta', async (req, res) => {
+  try {
+    const username = req.cookies.usuario;
+    if (!username) return res.redirect('/Login');
+
+    const usuario = await Usuario.findOne({ usuario: username });
+    if (!usuario) return res.redirect('/Login');
+
+    res.render('Ruleta', {
+      saldo: usuario.saldo.toLocaleString('es-CL'),
+      estado: 'Esperando apuesta'
+    });
+  } catch (err) {
+    console.error('Error al cargar ruleta:', err);
+    res.render('Ruleta', { saldo: 0, estado: 'Error cargando saldo' });
+  }
 });
