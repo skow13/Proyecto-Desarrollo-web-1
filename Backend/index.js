@@ -183,6 +183,19 @@ app.get('/Perfil', async (req, res) => {
   }
 });
 
+app.get('/Ruleta', async (req, res) => {
+  const username = req.cookies.usuario;
+  if (!username) return res.redirect('/login');
+
+  const usuario = await Usuario.findOne({ usuario: username });
+
+  res.render('Ruleta', {
+    saldo: usuario.saldo.toLocaleString('es-CL'),
+    estado: 'Esperando apuesta',
+    apuestas: usuario.apuestas || [], // si aún no existe, se puede inicializar vacío
+    resultados: usuario.resultados || [] // para mostrar historial de jugadas
+  });
+});
 
 
 // -------------------- INICIAR SERVIDOR --------------------
