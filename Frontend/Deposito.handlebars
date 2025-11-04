@@ -1,14 +1,12 @@
-    <div class="contenedor">
-        <h1>Deposito de dinero</h1>
-        <div class="saldo-box">
-            <p>Saldo actual:1.000.000</p>
-        </div>
-        <div class="acciones">
-            <input type="number" placeholder="Ingrese monto">
-            <button>Ingresar</button>
-        </div>
-        <div class="volver">
-            <a href="/Ruleta">Volver a la ruleta</a>
-        </div>
+<h2>Depósito</h2>
+<p>Saldo actual: ${{saldo}}</p>
 
-    </div>
+<form action="/Deposito" method="POST">
+  <label for="monto">Monto a depositar:</label>
+  <input type="number" name="monto" required min="1">
+  <button type="submit">Depositar</button>
+</form>
+
+{{#if error}}
+  <p style="color:red">{{error}}</p>
+{{/if}}

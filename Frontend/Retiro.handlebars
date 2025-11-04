@@ -1,26 +1,12 @@
-<div class="contenedor">
-  <h1>Retiro de dinero</h1>
+<h2>Depósito</h2>
+<p>Saldo actual: ${{saldo}}</p>
 
-  <div class="saldo-box">
-    <p>Saldo actual: ${{saldo}}</p>
-  </div>
+<form action="/Deposito" method="POST">
+  <label for="monto">Monto a depositar:</label>
+  <input type="number" name="monto" required min="1">
+  <button type="submit">Depositar</button>
+</form>
 
-  <div class="acciones">
-    <form action="/retirar" method="POST">
-      <input type="number" name="monto" placeholder="Ingrese monto" min="1" required>
-      <button type="submit">Retirar</button>
-    </form>
-  </div>
-
-  <div class="volver">
-    <a href="/Ruleta">Volver a la ruleta</a>
-  </div>
-
-  {{#if error}}
-    <p style="color:red;">{{error}}</p>
-  {{/if}}
-
-  {{#if success}}
-    <p style="color:green;">{{success}}</p>
-  {{/if}}
-</div>
+{{#if error}}
+  <p style="color:red">{{error}}</p>
+{{/if}}
