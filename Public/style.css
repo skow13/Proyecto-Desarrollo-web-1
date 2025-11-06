@@ -1,218 +1,627 @@
-/* === Estilo principal para sitio tipo casino online === */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-:root {
-  --color-fondo: #0d0d0d;
-  --color-secundario: #1a1a1a;
-  --color-verde: #00c46b;
-  --color-dorado: #d4af37;
-  --color-texto: #f1f1f1;
-  --color-error: #ff4d4d;
-  --shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
+/* ===== GENERALES ===== */
 body {
-  background: radial-gradient(circle at top, #1a1a1a 0%, #000 100%);
-  color: var(--color-texto);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: #001D20;
 }
 
-/* --- HEADER / NAVBAR --- */
-header {
-  background: var(--color-secundario);
-  box-shadow: var(--shadow);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+
+h1 {
+  text-align: center;
 }
 
-header h1 {
-  color: var(--color-dorado);
-  font-weight: 700;
-  letter-spacing: 1px;
+
+footer {
+  position: absolute;
+  top: 95%;
+  left: 42%;
 }
 
-nav a {
-  color: var(--color-texto);
-  margin: 0 1rem;
+
+a {
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: var(--color-verde);
-}
-
-/* --- CONTENEDORES GENERALES --- */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 2rem auto;
-  background: rgba(26, 26, 26, 0.9);
-  border-radius: 15px;
-  box-shadow: var(--shadow);
-  padding: 2rem;
-}
-
-/* --- BOTONES --- */
-button, .btn {
-  background: linear-gradient(90deg, var(--color-verde), var(--color-dorado));
-  border: none;
-  color: #000;
-  padding: 0.8rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.3s;
-}
-
-button:hover, .btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px var(--color-dorado);
-}
-
-/* --- FORMULARIOS --- */
-form {
+  background-color: #013338;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  font-size: 1.2rem;
   display: flex;
+  margin-top: 1%;
+  margin-left: 600px;
+  margin-right: 1px;
   flex-direction: column;
-  gap: 1rem;
 }
 
-input, select {
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-dorado);
-  background: var(--color-secundario);
-  color: var(--color-texto);
+
+#rule {
+  position: absolute;
+  height: 400px;
+  left: 7%;
+}
+
+
+#links {
+  position: absolute;
+  top: 20%;
+}
+
+
+/* ===== LOGIN / REGISTRO ===== */
+.formulario {
+  background-color: #013338;
+  width: 400px;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 5% auto;
+  color: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  font-family: Arial, sans-serif;
+}
+
+
+.formulario h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+.input-box {
+  position: relative;
+  margin-bottom: 1.8rem;
+}
+
+
+.input-box input {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
   font-size: 1rem;
 }
 
-input:focus, select:focus {
+
+.input-box input:focus {
   outline: none;
-  border-color: var(--color-verde);
-  box-shadow: 0 0 10px var(--color-verde);
+  border-bottom-color: #00FFC6;
 }
 
-/* --- TABLAS --- */
-table {
+
+.input-box label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: white;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+
+.input-box input:focus + label,
+.input-box input:valid + label {
+  top: -15px;
+  font-size: 0.8rem;
+  color: #00FFC6;
+}
+
+
+input[type="submit"] {
   width: 100%;
-  border-collapse: collapse;
+  padding: 12px;
+  background-color: #00FFC6;
+  border: none;
+  border-radius: 7px;
+  color: #001D20;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+input[type="submit"]:hover {
+  background-color: #00e6b0;
+}
+
+
+.recordar,
+.volver {
+  text-align: center;
   margin-top: 1rem;
+}
+
+
+.recordar a,
+.volver a {
+  display: inline-block;
+  background-color: #013338;
+  color: #00FFC6;
+  padding: 0.8rem 1.5rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  text-decoration: none;
+  min-width: 180px;  
   text-align: center;
 }
 
-th, td {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+.recordar a:hover,
+.volver a:hover {
+  background-color: #00FFC6;
+  color: #001D20;
 }
 
-th {
-  color: var(--color-dorado);
-  text-transform: uppercase;
+
+label[for="birthdate"] {
+  display: block;
+  margin: 1.2rem 0 .4rem;
+  color: #fff;
+  font-weight: 600;
 }
 
-tr:hover {
-  background-color: rgba(255,255,255,0.05);
+
+#birthdate {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px;
+  color: #fff;
+  font-size: 1rem;
+  color-scheme: dark;
+  margin-bottom: 1.2rem;
 }
 
-/* --- TARJETAS / SECCIONES --- */
-.card {
-  background: var(--color-secundario);
-  border-radius: 15px;
-  padding: 1.5rem;
+
+#birthdate:focus {
+  outline: none;
+  border-bottom-color: #00FFC6;
+}
+
+
+#birthdate::-webkit-datetime-edit,
+#birthdate::-webkit-datetime-edit-text,
+#birthdate::-webkit-datetime-edit-month-field,
+#birthdate::-webkit-datetime-edit-day-field,
+#birthdate::-webkit-datetime-edit-year-field {
+  color: #fff;
+}
+
+
+#birthdate::-webkit-clear-button,
+#birthdate::-webkit-inner-spin-button {
+  display: none;
+}
+
+
+/* ===== PERFIL ===== */
+.perfil {
+  width: min(900px, 92%);
+  margin: 0 auto;            
+  padding: 16px;
+  color: #fff;
+  text-align: center;        
+}
+
+
+.perfil h1 {
+  margin: 0 0 16px;
+}
+
+
+.perfil h2 {
+  margin: 24px 0 12px;
+}
+
+
+.perfil ul {
+  list-style: none;    
+  padding: 0;
+  margin: 0 0 20px 0;  
+  text-align: left;  
+}
+
+
+.tabla-transacciones {
+  width: 100%;
+  max-width: 720px;
+  border-collapse: collapse;
+  background: #01292d;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px auto;          
+  color: #fff;
+}
+
+
+.tabla-transacciones th,
+.tabla-transacciones td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+
+.tabla-transacciones thead th {
+  background: #013338;
+  text-align: left;
+}
+
+
+.tabla-transacciones tbody tr:nth-child(even) {
+  background: rgba(255,255,255,.03);
+}
+
+
+.tabla-transacciones tbody tr:hover {
+  background: rgba(255,255,255,.06);
+}
+
+
+.monto {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+.positivo {
+  color: #2ecc71;
+}
+
+
+.negativo {
+  color: #e74c3c;
+}
+
+
+.perfil .botones {
+  display: flex;
+  justify-content: center;    
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+
+.perfil .botones a {
+  display: block;
   text-align: center;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s;
+  margin: 0;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
 
-.card h2 {
-  color: var(--color-dorado);
-  margin-bottom: 1rem;
-}
-
-/* --- RUEDA DE RULETA / ELEMENTOS GRÁFICOS --- */
+/* ===== RULETA ===== */
 .ruleta {
+  display: block;
+  width: 1000px;          
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0 0 0;  
+}
+
+
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;              
+  margin-top: 2rem;
+}
+
+
+.botones a {
+  background-color: #013338;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  margin: 0;              
+}
+
+
+.botones a:hover {
+  background-color: #00FFC6;
+  color: #001D20;
+}
+
+
+.contenedor-ruleta {
+  display: flex;
+  justify-content: flex-start;  
+  align-items: flex-start;      
+  gap: 10rem;                    
+  margin: 2rem;
+}
+
+
+.panel-derecho {
+  text-align: left;            
+}
+
+
+.saldo {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.estado {
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.tablas-apuestas {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+
+.tabla-apuestas,
+.tabla-resultados {
   width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  margin: 2rem auto;
-  border: 8px solid var(--color-dorado);
-  background: conic-gradient(#000, var(--color-verde), #000);
-  box-shadow: 0 0 25px var(--color-dorado);
+  border-collapse: collapse;
+  background: #01292d;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #fff;
+}
+
+
+.tabla-apuestas th,
+.tabla-apuestas td,
+.tabla-resultados th,
+.tabla-resultados td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  text-align: center;
+}
+
+
+.tabla-apuestas thead th,
+.tabla-resultados thead th {
+  background: #013338;
+}
+
+
+td.rojo {
+  color: #e74c3c;
+  font-weight: bold;
+  background: transparent;
+}
+
+
+td.negro {
+  color: #000;
+  font-weight: bold;
+  background: transparent;
+}
+
+
+td.verde {
+  color: #2ecc71;
+  font-weight: bold;
+  background: transparent;
+}
+
+
+/* ===== RETIRO / DEPOSITO ===== */
+
+
+.contenedor {
+  width: 90%;
+  max-width: 720px;
+  margin: 60px auto;
+  padding: 2rem;
+  background: #013338;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
   position: relative;
 }
 
-.pelota {
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
 
-/* --- PIE DE PÁGINA --- */
-footer {
-  background: var(--color-secundario);
-  padding: 1rem;
+.saldo-box {
+  background: #01292d;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  color: #e6fffb;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.35);
+  margin: 0 auto 1rem auto;
+  width: fit-content;
+  min-width: 260px;
   text-align: center;
-  color: var(--color-dorado);
-  margin-top: auto;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-  }
 
-  nav {
-    margin-top: 1rem;
-    text-align: center;
-  }
-
-  .container {
-    padding: 1rem;
-  }
-
-  .ruleta {
-    width: 250px;
-    height: 250px;
-  }
+.saldo-box p {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.3px;
 }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem;
-  }
 
-  button, .btn {
-    width: 100%;
-  }
-
-  .card {
-    margin-bottom: 1rem;
-  }
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0 1.5rem 0;
+  flex-wrap: wrap;
 }
 
+
+.acciones input[type="number"] {
+  width: 260px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 2px solid #00FFC6;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+
+.acciones input[type="number"]:focus {
+  border-color: #00e6b0;
+  box-shadow: 0 0 0 3px rgba(0,255,198,0.15);
+}
+
+
+.acciones button {
+  padding: 12px 18px;
+  background-color: #00FFC6;
+  color: #001D20;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .1s ease;
+}
+
+
+.acciones button:hover {
+  background-color: #00e6b0;
+}
+
+
+.acciones button:active {
+  transform: translateY(1px);
+}
+
+
+.contenedor .volver { text-align: center; }
+.contenedor .volver a {
+  display: inline-block;
+  margin: 0.75rem auto 0;
+}
+
+
+/* ===== INFO / INFO RULETA ===== */
+body {
+      background-color: #001D20;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+      margin: 20px;
+    }
+
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+
+    details {
+      background: #08383D;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      margin: 10px auto;
+      max-width: 800px;
+      padding: 10px 15px;
+      color: #ddd;
+    }
+
+
+    summary {
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      outline: none;
+      list-style: none;
+      user-select: none;
+      padding: 10px;
+      background-color: #001D20;
+      border-radius: 6px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+      transition: background-color 0.3s ease;
+    }
+.contenido {
+  background-color: #2f2f2f;
+  padding: 10px;
+  border-radius: 5px;
+}
+summary:hover {
+  background-color: #444;
+}
+
+details > p {
+  padding: 10px 15px;
+  line-height: 1.6;
+  margin: 0;
+  background-color: #2b2b2b;
+  border-radius: 0 0 8px 8px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+.info {
+  color: #eee;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.info h2 {
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.info h3 {
+  color: #d9fffa;
+  margin-top: 0.75rem;
+}
+
+
+.tabla-probabilidades {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+
+.tabla-probabilidades thead th {
+  text-align: left;
+  border-bottom: 1px solid #999;
+}
+
+
+.tabla-probabilidades td,
+.tabla-probabilidades th {
+  padding: 8px 10px;
+}
+
+
+.tabla-probabilidades td:last-child,
+.tabla-probabilidades th:last-child {
+  text-align: right;
+}
+
+
+.regresar { text-align: center; }
+.regresar a {
+  display: inline-block;
+  background: #013338;
+  color: #00FFC6;
+  padding: 0.8rem 1.5rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  text-decoration: none;
+  margin: 1.25rem auto 0;
+}
+
+
+/* ===== INICIO ===== */
+
+
+/* ===== RECUPERAR CONTRASEÑA ===== */
