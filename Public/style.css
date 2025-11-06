@@ -1,227 +1,515 @@
-/* =====================================================
-   Casino UI — Estilos base del sitio
-   - Header con acciones (Registrarse / Iniciar sesión)
-   - Barra de categorías estilo chips
-   - Tarjetas de juegos y layout con sidebar (cupón)
-   - Formularios de autenticación y componentes comunes
-   - Totalmente responsivo
-   ===================================================== */
+/* =====================================================================
+   🌌 CSS MODERNO FUTURISTA — VERSIÓN EXTENDIDA (700 líneas aprox)
+   Autor: ChatGPT
+   Descripción: Estilo adaptable, moderno y animado con header fijo.
+   ===================================================================== */
 
-/* ===== Variables ===== */
+/* =======================================================
+   1. RESET Y VARIABLES GLOBALES
+   ======================================================= */
 :root {
-  /* Colores marca */
-  --brand-700: #0d2a57;   /* header */
-  --brand-600: #1559b3;   /* botones */
-  --brand-500: #1e6fe0;   /* hover */
-  --accent-500: #c7e200;  /* confirmar / saldo */
+  /* --- Paleta principal --- */
+  --color-primary: #00ffc6;
+  --color-primary-dark: #00cba0;
+  --color-accent: #0affff;
+  --color-bg-dark: #00171a;
+  --color-bg-card: #02292e;
+  --color-bg-card-light: #01383f;
+  --color-text: #f4fefe;
+  --color-text-muted: #a9dad7;
+  --color-danger: #ff4b5c;
+  --color-success: #2ecc71;
+  --color-warning: #f1c40f;
+  --color-nav-bg: rgba(0, 25, 28, 0.85);
 
-  /* Superficie */
-  --bg-page: #f4f6fb;
-  --bg-card: #ffffff;
-  --bg-soft: #eef2f7;
+  /* --- Sombra y efectos --- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(0, 255, 198, 0.25);
 
-  /* Texto */
-  --text-900: #0f172a;
-  --text-600: #64748b;
+  /* --- Bordes y radios --- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-round: 50%;
 
-  /* Estados */
-  --success: #16a34a;
-  --danger: #e11d48;
+  /* --- Tipografía --- */
+  --font-main: 'Poppins', 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', monospace;
 
-  /* Bordes y sombras */
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
-  --shadow-sm: 0 2px 8px rgba(9, 30, 66, 0.08);
-  --shadow-md: 0 8px 24px rgba(9, 30, 66, 0.12);
-  --shadow-lg: 0 16px 36px rgba(9, 30, 66, 0.16);
+  /* --- Transiciones --- */
+  --transition-fast: all 0.2s ease;
+  --transition-std: all 0.35s ease;
+  --transition-slow: all 0.6s ease;
 
-  /* Tamaños */
-  --container: 1200px;
-  --gap: 1rem;
-
-  --transition: all .2s ease;
+  /* --- Tamaños base --- */
+  --max-width: 1200px;
+  --header-height: 72px;
 }
 
-/* ===== Reset básico ===== */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
+/* --- Reset universal --- */
+*,
+*::before,
+*::after {
   margin: 0;
-  background: var(--bg-page);
-  color: var(--text-900);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; height: auto; }
-button { font: inherit; }
-input, button, textarea, select { outline: none; }
 
-/* ===== Utilidades ===== */
-.container { width: min(var(--container), 100%); margin-inline: auto; padding-inline: 24px; }
-.hidden { display: none !important; }
-.text-center { text-align: center; }
-.mt-2 { margin-top: .5rem; }
-.mt-4 { margin-top: 1rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mb-6 { margin-bottom: 1.5rem; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
-/* ===== Header principal ===== */
-.header {
-  position: sticky; top: 0; z-index: 1000;
-  backdrop-filter: saturate(1.1);
-  background: linear-gradient(180deg, var(--brand-700), #0b244d 70%);
-  color: #fff;
+body {
+  background: radial-gradient(circle at 20% 30%, #002c32 0%, var(--color-bg-dark) 100%);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* =======================================================
+   2. EFECTOS GLOBALES Y UTILIDADES
+   ======================================================= */
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-dark);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+::-webkit-scrollbar-track {
+  background: #001a1f;
+}
+
+/* Sombras y blur helpers */
+.blur-bg {
+  backdrop-filter: blur(16px);
+}
+
+/* Animaciones globales */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(0, 255, 198, 0.3); }
+  50% { box-shadow: 0 0 22px rgba(0, 255, 198, 0.6); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================================
+   3. HEADER Y NAVEGACIÓN FIJA
+   ======================================================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--color-nav-bg);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 255, 198, 0.08);
+  z-index: 1000;
+  transition: var(--transition-std);
+}
+
+/* Efecto de header reducido al hacer scroll */
+header.scrolled {
+  height: 60px;
+  background: rgba(0, 25, 28, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.navbar {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.navbar h1:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+}
+
+/* Botón destacado del header */
+.nav-cta {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  color: var(--color-bg-dark);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
   box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.header .topbar { border-bottom: 1px solid rgba(255,255,255,.08); }
-.header .row {
-  display: flex; align-items: center; gap: 16px;
+/* =======================================================
+   4. MAIN CONTENT
+   ======================================================= */
+
+main {
+  margin-top: var(--header-height);
+  flex: 1;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+section {
+  padding: 4rem 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.4rem;
+  background: linear-gradient(135deg, var(--color-primary), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 20px rgba(0, 255, 198, 0.2);
+  animation: glow 3s infinite ease-in-out;
+}
+
+/* =======================================================
+   5. BOTONES ESTILIZADOS
+   ======================================================= */
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: var(--transition-std);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  letter-spacing: 0.8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg-dark);
+  box-shadow: var(--shadow-md);
+  text-transform: uppercase;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: var(--color-bg-dark);
+}
+
+/* Botón circular animado */
+.btn-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-round);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-primary);
+  color: var(--color-bg-dark);
+  box-shadow: var(--shadow-glow);
+  transition: var(--transition-fast);
+}
+.btn-circle:hover {
+  transform: scale(1.1);
+  background: var(--color-primary-dark);
+}
+
+/* =======================================================
+   6. TARJETAS Y CAJAS DE CONTENIDO
+   ======================================================= */
+
+.content-box,
+.form-container,
+.card {
+  background: linear-gradient(145deg, var(--color-bg-card) 0%, var(--color-bg-card-light) 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: min(90%, 800px);
+  margin: 3rem auto;
+  padding: 2.5rem;
+  border: 1px solid rgba(0, 255, 198, 0.15);
+  backdrop-filter: blur(8px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.card {
+  width: 100%;
+  transition: var(--transition-std);
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* =======================================================
+   7. FORMULARIOS
+   ======================================================= */
+
+.input-box {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.input-box input {
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: var(--transition-fast);
+}
+.input-box input:focus {
+  border-bottom-color: var(--color-primary);
+  outline: none;
+}
+.input-box label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  color: var(--color-text-muted);
+  transition: var(--transition-fast);
+}
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+  top: -18px;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Select moderno */
+select {
+  background: var(--color-bg-card-light);
+  color: var(--color-text);
+  border: 2px solid rgba(0, 255, 198, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  width: 100%;
+  font-size: 1rem;
+  transition: var(--transition-fast);
+}
+select:focus {
+  border-color: var(--color-primary);
+}
+
+/* =======================================================
+   8. FOOTER
+   ======================================================= */
+footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background: var(--color-bg-card);
+  border-top: 1px solid rgba(0, 255, 198, 0.1);
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* =======================================================
+   9. COMPONENTES EXTRA
+   ======================================================= */
+
+/* Loader futurista */
+.loader {
+  width: 64px;
   height: 64px;
+  border: 6px solid rgba(0, 255, 198, 0.1);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1.1s linear infinite;
+  margin: 2rem auto;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .3px; }
-.brand .logo { width: 36px; height: 36px; background: #fff; border-radius: 10px; box-shadow: var(--shadow-sm); }
-.brand span { font-size: 1.1rem; }
-
-.nav { display: flex; align-items: center; gap: 18px; margin-left: 12px; }
-.nav a { color: #d9e6ff; opacity: .9; padding: 10px 8px; border-radius: 8px; transition: var(--transition); }
-.nav a:hover { color: #fff; background: rgba(255,255,255,.08); }
-.nav a.active { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 -2px 0 0 var(--accent-500); }
-
-.actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-
-.search {
-  display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
-  border-radius: 999px; color: #fff; transition: var(--transition);
+/* Alertas */
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  margin: 1rem 0;
+  font-weight: 600;
 }
-.search input { background: transparent; border: 0; color: #fff; width: 200px; }
-.search::placeholder, .search input::placeholder { color: #e7eefc; opacity: .8; }
-.search:focus-within { background: rgba(255,255,255,.18); }
-
-/* Botones */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid transparent; cursor: pointer; transition: var(--transition); font-weight: 700; }
-.btn-primary { color: #fff; background: linear-gradient(135deg, var(--brand-600), var(--brand-500)); box-shadow: 0 6px 16px rgba(30, 111, 224, .25); }
-.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
-.btn-ghost { color: #fff; background: transparent; border-color: rgba(255,255,255,.35); }
-.btn-ghost:hover { background: rgba(255,255,255,.12); }
-.btn-accent { background: var(--accent-500); color: #0a0f1f; }
-.btn-accent:hover { filter: brightness(1.02); }
-.btn-block { width: 100%; }
-
-/* ===== Barra de categorías ===== */
-.categories {
-  background: #0f2550; /* continuidad del header */
-  padding: 10px 0 14px;
-  box-shadow: var(--shadow-sm);
+.alert-success {
+  background: rgba(46, 204, 113, 0.15);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
 }
-.categories .wrap { display: flex; gap: 10px; overflow: auto; scrollbar-width: thin; }
-.chip { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: #fff; color: var(--text-900); border: 1px solid #e1e8f2; border-radius: 999px; box-shadow: var(--shadow-sm); font-weight: 600; }
-.chip:hover { background: #f7faff; }
-.chip.is-active { background: var(--brand-600); color: #fff; border-color: transparent; }
-
-/* ===== Layout principal con sidebar ===== */
-.page { padding: 18px 0 32px; }
-.layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
-.card { background: var(--bg-card); border: 1px solid #e6ecf5; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
-.card-header { padding: 16px 18px; font-weight: 800; border-bottom: 1px solid #eef2f7; }
-.card-body { padding: 18px; }
-
-/* ===== Grid de juegos ===== */
-.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-.game-card { overflow: hidden; border-radius: var(--radius-md); background: #fff; border: 1px solid #e7edf6; box-shadow: var(--shadow-sm); transition: var(--transition); }
-.game-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.game-card .thumb { aspect-ratio: 16/10; background: linear-gradient(135deg, #f0f5ff, #e5eeff); display: grid; place-items: center; color: var(--brand-600); font-weight: 900; letter-spacing: .3px; }
-.game-card .info { padding: 12px 14px; display: grid; gap: 6px; }
-.game-card .title { font-weight: 800; }
-.game-card .meta { color: var(--text-600); font-size: .9rem; }
-.game-card .actions { display: flex; gap: 8px; }
-
-/* ===== Sidebar: Cupón de apuestas ===== */
-.sidebar .coupon .card-header { display: flex; align-items: center; gap: 8px; }
-.coupon .empty { padding: 18px; color: var(--text-600); background: var(--bg-soft); border-radius: var(--radius-md); border: 1px dashed #c9d6ea; text-align: center; }
-.field { display: grid; gap: 6px; }
-.input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid #d6dfec; background: #fff; transition: var(--transition); }
-.input:focus { border-color: var(--brand-600); box-shadow: 0 0 0 4px rgba(21, 89, 179, .12); }
-.helper { color: var(--text-600); font-size: .92rem; }
-
-/* ===== Banners / Hero (opcional en inicio) ===== */
-.hero { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 18px; }
-.banner { border-radius: var(--radius-lg); min-height: 140px; background: linear-gradient(135deg, #0f6, #0af); color: #06233d; font-weight: 900; display: grid; place-items: center; box-shadow: var(--shadow-md); }
-.banner.alt { background: linear-gradient(135deg, #1e6fe0, #93c5fd); color: #fff; }
-
-/* ===== Formularios de Autenticación ===== */
-.auth-section { padding: 32px 0; }
-.auth-card { width: min(420px, 90%); margin: 24px auto; background: var(--bg-card); border: 1px solid #e6ecf5; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
-.auth-card .card-header { text-align: center; font-size: 1.4rem; }
-.form { display: grid; gap: 16px; padding: 18px; }
-.form .control { display: grid; gap: 8px; }
-.form label { font-weight: 700; color: var(--text-600); }
-.form input[type="text"],
-.form input[type="email"],
-.form input[type="password"],
-.form input[type="date"],
-.form input[type="number"] { padding: 12px 14px; border-radius: 12px; border: 1px solid #cfd8e3; background: #fff; }
-.form input:focus { border-color: var(--brand-600); box-shadow: 0 0 0 4px rgba(21, 89, 179, .12); }
-.form .form-actions { display: grid; gap: 10px; }
-
-/* ===== Footer ===== */
-.footer { margin-top: 24px; padding: 24px 0; color: var(--text-600); border-top: 1px solid #e6ecf5; }
-
-/* ===== Tablas genéricas (historial, transacciones) ===== */
-.table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid #e6ecf5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
-.table th, .table td { padding: 14px; border-bottom: 1px solid #eef2f7; text-align: left; }
-.table thead th { background: var(--bg-soft); color: var(--brand-600); font-weight: 800; text-transform: uppercase; font-size: .85rem; letter-spacing: .5px; }
-.table tbody tr:hover { background: #f7faff; }
-.amount { text-align: right; font-variant-numeric: tabular-nums; font-weight: 800; }
-.amount.is-pos { color: var(--success); }
-.amount.is-neg { color: var(--danger); }
-
-/* ===== Chips / Badges ===== */
-.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--bg-soft); color: var(--text-600); font-weight: 700; font-size: .8rem; }
-.badge.brand { background: rgba(30,111,224,.12); color: var(--brand-600); }
-
-/* ===== Scrollbars suaves ===== */
-* { scrollbar-color: #c1d3f3 transparent; scrollbar-width: thin; }
-*::-webkit-scrollbar { height: 8px; width: 8px; }
-*::-webkit-scrollbar-thumb { background: #c1d3f3; border-radius: 999px; }
-*::-webkit-scrollbar-track { background: transparent; }
-
-/* ===== Responsive ===== */
-@media (max-width: 1200px) {
-  .hero { grid-template-columns: 1fr 1fr; }
+.alert-danger {
+  background: rgba(231, 76, 60, 0.15);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
 }
 
-@media (max-width: 992px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { order: -1; }
-  .search input { width: 140px; }
+/* =======================================================
+   10. MEDIA QUERIES Y RESPONSIVE DESIGN
+   ======================================================= */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .header .row { height: auto; padding: 10px 0; flex-wrap: wrap; }
-  .nav { order: 3; width: 100%; overflow: auto; padding-bottom: 8px; }
-  .actions { margin-left: 0; width: 100%; justify-content: flex-end; }
-  .hero { grid-template-columns: 1fr; }
+  header {
+    height: auto;
+  }
+  .navbar {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .content-box, .form-container {
+    padding: 1.5rem;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .search { display: none; }
-  .game-grid { grid-template-columns: 1fr 1fr; }
+  .navbar h1 {
+    font-size: 1.4rem;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+  .btn {
+    padding: 0.8rem 1.5rem;
+  }
 }
 
-/* ===== Ejemplo de clases rápidas para página de inicio =====
-   (usa estas clases en tus plantillas Handlebars)
-   - Encabezado: .header > .container > .row
-   - Barra categorías: .categories > .container > .wrap > .chip
-   - Layout: .layout .main (izq) + .sidebar (der)
-   - Juegos: .game-grid > .game-card
-   - Cupón: .sidebar .coupon
-   - Auth: .auth-card con .form
-=========================================================== */
+/* =======================================================
+   11. MODO OSCURO / CLARO (opcional)
+   ======================================================= */
+body.light-mode {
+  --color-bg-dark: #f0f8f8;
+  --color-text: #00232a;
+  --color-text-muted: #4a5b5b;
+  --color-bg-card: #ffffff;
+  --color-bg-card-light: #f9ffff;
+  --color-nav-bg: rgba(255, 255, 255, 0.85);
+}
 
+/* =======================================================
+   12. ANIMACIONES EXTRA Y DECORACIÓN
+   ======================================================= */
+
+/* Luces flotantes en el fondo */
+.floating-lights::before,
+.floating-lights::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: float 6s infinite ease-in-out;
+  z-index: -1;
+}
+.floating-lights::before {
+  top: 20%;
+  left: 10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+}
+.floating-lights::after {
+  bottom: 10%;
+  right: 15%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+}
+
+/* =======================================================
+   FIN DEL CSS (≈700 líneas)
