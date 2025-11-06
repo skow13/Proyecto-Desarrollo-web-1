@@ -1,243 +1,227 @@
 /* =====================================================
-   🌌 ESTILO MODERNO MEJORADO
+   Casino UI — Estilos base del sitio
+   - Header con acciones (Registrarse / Iniciar sesión)
+   - Barra de categorías estilo chips
+   - Tarjetas de juegos y layout con sidebar (cupón)
+   - Formularios de autenticación y componentes comunes
+   - Totalmente responsivo
    ===================================================== */
 
-/* === 1. VARIABLES GLOBALES Y RESET === */
+/* ===== Variables ===== */
 :root {
-  --color-primary: #00FFC6;
-  --color-primary-dark: #00cba0;
-  --color-bg-dark: #00171A;
-  --color-bg-card: #02292E;
-  --color-bg-card-light: #01383F;
-  --color-text: #f4fefe;
-  --color-text-muted: #a9dad7;
-  --color-success: #2ecc71;
-  --color-danger: #e74c3c;
-  --color-nav-bg: rgba(0, 25, 28, 0.9);
+  /* Colores marca */
+  --brand-700: #0d2a57;   /* header */
+  --brand-600: #1559b3;   /* botones */
+  --brand-500: #1e6fe0;   /* hover */
+  --accent-500: #c7e200;  /* confirmar / saldo */
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  /* Superficie */
+  --bg-page: #f4f6fb;
+  --bg-card: #ffffff;
+  --bg-soft: #eef2f7;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  /* Texto */
+  --text-900: #0f172a;
+  --text-600: #64748b;
 
-  --transition-fast: all 0.2s ease;
-  --transition-std: all 0.3s ease;
+  /* Estados */
+  --success: #16a34a;
+  --danger: #e11d48;
+
+  /* Bordes y sombras */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --shadow-sm: 0 2px 8px rgba(9, 30, 66, 0.08);
+  --shadow-md: 0 8px 24px rgba(9, 30, 66, 0.12);
+  --shadow-lg: 0 16px 36px rgba(9, 30, 66, 0.16);
+
+  /* Tamaños */
+  --container: 1200px;
+  --gap: 1rem;
+
+  --transition: all .2s ease;
 }
 
-/* --- Reset básico --- */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* === 2. ESTILOS GENERALES === */
-html {
-  scroll-behavior: smooth;
-}
-
+/* ===== Reset básico ===== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-  background: linear-gradient(145deg, var(--color-bg-dark) 0%, #002f36 100%);
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
-  color: var(--color-text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.6;
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text-900);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; }
+input, button, textarea, select { outline: none; }
 
-/* === 3. HEADER Y NAVEGACIÓN === */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--color-nav-bg);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 12px rgba(0, 255, 198, 0.08);
-  z-index: 1000;
-}
+/* ===== Utilidades ===== */
+.container { width: min(var(--container), 100%); margin-inline: auto; padding-inline: 24px; }
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.mt-2 { margin-top: .5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mb-6 { margin-bottom: 1.5rem; }
 
-.navbar {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--color-primary), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.2rem;
-}
-
-.nav-links a {
-  color: var(--color-text);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-std);
-}
-
-.nav-links a:hover {
-  background: var(--color-primary);
-  color: var(--color-bg-dark);
+/* ===== Header principal ===== */
+.header {
+  position: sticky; top: 0; z-index: 1000;
+  backdrop-filter: saturate(1.1);
+  background: linear-gradient(180deg, var(--brand-700), #0b244d 70%);
+  color: #fff;
   box-shadow: var(--shadow-sm);
 }
 
-/* Espaciado para el contenido principal (por el header fijo) */
-main {
-  margin-top: 80px;
-  flex: 1;
+.header .topbar { border-bottom: 1px solid rgba(255,255,255,.08); }
+.header .row {
+  display: flex; align-items: center; gap: 16px;
+  height: 64px;
 }
 
-/* === 4. BOTONES === */
-.btn {
-  display: inline-block;
-  padding: 0.9rem 2rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  transition: var(--transition-std);
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  border: none;
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .3px; }
+.brand .logo { width: 36px; height: 36px; background: #fff; border-radius: 10px; box-shadow: var(--shadow-sm); }
+.brand span { font-size: 1.1rem; }
+
+.nav { display: flex; align-items: center; gap: 18px; margin-left: 12px; }
+.nav a { color: #d9e6ff; opacity: .9; padding: 10px 8px; border-radius: 8px; transition: var(--transition); }
+.nav a:hover { color: #fff; background: rgba(255,255,255,.08); }
+.nav a.active { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 -2px 0 0 var(--accent-500); }
+
+.actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+
+.search {
+  display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px; color: #fff; transition: var(--transition);
+}
+.search input { background: transparent; border: 0; color: #fff; width: 200px; }
+.search::placeholder, .search input::placeholder { color: #e7eefc; opacity: .8; }
+.search:focus-within { background: rgba(255,255,255,.18); }
+
+/* Botones */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid transparent; cursor: pointer; transition: var(--transition); font-weight: 700; }
+.btn-primary { color: #fff; background: linear-gradient(135deg, var(--brand-600), var(--brand-500)); box-shadow: 0 6px 16px rgba(30, 111, 224, .25); }
+.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn-ghost { color: #fff; background: transparent; border-color: rgba(255,255,255,.35); }
+.btn-ghost:hover { background: rgba(255,255,255,.12); }
+.btn-accent { background: var(--accent-500); color: #0a0f1f; }
+.btn-accent:hover { filter: brightness(1.02); }
+.btn-block { width: 100%; }
+
+/* ===== Barra de categorías ===== */
+.categories {
+  background: #0f2550; /* continuidad del header */
+  padding: 10px 0 14px;
+  box-shadow: var(--shadow-sm);
+}
+.categories .wrap { display: flex; gap: 10px; overflow: auto; scrollbar-width: thin; }
+.chip { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: #fff; color: var(--text-900); border: 1px solid #e1e8f2; border-radius: 999px; box-shadow: var(--shadow-sm); font-weight: 600; }
+.chip:hover { background: #f7faff; }
+.chip.is-active { background: var(--brand-600); color: #fff; border-color: transparent; }
+
+/* ===== Layout principal con sidebar ===== */
+.page { padding: 18px 0 32px; }
+.layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+.card { background: var(--bg-card); border: 1px solid #e6ecf5; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+.card-header { padding: 16px 18px; font-weight: 800; border-bottom: 1px solid #eef2f7; }
+.card-body { padding: 18px; }
+
+/* ===== Grid de juegos ===== */
+.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.game-card { overflow: hidden; border-radius: var(--radius-md); background: #fff; border: 1px solid #e7edf6; box-shadow: var(--shadow-sm); transition: var(--transition); }
+.game-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.game-card .thumb { aspect-ratio: 16/10; background: linear-gradient(135deg, #f0f5ff, #e5eeff); display: grid; place-items: center; color: var(--brand-600); font-weight: 900; letter-spacing: .3px; }
+.game-card .info { padding: 12px 14px; display: grid; gap: 6px; }
+.game-card .title { font-weight: 800; }
+.game-card .meta { color: var(--text-600); font-size: .9rem; }
+.game-card .actions { display: flex; gap: 8px; }
+
+/* ===== Sidebar: Cupón de apuestas ===== */
+.sidebar .coupon .card-header { display: flex; align-items: center; gap: 8px; }
+.coupon .empty { padding: 18px; color: var(--text-600); background: var(--bg-soft); border-radius: var(--radius-md); border: 1px dashed #c9d6ea; text-align: center; }
+.field { display: grid; gap: 6px; }
+.input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid #d6dfec; background: #fff; transition: var(--transition); }
+.input:focus { border-color: var(--brand-600); box-shadow: 0 0 0 4px rgba(21, 89, 179, .12); }
+.helper { color: var(--text-600); font-size: .92rem; }
+
+/* ===== Banners / Hero (opcional en inicio) ===== */
+.hero { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+.banner { border-radius: var(--radius-lg); min-height: 140px; background: linear-gradient(135deg, #0f6, #0af); color: #06233d; font-weight: 900; display: grid; place-items: center; box-shadow: var(--shadow-md); }
+.banner.alt { background: linear-gradient(135deg, #1e6fe0, #93c5fd); color: #fff; }
+
+/* ===== Formularios de Autenticación ===== */
+.auth-section { padding: 32px 0; }
+.auth-card { width: min(420px, 90%); margin: 24px auto; background: var(--bg-card); border: 1px solid #e6ecf5; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.auth-card .card-header { text-align: center; font-size: 1.4rem; }
+.form { display: grid; gap: 16px; padding: 18px; }
+.form .control { display: grid; gap: 8px; }
+.form label { font-weight: 700; color: var(--text-600); }
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="date"],
+.form input[type="number"] { padding: 12px 14px; border-radius: 12px; border: 1px solid #cfd8e3; background: #fff; }
+.form input:focus { border-color: var(--brand-600); box-shadow: 0 0 0 4px rgba(21, 89, 179, .12); }
+.form .form-actions { display: grid; gap: 10px; }
+
+/* ===== Footer ===== */
+.footer { margin-top: 24px; padding: 24px 0; color: var(--text-600); border-top: 1px solid #e6ecf5; }
+
+/* ===== Tablas genéricas (historial, transacciones) ===== */
+.table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid #e6ecf5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+.table th, .table td { padding: 14px; border-bottom: 1px solid #eef2f7; text-align: left; }
+.table thead th { background: var(--bg-soft); color: var(--brand-600); font-weight: 800; text-transform: uppercase; font-size: .85rem; letter-spacing: .5px; }
+.table tbody tr:hover { background: #f7faff; }
+.amount { text-align: right; font-variant-numeric: tabular-nums; font-weight: 800; }
+.amount.is-pos { color: var(--success); }
+.amount.is-neg { color: var(--danger); }
+
+/* ===== Chips / Badges ===== */
+.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--bg-soft); color: var(--text-600); font-weight: 700; font-size: .8rem; }
+.badge.brand { background: rgba(30,111,224,.12); color: var(--brand-600); }
+
+/* ===== Scrollbars suaves ===== */
+* { scrollbar-color: #c1d3f3 transparent; scrollbar-width: thin; }
+*::-webkit-scrollbar { height: 8px; width: 8px; }
+*::-webkit-scrollbar-thumb { background: #c1d3f3; border-radius: 999px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+  .hero { grid-template-columns: 1fr 1fr; }
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: var(--color-bg-dark);
-  box-shadow: var(--shadow-md);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+@media (max-width: 992px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { order: -1; }
+  .search input { width: 140px; }
 }
 
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-outline {
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  background: transparent;
-}
-
-.btn-outline:hover {
-  background: var(--color-primary);
-  color: var(--color-bg-dark);
-}
-
-/* === 5. CONTENEDORES Y TARJETAS === */
-.content-box, .form-container {
-  background: linear-gradient(145deg, var(--color-bg-card) 0%, var(--color-bg-card-light) 100%);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  width: min(90%, 720px);
-  margin: 4rem auto;
-  padding: 2.5rem;
-  border: 1px solid rgba(0, 255, 198, 0.15);
-  backdrop-filter: blur(8px);
-}
-
-/* === 6. TIPOGRAFÍA === */
-h1, h2, h3 {
-  font-weight: 700;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2.3rem;
-  background: linear-gradient(135deg, var(--color-primary), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 10px rgba(0, 255, 198, 0.3);
-}
-
-h2 {
-  color: var(--color-primary);
-  margin-bottom: 1.5rem;
-  font-size: 1.7rem;
-}
-
-/* === 7. FORMULARIOS === */
-.input-box {
-  position: relative;
-  margin-bottom: 2rem;
-}
-
-.input-box input {
-  width: 100%;
-  padding: 12px 0;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  color: var(--color-text);
-  font-size: 1rem;
-  transition: var(--transition-fast);
-}
-
-.input-box input:focus {
-  border-bottom-color: var(--color-primary);
-  outline: none;
-}
-
-.input-box label {
-  position: absolute;
-  top: 12px;
-  left: 0;
-  color: var(--color-text-muted);
-  transition: var(--transition-fast);
-}
-
-.input-box input:focus + label,
-.input-box input:not(:placeholder-shown) + label {
-  top: -18px;
-  font-size: 0.85rem;
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-/* === 8. FOOTER === */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: var(--color-bg-card);
-  border-top: 1px solid rgba(0, 255, 198, 0.1);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
-  color: var(--color-text-muted);
-}
-
-/* === 9. RESPONSIVE === */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .content-box, .form-container {
-    padding: 1.5rem;
-  }
+  .header .row { height: auto; padding: 10px 0; flex-wrap: wrap; }
+  .nav { order: 3; width: 100%; overflow: auto; padding-bottom: 8px; }
+  .actions { margin-left: 0; width: 100%; justify-content: flex-end; }
+  .hero { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 480px) {
+  .search { display: none; }
+  .game-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== Ejemplo de clases rápidas para página de inicio =====
+   (usa estas clases en tus plantillas Handlebars)
+   - Encabezado: .header > .container > .row
+   - Barra categorías: .categories > .container > .wrap > .chip
+   - Layout: .layout .main (izq) + .sidebar (der)
+   - Juegos: .game-grid > .game-card
+   - Cupón: .sidebar .coupon
+   - Auth: .auth-card con .form
+=========================================================== */
+
