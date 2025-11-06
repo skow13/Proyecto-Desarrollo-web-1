@@ -1,32 +1,36 @@
 /* =====================================================================
-   🌌 CSS MODERNO FUTURISTA — VERSIÓN EXTENDIDA (700 líneas aprox)
-   Autor: ChatGPT
-   Descripción: Estilo adaptable, moderno y animado con header fijo.
+   🌌 CSS CASINO FUTURISTA — TEMÁTICA ESMERALDA Y ORO
+   Autor: Gemini (Basado en la estructura original)
    ===================================================================== */
 
 /* =======================================================
    1. RESET Y VARIABLES GLOBALES
    ======================================================= */
 :root {
-  /* --- Paleta principal --- */
-  --color-primary: #00ffc6;
-  --color-primary-dark: #00cba0;
-  --color-accent: #0affff;
-  --color-bg-dark: #00171a;
-  --color-bg-card: #02292e;
-  --color-bg-card-light: #01383f;
-  --color-text: #f4fefe;
-  --color-text-muted: #a9dad7;
-  --color-danger: #ff4b5c;
-  --color-success: #2ecc71;
-  --color-warning: #f1c40f;
-  --color-nav-bg: rgba(0, 25, 28, 0.85);
+  /* --- Paleta de Casino (Esmeralda y Oro) --- */
+  --color-primary: #00bfa5; /* Deep Emerald/Teal */
+  --color-primary-dark: #00897b;
+  --color-accent: #ffc107; /* Gold/Amber para acentos */
+  --color-bg-dark: #0a0a0a; /* Negro Profundo */
+  --color-bg-card: #1c1c1c; /* Fondo de cartas y formularios */
+  --color-bg-card-light: #2c2c2c;
+  --color-text: #f0f0f0;
+  --color-text-muted: #a0a0a0;
+  --color-danger: #d32f2f; /* Rojo de casino */
+  --color-success: #43a047; /* Verde para saldos positivos */
+  --color-nav-bg: rgba(10, 10, 10, 0.95);
 
-  /* --- Sombra y efectos --- */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 20px rgba(0, 255, 198, 0.25);
+  /* --- Colores de Ruleta --- */
+  --color-roulette-red: #e53935;
+  --color-roulette-black: #212121;
+  --color-roulette-green: #388e3c; /* Para el número 0 */
+
+  /* --- Sombra y efectos (Más intensos para "glow") --- */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.9);
+  --shadow-glow: 0 0 25px rgba(0, 191, 165, 0.45);
+  --shadow-glow-hard: 0 0 10px var(--color-accent), 0 0 20px var(--color-primary);
 
   /* --- Bordes y radios --- */
   --radius-xs: 4px;
@@ -37,7 +41,7 @@
 
   /* --- Tipografía --- */
   --font-main: 'Poppins', 'Segoe UI', sans-serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-mono: 'Fira Code', 'Roboto Mono', monospace; /* Para datos y tablas */
 
   /* --- Transiciones --- */
   --transition-fast: all 0.2s ease;
@@ -45,14 +49,12 @@
   --transition-slow: all 0.6s ease;
 
   /* --- Tamaños base --- */
-  --max-width: 1200px;
+  --max-width: 1280px;
   --header-height: 72px;
 }
 
 /* --- Reset universal --- */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -64,13 +66,15 @@ html {
 }
 
 body {
-  background: radial-gradient(circle at 20% 30%, #002c32 0%, var(--color-bg-dark) 100%);
+  /* Fondo con patrón sutil de casino (ejemplo sin imagen) */
+  background-color: var(--color-bg-dark);
+  background-image: radial-gradient(circle at 50% 10%, #151515 0%, var(--color-bg-dark) 80%);
   color: var(--color-text);
   font-family: var(--font-main);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  line-height: 1.7;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
@@ -79,35 +83,24 @@ body {
    ======================================================= */
 
 /* Scrollbar personalizado */
-::-webkit-scrollbar {
-  width: 10px;
-}
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-dark);
+  background: var(--color-accent);
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-::-webkit-scrollbar-track {
-  background: #001a1f;
-}
-
-/* Sombras y blur helpers */
-.blur-bg {
-  backdrop-filter: blur(16px);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+::-webkit-scrollbar-track { background: var(--color-bg-card-light); }
 
 /* Animaciones globales */
 @keyframes float {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-5px); }
   100% { transform: translateY(0); }
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 12px rgba(0, 255, 198, 0.3); }
-  50% { box-shadow: 0 0 22px rgba(0, 255, 198, 0.6); }
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 191, 165, 0.4); }
+  50% { text-shadow: 0 0 15px rgba(0, 191, 165, 0.8); }
 }
 
 @keyframes fadeInUp {
@@ -120,23 +113,16 @@ body {
    ======================================================= */
 
 header {
-  position: fixed;
+  position: sticky; /* Cambiado a sticky para que no tape contenido inicial */
   top: 0;
   left: 0;
   width: 100%;
   height: var(--header-height);
   background: var(--color-nav-bg);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 12px rgba(0, 255, 198, 0.08);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
   z-index: 1000;
   transition: var(--transition-std);
-}
-
-/* Efecto de header reducido al hacer scroll */
-header.scrolled {
-  height: 60px;
-  background: rgba(0, 25, 28, 0.95);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
@@ -150,68 +136,46 @@ header.scrolled {
 }
 
 .navbar h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--color-primary), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
+  font-size: 2rem;
+  font-weight: 900;
+  /* Efecto de texto Oro Neón */
+  color: var(--color-accent);
+  text-shadow: 0 0 5px var(--color-accent), 0 0 10px var(--color-primary);
+  letter-spacing: 2px;
   cursor: pointer;
   transition: var(--transition-fast);
 }
 
-.navbar h1:hover {
-  transform: scale(1.05);
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
 .nav-links a {
-  color: var(--color-text);
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   position: relative;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-sm);
   transition: var(--transition-fast);
 }
 
 .nav-links a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 0%;
-  background: var(--color-primary);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
+  background: var(--color-accent);
 }
 
 .nav-links a:hover {
   color: var(--color-primary);
+  text-shadow: 0 0 5px var(--color-primary);
 }
 
-/* Botón destacado del header */
+/* Botón destacado del header (Mantenido con énfasis primario) */
 .nav-cta {
   background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
   color: var(--color-bg-dark);
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition-fast);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-std);
 }
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 0 15px var(--color-primary);
 }
 
 /* =======================================================
@@ -219,9 +183,9 @@ header.scrolled {
    ======================================================= */
 
 main {
-  margin-top: var(--header-height);
+  margin-top: 0; /* Sticky header no necesita margen */
   flex: 1;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: none;
 }
 
 section {
@@ -230,71 +194,78 @@ section {
   margin: 0 auto;
 }
 
-.section-title {
+.section-title, h1, h2 {
   text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2.4rem;
-  background: linear-gradient(135deg, var(--color-primary), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 20px rgba(0, 255, 198, 0.2);
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  text-shadow: 0 0 15px rgba(0, 191, 165, 0.4);
   animation: glow 3s infinite ease-in-out;
 }
+
+/* Estilos para el título de la página de inicio (Inicio.handlebars) */
+#links a {
+    background: var(--color-bg-card-light);
+    border: 1px solid var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: var(--transition-std);
+}
+
+#links a:hover {
+    background: var(--color-primary-dark);
+    box-shadow: var(--shadow-glow);
+    color: var(--color-bg-dark);
+}
+
 
 /* =======================================================
    5. BOTONES ESTILIZADOS
    ======================================================= */
 
-.btn {
+.btn, input[type="submit"], button[type="submit"] {
   display: inline-block;
-  padding: 0.9rem 2rem;
+  padding: 1rem 2.2rem;
   border-radius: var(--radius-sm);
-  font-weight: 600;
+  font-weight: 700;
   transition: var(--transition-std);
   text-decoration: none;
   cursor: pointer;
   border: none;
   text-align: center;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 1rem;
 }
 
-.btn-primary {
+.btn-primary, input[type="submit"], button[type="submit"] {
   background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   color: var(--color-bg-dark);
-  box-shadow: var(--shadow-md);
-  text-transform: uppercase;
+  box-shadow: 0 0 10px var(--color-primary);
 }
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+.btn-primary:hover, input[type="submit"]:hover, button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--color-primary);
 }
 
-.btn-outline {
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
+.btn-outline, .botones a, .volver a, .regresar a {
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
   background: transparent;
+  padding: 0.9rem 1.8rem;
 }
-.btn-outline:hover {
-  background: var(--color-primary);
+.btn-outline:hover, .botones a:hover, .volver a:hover, .regresar a:hover {
+  background: var(--color-accent);
   color: var(--color-bg-dark);
 }
-
-/* Botón circular animado */
-.btn-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-round);
+.botones {
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: var(--color-primary);
-  color: var(--color-bg-dark);
-  box-shadow: var(--shadow-glow);
-  transition: var(--transition-fast);
-}
-.btn-circle:hover {
-  transform: scale(1.1);
-  background: var(--color-primary-dark);
+  gap: 1.5rem;
+  margin: 2rem 0;
 }
 
 /* =======================================================
@@ -303,77 +274,54 @@ section {
 
 .content-box,
 .form-container,
-.card {
-  background: linear-gradient(145deg, var(--color-bg-card) 0%, var(--color-bg-card-light) 100%);
+.card,
+.formulario,
+.perfil,
+.info {
+  background: var(--color-bg-card);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  width: min(90%, 800px);
+  width: min(95%, 900px);
   margin: 3rem auto;
-  padding: 2.5rem;
-  border: 1px solid rgba(0, 255, 198, 0.15);
-  backdrop-filter: blur(8px);
+  padding: 3rem;
+  border: 2px solid var(--color-primary-dark);
   animation: fadeInUp 0.6s ease forwards;
 }
-
-.card {
-  width: 100%;
-  transition: var(--transition-std);
-}
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-glow);
+.formulario h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 /* =======================================================
    7. FORMULARIOS
    ======================================================= */
 
-.input-box {
-  position: relative;
-  margin-bottom: 2rem;
-}
 .input-box input {
-  width: 100%;
-  padding: 12px 0;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  color: var(--color-text);
-  font-size: 1rem;
-  transition: var(--transition-fast);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
 }
 .input-box input:focus {
-  border-bottom-color: var(--color-primary);
-  outline: none;
-}
-.input-box label {
-  position: absolute;
-  top: 12px;
-  left: 0;
-  color: var(--color-text-muted);
-  transition: var(--transition-fast);
+  border-bottom-color: var(--color-accent);
+  box-shadow: 0 2px 0 var(--color-accent);
 }
 .input-box input:focus + label,
 .input-box input:not(:placeholder-shown) + label {
-  top: -18px;
-  font-size: 0.85rem;
-  color: var(--color-primary);
-  font-weight: 600;
+  color: var(--color-accent);
 }
-
-/* Select moderno */
-select {
-  background: var(--color-bg-card-light);
-  color: var(--color-text);
-  border: 2px solid rgba(0, 255, 198, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem;
-  width: 100%;
-  font-size: 1rem;
+.recordar {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+}
+.recordar a {
+  color: var(--color-text-muted);
+  text-decoration: none;
   transition: var(--transition-fast);
 }
-select:focus {
-  border-color: var(--color-primary);
+.recordar a:hover {
+  color: var(--color-primary);
+}
+label strong {
+  color: var(--color-accent);
 }
 
 /* =======================================================
@@ -381,135 +329,180 @@ select:focus {
    ======================================================= */
 footer {
   text-align: center;
-  padding: 2.5rem 1rem;
+  padding: 1.5rem 1rem;
   background: var(--color-bg-card);
-  border-top: 1px solid rgba(0, 255, 198, 0.1);
+  border-top: 2px solid var(--color-primary-dark);
   color: var(--color-text-muted);
-  font-size: 0.95rem;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 0.9rem;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.7);
+  margin-top: auto;
 }
 
 /* =======================================================
-   9. COMPONENTES EXTRA
+   9. ESTILOS ESPECÍFICOS DE COMPONENTES
    ======================================================= */
 
-/* Loader futurista */
-.loader {
-  width: 64px;
-  height: 64px;
-  border: 6px solid rgba(0, 255, 198, 0.1);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 1.1s linear infinite;
-  margin: 2rem auto;
+/* Tablas de datos (Transacciones, Probabilidades, Apuestas, Resultados) */
+.tabla-transacciones, .tabla-probabilidades, .tabla-resultados, .tabla-apuestas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  background: var(--color-bg-card-light);
+  border: 1px solid var(--color-primary-dark);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.tabla-transacciones thead th, .tabla-probabilidades thead th, .tabla-resultados thead th, .tabla-apuestas thead th {
+  background-color: var(--color-primary-dark);
+  color: var(--color-bg-dark);
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--color-accent);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.tabla-transacciones tbody td, .tabla-probabilidades tbody td, .tabla-resultados tbody td, .tabla-apuestas tbody td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.tabla-transacciones tbody tr:nth-child(even), .tabla-probabilidades tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+.tabla-transacciones tbody tr:hover {
+  background-color: rgba(0, 191, 165, 0.1);
+}
+/* Alineación de datos numéricos en tablas */
+.tabla-probabilidades td:nth-child(2),
+.tabla-probabilidades td:nth-child(3),
+.tabla-probabilidades td:nth-child(4) {
+    text-align: right;
 }
 
-/* Alertas */
-.alert {
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius-md);
-  margin: 1rem 0;
+/* Estilos para el Perfil */
+.perfil ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.perfil ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+.perfil strong {
+  color: var(--color-accent);
   font-weight: 600;
-}
-.alert-success {
-  background: rgba(46, 204, 113, 0.15);
-  color: var(--color-success);
-  border: 1px solid var(--color-success);
-}
-.alert-danger {
-  background: rgba(231, 76, 60, 0.15);
-  color: var(--color-danger);
-  border: 1px solid var(--color-danger);
+  min-width: 150px;
+  display: inline-block;
 }
 
 /* =======================================================
-   10. MEDIA QUERIES Y RESPONSIVE DESIGN
+   10. ESTILOS DE PÁGINA DE RULETA (Ruleta.handlebars)
+   ======================================================= */
+
+.contenedor-ruleta {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.ruleta {
+  max-width: 60%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+  border: 5px solid var(--color-accent);
+}
+.panel-derecho {
+  width: 35%;
+  min-width: 300px;
+  padding: 1.5rem;
+  background: var(--color-bg-card);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glow);
+}
+.saldo, .estado {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+.estado {
+  color: var(--color-accent);
+  text-shadow: 0 0 5px var(--color-accent);
+}
+.tablas-apuestas {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.ultimas-apuestas, .ultimos-resultados {
+  flex: 1;
+}
+
+/* CLASES PARA RESULTADOS DE APUESTAS (Ruleta.handlebars) */
+.red {
+  color: var(--color-text);
+  background-color: var(--color-roulette-red);
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+}
+.black {
+  color: var(--color-text);
+  background-color: var(--color-roulette-black);
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+}
+.green {
+  color: var(--color-text);
+  background-color: var(--color-roulette-green);
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+}
+
+/* =======================================================
+   11. MEDIA QUERIES Y RESPONSIVE DESIGN
    ======================================================= */
 @media (max-width: 1024px) {
-  .navbar {
-    padding: 0 1rem;
+  .contenedor-ruleta {
+    flex-direction: column;
+    align-items: center;
   }
-  .nav-links {
-    gap: 1rem;
+  .ruleta {
+    max-width: 90%;
+  }
+  .panel-derecho {
+    width: 90%;
+  }
+  .tablas-apuestas {
+    flex-direction: column;
   }
 }
 
 @media (max-width: 768px) {
-  header {
-    height: auto;
+  .formulario, .perfil, .info {
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
   }
-  .navbar {
-    flex-direction: column;
-    gap: 0.8rem;
-    padding: 1rem;
-  }
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .content-box, .form-container {
-    padding: 1.5rem;
-  }
-  .section-title {
+  .section-title, h1 {
     font-size: 2rem;
   }
-}
-
-@media (max-width: 480px) {
-  .navbar h1 {
-    font-size: 1.4rem;
+  .botones {
+    flex-direction: column;
   }
-  .nav-links a {
-    font-size: 0.9rem;
-  }
-  .btn {
-    padding: 0.8rem 1.5rem;
+  .btn, input[type="submit"], button[type="submit"], .botones a, .volver a, .regresar a {
+    width: 100%;
+    margin-top: 0.5rem;
   }
 }
-
-/* =======================================================
-   11. MODO OSCURO / CLARO (opcional)
-   ======================================================= */
-body.light-mode {
-  --color-bg-dark: #f0f8f8;
-  --color-text: #00232a;
-  --color-text-muted: #4a5b5b;
-  --color-bg-card: #ffffff;
-  --color-bg-card-light: #f9ffff;
-  --color-nav-bg: rgba(255, 255, 255, 0.85);
-}
-
-/* =======================================================
-   12. ANIMACIONES EXTRA Y DECORACIÓN
-   ======================================================= */
-
-/* Luces flotantes en el fondo */
-.floating-lights::before,
-.floating-lights::after {
-  content: "";
-  position: fixed;
-  border-radius: 50%;
-  opacity: 0.2;
-  animation: float 6s infinite ease-in-out;
-  z-index: -1;
-}
-.floating-lights::before {
-  top: 20%;
-  left: 10%;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
-}
-.floating-lights::after {
-  bottom: 10%;
-  right: 15%;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
-}
-
-/* =======================================================
-   FIN DEL CSS (≈700 líneas)
