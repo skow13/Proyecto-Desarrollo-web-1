@@ -1,5 +1,5 @@
 /* =====================================================================
-   🌌 CSS CASINO FUTURISTA — TEMÁTICA ESMERALDA Y ORO
+   🌌 CSS CASINO FUTURISTA — TEMÁTICA PÚRPURA NEÓN Y ORO
    Autor: Gemini (Basado en la estructura original)
    ===================================================================== */
 
@@ -7,20 +7,20 @@
    1. RESET Y VARIABLES GLOBALES
    ======================================================= */
 :root {
-  /* --- Paleta de Casino (Esmeralda y Oro) --- */
-  --color-primary: #00bfa5; /* Deep Emerald/Teal */
-  --color-primary-dark: #00897b;
-  --color-accent: #ffc107; /* Gold/Amber para acentos */
-  --color-bg-dark: #0a0a0a; /* Negro Profundo */
-  --color-bg-card: #1c1c1c; /* Fondo de cartas y formularios */
-  --color-bg-card-light: #2c2c2c;
+  /* --- Nueva Paleta de Casino (Púrpura Neón y Oro) --- */
+  --color-primary: #a72dff; /* Púrpura Neón Vibrante */
+  --color-primary-dark: #7a00d1; /* Púrpura más oscuro */
+  --color-accent: #ffd700; /* Dorado brillante */
+  --color-bg-dark: #0f001a; /* Negro muy oscuro con tinte púrpura */
+  --color-bg-card: #1f0033; /* Fondo de cartas y formularios */
+  --color-bg-card-light: #2f004a;
   --color-text: #f0f0f0;
-  --color-text-muted: #a0a0a0;
-  --color-danger: #d32f2f; /* Rojo de casino */
-  --color-success: #43a047; /* Verde para saldos positivos */
-  --color-nav-bg: rgba(10, 10, 10, 0.95);
+  --color-text-muted: #b0b0b0;
+  --color-danger: #ff4d4d; /* Rojo para alertas */
+  --color-success: #43a047; /* Verde para saldos positivos (mantenido) */
+  --color-nav-bg: rgba(15, 0, 26, 0.95); /* Fondo de navegación semitransparente */
 
-  /* --- Colores de Ruleta --- */
+  /* --- Colores de Ruleta (Ajustados ligeramente para encajar) --- */
   --color-roulette-red: #e53935;
   --color-roulette-black: #212121;
   --color-roulette-green: #388e3c; /* Para el número 0 */
@@ -28,8 +28,8 @@
   /* --- Sombra y efectos (Más intensos para "glow") --- */
   --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.8);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.9);
-  --shadow-glow: 0 0 25px rgba(0, 191, 165, 0.45);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.95);
+  --shadow-glow: 0 0 25px rgba(167, 45, 255, 0.45); /* Glow primario */
   --shadow-glow-hard: 0 0 10px var(--color-accent), 0 0 20px var(--color-primary);
 
   /* --- Bordes y radios --- */
@@ -68,7 +68,7 @@ html {
 body {
   /* Fondo con patrón sutil de casino (ejemplo sin imagen) */
   background-color: var(--color-bg-dark);
-  background-image: radial-gradient(circle at 50% 10%, #151515 0%, var(--color-bg-dark) 80%);
+  background-image: radial-gradient(circle at 50% 10%, #2f004a 0%, var(--color-bg-dark) 80%);
   color: var(--color-text);
   font-family: var(--font-main);
   min-height: 100vh;
@@ -99,8 +99,8 @@ body {
 }
 
 @keyframes glow {
-  0%, 100% { text-shadow: 0 0 10px rgba(0, 191, 165, 0.4); }
-  50% { text-shadow: 0 0 15px rgba(0, 191, 165, 0.8); }
+  0%, 100% { text-shadow: 0 0 10px rgba(167, 45, 255, 0.4); }
+  50% { text-shadow: 0 0 15px rgba(167, 45, 255, 0.8); }
 }
 
 @keyframes fadeInUp {
@@ -109,11 +109,11 @@ body {
 }
 
 /* =======================================================
-   3. HEADER Y NAVEGACIÓN FIJA
+   3. HEADER Y NAVEGACIÓN FIJA (EL MENÚ PRINCIPAL)
    ======================================================= */
 
 header {
-  position: sticky; /* Cambiado a sticky para que no tape contenido inicial */
+  position: fixed; /* Cambiado a fixed para que siempre esté arriba */
   top: 0;
   left: 0;
   width: 100%;
@@ -144,6 +144,12 @@ header {
   letter-spacing: 2px;
   cursor: pointer;
   transition: var(--transition-fast);
+  margin: 0; /* Asegurarse de que no tenga margen extra */
+}
+
+.nav-links {
+  display: flex; /* Para organizar los enlaces horizontalmente */
+  gap: 1.5rem; /* Espacio entre enlaces */
 }
 
 .nav-links a {
@@ -152,15 +158,27 @@ header {
   font-weight: 500;
   position: relative;
   transition: var(--transition-fast);
+  padding: 0.5rem 0; /* Añadir padding para hacer clic más fácil */
 }
 
 .nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
   background: var(--color-accent);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
   color: var(--color-primary);
   text-shadow: 0 0 5px var(--color-primary);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 /* Botón destacado del header (Mantenido con énfasis primario) */
@@ -170,20 +188,22 @@ header {
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 0 10px var(--color-primary);
   transition: var(--transition-std);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 15px var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary);
 }
 
 /* =======================================================
-   4. MAIN CONTENT
+   4. MAIN CONTENT (Asegurarse de que el contenido no quede debajo del header)
    ======================================================= */
 
 main {
-  margin-top: 0; /* Sticky header no necesita margen */
+  margin-top: var(--header-height); /* Desplaza el contenido debajo del header fijo */
   flex: 1;
   animation: none;
 }
@@ -199,28 +219,42 @@ section {
   margin-bottom: 2rem;
   font-size: 2.5rem;
   color: var(--color-primary);
-  text-shadow: 0 0 15px rgba(0, 191, 165, 0.4);
+  text-shadow: 0 0 15px rgba(167, 45, 255, 0.4);
   animation: glow 3s infinite ease-in-out;
 }
 
 /* Estilos para el título de la página de inicio (Inicio.handlebars) */
+#links {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  justify-content: center;
+  gap: 1.5rem; /* Espacio entre los botones/enlaces */
+  padding-top: 2rem; /* Espacio por si el main tiene padding superior */
+}
+
 #links a {
     background: var(--color-bg-card-light);
     border: 1px solid var(--color-primary-dark);
     box-shadow: var(--shadow-md);
-    padding: 10px 20px;
+    padding: 15px 30px; /* Aumentado el padding para botones más grandes */
     border-radius: var(--radius-sm);
     text-decoration: none;
     color: var(--color-text);
     transition: var(--transition-std);
+    flex-grow: 1; /* Permite que los botones crezcan */
+    max-width: 300px; /* Ancho máximo para cada botón */
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
 }
 
 #links a:hover {
     background: var(--color-primary-dark);
-    box-shadow: var(--shadow-glow);
-    color: var(--color-bg-dark);
+    box-shadow: 0 0 20px var(--color-primary), 0 0 10px var(--color-accent); /* Doble glow */
+    color: var(--color-text); /* Mantener texto visible, o cambiar a var(--color-accent) */
+    transform: translateY(-3px);
 }
-
 
 /* =======================================================
    5. BOTONES ESTILIZADOS
@@ -248,7 +282,7 @@ section {
 }
 .btn-primary:hover, input[type="submit"]:hover, button[type="submit"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 20px var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary), 0 0 10px var(--color-accent);
 }
 
 .btn-outline, .botones a, .volver a, .regresar a {
@@ -260,6 +294,7 @@ section {
 .btn-outline:hover, .botones a:hover, .volver a:hover, .regresar a:hover {
   background: var(--color-accent);
   color: var(--color-bg-dark);
+  box-shadow: 0 0 15px var(--color-accent);
 }
 .botones {
   display: flex;
@@ -298,14 +333,21 @@ section {
 
 .input-box input {
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-bg-card-light); /* Fondo para inputs */
+  color: var(--color-text);
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-xs);
+  margin-bottom: 1rem;
 }
 .input-box input:focus {
   border-bottom-color: var(--color-accent);
-  box-shadow: 0 2px 0 var(--color-accent);
+  box-shadow: 0 2px 0 var(--color-accent), 0 0 10px rgba(255, 215, 0, 0.3);
+  outline: none; /* Eliminar el contorno por defecto */
 }
 .input-box input:focus + label,
 .input-box input:not(:placeholder-shown) + label {
   color: var(--color-accent);
+  transform: translateY(-20px) scale(0.8); /* Efecto flotante de label */
 }
 .recordar {
   text-align: right;
@@ -319,6 +361,7 @@ section {
 }
 .recordar a:hover {
   color: var(--color-primary);
+  text-shadow: 0 0 5px var(--color-primary);
 }
 label strong {
   color: var(--color-accent);
@@ -370,7 +413,7 @@ footer {
   background-color: rgba(255, 255, 255, 0.02);
 }
 .tabla-transacciones tbody tr:hover {
-  background-color: rgba(0, 191, 165, 0.1);
+  background-color: rgba(167, 45, 255, 0.1); /* Efecto hover con color primario */
 }
 /* Alineación de datos numéricos en tablas */
 .tabla-probabilidades td:nth-child(2),
@@ -423,7 +466,7 @@ footer {
   background: var(--color-bg-card);
   border: 3px solid var(--color-primary);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-glow-hard); /* Más glow en el panel de control */
 }
 .saldo, .estado {
   font-size: 1.3rem;
@@ -488,6 +531,20 @@ footer {
   .tablas-apuestas {
     flex-direction: column;
   }
+
+  .navbar h1 {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+  .nav-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -504,5 +561,30 @@ footer {
   .btn, input[type="submit"], button[type="submit"], .botones a, .volver a, .regresar a {
     width: 100%;
     margin-top: 0.5rem;
+  }
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 1rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .nav-links a {
+    width: 100%;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+  .nav-cta {
+    margin-top: 1rem;
+  }
+  main {
+    margin-top: var(--header-height); /* Ajustar según sea necesario si el header se hace más alto */
   }
 }
