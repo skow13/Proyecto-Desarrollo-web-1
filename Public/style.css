@@ -152,12 +152,62 @@ body {
         padding-top: 150px; /* Estimar la nueva altura del header colapsado */
     }
 }
+
 /* =======================================================
-   ESTILOS ESPECÍFICOS PARA FORMULARIOS DE REGISTRO/LOGIN
-   (Añadir a style.css)
+   ESTILOS ESPECÍFICOS PARA FORMULARIOS
+   (Login, Registro, Depósito, Retiro)
    ======================================================= */
 
-/* Estilo para que el input[type="date"] se vea mejor en el tema oscuro de casino */
+/* --- Contenedor del Formulario (Asegura la Caja Central) --- */
+.formulario {
+  /* Estas propiedades deben coincidir con .content-box para consistencia */
+  background: var(--color-bg-card, #1f0033);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-lg);
+  width: min(95%, 600px); /* Ancho más compacto para formularios */
+  margin: 3rem auto;
+  padding: 3rem;
+  border: 2px solid var(--color-primary-dark, #7a00d1);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.formulario h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--color-primary);
+  text-shadow: 0 0 10px rgba(167, 45, 255, 0.4);
+}
+
+/* --- Estilos de Input (input-box) --- */
+.input-box input {
+  /* Sobreescribe el estilo genérico de input para el tema casino */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: var(--color-bg-card-light); /* Fondo del campo */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+  font-size: 1rem;
+  border-radius: var(--radius-xs);
+  transition: var(--transition-fast);
+  margin-bottom: 0.5rem;
+}
+.input-box input:focus {
+  border-bottom-color: var(--color-accent); /* Borde inferior Dorado al enfocar */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); /* Glow sutil Dorado */
+  outline: none;
+}
+/* Etiqueta flotante (label) al enfocar o escribir */
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label,
+.input-box input:valid + label { /* :valid para inputs requeridos llenos */
+  top: -18px;
+  font-size: 0.85rem;
+  color: var(--color-accent); /* Color Dorado al flotar */
+  font-weight: 600;
+}
+
+/* --- Input Específico de Fecha (Registro) --- */
 .input-date-style {
   background: var(--color-bg-card-light);
   color: var(--color-text);
@@ -172,24 +222,71 @@ body {
 .input-date-style:focus {
   border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 10px rgba(167, 45, 255, 0.3); /* Usa el brillo púrpura */
+  box-shadow: 0 0 10px rgba(167, 45, 255, 0.3);
+}
+/* Asegura que la etiqueta Fecha de Nacimiento tenga el color acentuado */
+.formulario label strong {
+    color: var(--color-accent);
 }
 
-/* Estilo para mensajes de alerta (error/success) */
+/* --- Botones de Envío --- */
+input[type="submit"] {
+  /* Heredan los estilos del .btn-primary */
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg-dark);
+  box-shadow: 0 0 10px var(--color-primary);
+  width: 100%;
+}
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--color-primary), 0 0 10px var(--color-accent);
+}
+
+/* --- Enlace "Olvidó su contraseña" --- */
+.recordar {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+.recordar a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+.recordar a:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 5px var(--color-primary);
+}
+
+/* --- Botón Volver (btn-outline) --- */
+.volver {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+.volver a {
+    display: block;
+    width: 100%;
+}
+
+/* --- Mensajes de Alerta (Error/Success) --- */
 .alert {
-  padding: 10px;
+  padding: 12px;
   margin-top: 15px;
   border-radius: var(--radius-sm);
   font-weight: 600;
   text-align: center;
+  font-size: 1rem;
 }
 .alert-danger {
+  /* Rojo de alerta */
   background-color: var(--color-danger);
   color: var(--color-text);
   box-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
   border: 1px solid var(--color-danger);
 }
 .alert-success {
+  /* Verde de éxito */
   background-color: var(--color-success);
   color: var(--color-bg-dark);
   box-shadow: 0 0 10px rgba(67, 160, 71, 0.5);
