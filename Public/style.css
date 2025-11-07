@@ -1,35 +1,29 @@
 /* =====================================================================
-   🌌 CSS CASINO CLÁSICO — TEMÁTICA VERDE ESMERALDA Y ROJO (PrimeBet)
-   Autor: Gemini (Adaptado a la imagen PrimeBet)
+   🌌 CSS CASINO CLÁSICO — TEMÁTICA VERDE ESMERALDA Y ROJO (FINAL)
    ===================================================================== */
 
 /* =======================================================
-   1. RESET Y VARIABLES GLOBALES
+   1. RESET Y VARIABLES GLOBALES (Corregidas a Verde/Rojo)
    ======================================================= */
 :root {
-  /* --- Paleta de Casino Clásico --- */
+  /* --- Paleta de Casino Clásico (Verde/Rojo) --- */
   --color-primary: #008080; /* Verde Esmeralda/Teal Oscuro */
   --color-primary-dark: #005f5f; /* Verde más profundo */
   --color-accent: #c0392b; /* Rojo Casino para acentos y peligro */
   --color-bg-dark: #121212; /* Negro muy oscuro (lujo) */
   --color-bg-card: #1f2c2c; /* Fondo de cartas y formularios (Tinte verde oscuro) */
   --color-bg-card-light: #304141;
-  --color-text: #f0f0f0; /* Blanco roto/Claro */
+  --color-text: #f0f0f0; /* Blanco roto/Claro (ALTO CONTRASTE) */
   --color-text-muted: #a0a0a0;
-  --color-danger: var(--color-accent); /* Rojo de ruleta */
-  --color-success: #27ae60; /* Verde de saldo positivo */
-  --color-nav-bg: rgba(18, 18, 18, 0.95); /* Fondo de navegación semitransparente oscuro */
-
-  /* --- Colores de Ruleta --- */
-  --color-roulette-red: #e53935;
-  --color-roulette-black: #212121;
-  --color-roulette-green: #388e3c; 
+  --color-danger: var(--color-accent); 
+  --color-success: #27ae60; 
+  --color-nav-bg: rgba(18, 18, 18, 0.95); 
 
   /* --- Sombra y efectos --- */
   --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.8);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.95);
-  --shadow-glow: 0 0 15px rgba(0, 128, 128, 0.6); /* Glow Esmeralda */
+  --shadow-glow: 0 0 15px rgba(0, 128, 128, 0.6); 
 
   /* --- Tamaños base --- */
   --header-height: 72px;
@@ -38,50 +32,23 @@
   --radius-lg: 16px;
 }
 
-/* --- Reset universal y base --- */
+/* --- Base --- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
 
 body {
   background-color: var(--color-bg-dark);
-  color: var(--color-text);
+  color: var(--color-text); /* **CLAVE**: Color de texto principal CLARO */
   font-family: 'Poppins', 'Segoe UI', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   line-height: 1.6;
-  overflow-x: hidden;
   padding-top: 0; 
 }
 
 /* =======================================================
-   2. ESTILOS BASE Y UTILITIES
-   ======================================================= */
-
-/* --- Estilos de Título Principal --- */
-h1, h2, h3 {
-    color: var(--color-text);
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-/* --- Botones Genéricos (Botones de Volver/Outline) --- */
-.btn-outline, .volver a, .regresar a {
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  background: transparent;
-  padding: 0.9rem 1.8rem;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: all 0.35s ease;
-}
-.btn-outline:hover, .volver a:hover, .regresar a:hover {
-  background: var(--color-primary);
-  color: var(--color-bg-dark);
-  box-shadow: 0 0 15px rgba(0, 128, 128, 0.5);
-}
-
-/* =======================================================
-   3. ESTILOS DE FORMULARIO (LOGIN & REGISTRO) - CORREGIDO
+   2. ESTILOS DE FORMULARIO (LOGIN & REGISTRO) - CORREGIDO
    ======================================================= */
 
 .formulario {
@@ -98,7 +65,7 @@ h1, h2, h3 {
 .formulario h1 {
   text-align: center;
   margin-bottom: 2.5rem;
-  /* El color debe ser el color de acento o primary brillante */
+  /* El color es el primario (verde esmeralda) */
   color: var(--color-primary); 
   text-shadow: 0 0 10px rgba(0, 128, 128, 0.4); 
 }
@@ -111,9 +78,10 @@ h1, h2, h3 {
   background-color: var(--color-bg-card-light);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
-  color: var(--color-text); /* **CLAVE**: Texto del input es claro */
+  /* **CLAVE**: Texto del input es CLARO */
+  color: var(--color-text); 
   font-size: 1rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   transition: all 0.2s ease;
   margin-bottom: 0.5rem;
 }
@@ -128,7 +96,8 @@ h1, h2, h3 {
   position: absolute;
   top: 12px;
   left: 0;
-  color: var(--color-text-muted); /* Color gris claro */
+  /* **CLAVE**: Etiqueta por defecto es CLARO */
+  color: var(--color-text-muted); 
   transition: all 0.2s ease;
   pointer-events: none; 
 }
@@ -139,23 +108,10 @@ h1, h2, h3 {
 .input-box input:valid + label {
   top: -18px;
   font-size: 0.85rem;
-  color: var(--color-primary); /* Color Esmeralda al flotar */
+  /* Color PRIMARIO (Esmeralda) al flotar */
+  color: var(--color-primary); 
   font-weight: 600;
 }
-
-/* --- Input de Fecha (Registro) --- */
-.input-date-style {
-  background: var(--color-bg-card-light);
-  color: var(--color-text);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem;
-  width: 100%;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  margin-top: 0.5rem;
-}
-.formulario label strong { color: var(--color-primary); }
 
 
 /* --- Botón Submit (Registrarse / Iniciar sesión) --- */
@@ -171,7 +127,8 @@ input[type="submit"] {
   margin-top: 1rem;
   
   background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: var(--color-bg-dark); /* Texto oscuro sobre botón claro */
+  /* **CLAVE**: Texto oscuro sobre botón claro */
+  color: var(--color-bg-dark); 
   box-shadow: 0 0 10px rgba(0, 128, 128, 0.4);
 }
 input[type="submit"]:hover {
@@ -179,26 +136,42 @@ input[type="submit"]:hover {
   box-shadow: 0 0 20px rgba(0, 128, 128, 0.8);
 }
 
-/* --- Enlace Olvidó su contraseña --- */
-.recordar {
-  text-align: right;
-  font-size: 0.9rem;
-  margin-top: -1rem;
-  margin-bottom: 2rem;
-}
-.recordar a {
-  color: var(--color-text-muted);
-  text-decoration: none;
+/* --- Input de Fecha (Registro) --- */
+.input-date-style {
+  background: var(--color-bg-card-light);
+  color: var(--color-text);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  width: 100%;
+  font-size: 1rem;
   transition: all 0.2s ease;
+  margin-top: 0.5rem;
 }
-.recordar a:hover {
-  color: var(--color-primary);
+.input-date-style:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 128, 128, 0.3);
 }
+.formulario label strong { color: var(--color-primary); }
 
-/* --- Botón Volver al inicio --- */
+/* --- Enlace Olvidó su contraseña y Volver --- */
+.recordar { text-align: right; margin-top: -1rem; margin-bottom: 2rem; }
+.recordar a, .volver a { text-decoration: none; color: var(--color-text-muted); }
 .volver { margin-top: 1.5rem; text-align: center; }
-.volver a { display: block; width: 100%; }
-
+.volver a { 
+    display: block; width: 100%;
+    /* Estilo del botón outline para Volver */
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+    padding: 0.9rem 1.8rem;
+    border-radius: var(--radius-sm);
+}
+.volver a:hover {
+    background: var(--color-primary);
+    color: var(--color-bg-dark);
+}
 
 /* --- Mensajes de Alerta (Error/Success) --- */
 .alert {
@@ -207,18 +180,15 @@ input[type="submit"]:hover {
   border-radius: var(--radius-sm);
   font-weight: 600;
   text-align: center;
-  font-size: 1rem;
   border: 1px solid transparent;
 }
 .alert-danger {
-  background-color: var(--color-danger);
+  background-color: var(--color-danger); /* Rojo */
   color: var(--color-text);
-  box-shadow: 0 0 10px rgba(192, 57, 43, 0.5);
   border-color: var(--color-danger);
 }
 .alert-success {
-  background-color: var(--color-success);
+  background-color: var(--color-success); /* Verde */
   color: var(--color-bg-dark);
-  box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
   border-color: var(--color-success);
 }
