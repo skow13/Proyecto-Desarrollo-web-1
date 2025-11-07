@@ -28,6 +28,8 @@ const UsuarioSchema = new mongoose.Schema({
   nombre: String,
   email: String,
   usuario: String,
+  // 1. Añadimos el campo RUT
+  rut: { type: String, unique: true, required: true }, 
   password: String,
   fechaNacimiento: Date,
   saldo: { type: Number, default: 0 },
@@ -53,16 +55,18 @@ app.get('/Info', (req, res) => res.render('Info'));
 app.get('/Info_ruleta', (req, res) => res.render('Info_ruleta'));
 
 app.post('/register', async (req, res) => {
-  const { nombre, email, usuario, password, repassword, birthdate } = req.body;
+  // 2. Capturamos el RUT en el registro
+  const { nombre, email, usuario, password, repassword, birthdate, rut } = req.body; 
 
   if (password !== repassword) {
     return res.render('Registro', { error: 'Las contraseñas no coinciden' });
   }
 
   try {
-    const existe = await Usuario.findOne({ usuario });
+    // Verificamos si el RUT ya existe
+    const existe = await Usuario.findOne({ rut }); 
     if (existe) {
-      return res.render('Registro', { error: 'El nombre de usuario ya existe' });
+      return res.render('Registro', { error: 'El RUT ya se encuentra registrado' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -70,6 +74,7 @@ app.post('/register', async (req, res) => {
       nombre,
       email,
       usuario,
+      rut, // Guardamos el RUT
       password: hashedPassword,
       fechaNacimiento: birthdate,
       saldo: 0,
@@ -85,28 +90,37 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { usuario, password } = req.body;
+  // 3. Autenticación por RUT
+  const { rut, password } = req.body; 
 
   try {
-    const user = await Usuario.findOne({ usuario });
-    if (!user) return res.render('Login', { error: 'Usuario no encontrado' });
+    // Buscamos al usuario por RUT
+    const user = await Usuario.findOne({ rut }); 
+    if (!user) return res.render('Login', { error: 'RUT no encontrado' });
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.render('Login', { error: 'Contraseña incorrecta' });
-    res.cookie('usuario', user.usuario, { httpOnly: false });
+    
+    // 4. Guardamos el RUT en la cookie (reemplazando al 'usuario')
+    res.cookie('rut', user.rut, { httpOnly: false }); 
     res.redirect('/Perfil');
   } catch (err) {
     console.error('Error en login:', err);
     res.render('Login', { error: 'Error interno del servidor' });
   }
 });
+
 app.get('/Perfil', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
-    if (!username) return res.redirect('/Login');
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
+    if (!userRut) return res.redirect('/Login');
 
-    const usuario = await Usuario.findOne({ usuario: username });
+    // Buscamos al usuario por RUT
+    const usuario = await Usuario.findOne({ rut: userRut }); 
     if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
+    
+    // El resto de la lógica de perfil se mantiene igual
     const ultimasTransacciones = usuario.transacciones
       .slice(-5)
       .reverse()
@@ -135,10 +149,11 @@ app.get('/Perfil', async (req, res) => {
 
 app.get('/Ruleta', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
-    if (!username) return res.redirect('/Login');
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
+    if (!userRut) return res.redirect('/Login');
 
-    const usuario = await Usuario.findOne({ usuario: username });
+    const usuario = await Usuario.findOne({ rut: userRut });
     if (!usuario) return res.redirect('/Login');
 
     res.render('Ruleta', {
@@ -153,10 +168,11 @@ app.get('/Ruleta', async (req, res) => {
 
 app.get('/Deposito', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
-    if (!username) return res.redirect('/Login');
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
+    if (!userRut) return res.redirect('/Login');
 
-    const usuario = await Usuario.findOne({ usuario: username });
+    const usuario = await Usuario.findOne({ rut: userRut });
     if (!usuario) return res.redirect('/Login');
 
     res.render('Deposito', {
@@ -170,9 +186,10 @@ app.get('/Deposito', async (req, res) => {
 
 app.post('/Deposito', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
     const { monto } = req.body;
-    const usuario = await Usuario.findOne({ usuario: username });
+    const usuario = await Usuario.findOne({ rut: userRut });
     if (!usuario) return res.redirect('/Login');
 
     const montoNum = Number(monto);
@@ -197,10 +214,11 @@ app.post('/Deposito', async (req, res) => {
 
 app.get('/Retiro', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
-    if (!username) return res.redirect('/Login');
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
+    if (!userRut) return res.redirect('/Login');
 
-    const usuario = await Usuario.findOne({ usuario: username });
+    const usuario = await Usuario.findOne({ rut: userRut });
     if (!usuario) return res.redirect('/Login');
 
     res.render('Retiro', {
@@ -214,9 +232,10 @@ app.get('/Retiro', async (req, res) => {
 
 app.post('/Retiro', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
     const { monto } = req.body;
-    const usuario = await Usuario.findOne({ usuario: username });
+    const usuario = await Usuario.findOne({ rut: userRut });
     if (!usuario) return res.redirect('/Login');
 
     const montoNum = Number(monto);
@@ -242,13 +261,14 @@ app.post('/Retiro', async (req, res) => {
   }
 });
 
-//xd
+// Transacción (Actualizar para usar 'rut')
 app.post('/transaccion', async (req, res) => {
   try {
-    const username = req.cookies.usuario;
+    // Buscamos por la nueva cookie 'rut'
+    const userRut = req.cookies.rut; 
     const { detalle, monto, positivo } = req.body;
 
-    const usuario = await Usuario.findOne({ usuario: username });
+    const usuario = await Usuario.findOne({ rut: userRut });
     if (!usuario) return res.status(404).send('Usuario no encontrado');
 
     const montoNum = Number(monto);
@@ -274,7 +294,8 @@ app.post('/transaccion', async (req, res) => {
 
 // -------------------- CERRAR SESIÓN --------------------
 app.get('/logout', (req, res) => {
-  res.clearCookie('usuario');
+  // Eliminamos la cookie 'rut'
+  res.clearCookie('rut'); 
   res.redirect('/Login');
 });
 

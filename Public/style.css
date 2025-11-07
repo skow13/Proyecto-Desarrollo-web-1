@@ -152,3 +152,46 @@ body {
         padding-top: 150px; /* Estimar la nueva altura del header colapsado */
     }
 }
+/* =======================================================
+   ESTILOS ESPECÍFICOS PARA FORMULARIOS DE REGISTRO/LOGIN
+   (Añadir a style.css)
+   ======================================================= */
+
+/* Estilo para que el input[type="date"] se vea mejor en el tema oscuro de casino */
+.input-date-style {
+  background: var(--color-bg-card-light);
+  color: var(--color-text);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  width: 100%;
+  font-size: 1rem;
+  transition: var(--transition-fast);
+  margin-top: 0.5rem;
+}
+.input-date-style:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 10px rgba(167, 45, 255, 0.3); /* Usa el brillo púrpura */
+}
+
+/* Estilo para mensajes de alerta (error/success) */
+.alert {
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-align: center;
+}
+.alert-danger {
+  background-color: var(--color-danger);
+  color: var(--color-text);
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
+  border: 1px solid var(--color-danger);
+}
+.alert-success {
+  background-color: var(--color-success);
+  color: var(--color-bg-dark);
+  box-shadow: 0 0 10px rgba(67, 160, 71, 0.5);
+  border: 1px solid var(--color-success);
+}
