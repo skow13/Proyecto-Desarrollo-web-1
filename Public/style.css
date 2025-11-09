@@ -297,3 +297,165 @@ input[type="submit"]:hover {
   color: var(--color-bg-dark);
   border-color: var(--color-success);
 }
+
+/* =======================================================
+   2. ESTILOS GLOBALES DE NAVEGACIÓN Y CONTENEDORES
+   ======================================================= */
+
+/* A. Ajuste del Body para evitar que el header cubra el contenido */
+body {
+ /* Requiere que --header-height esté definido en :root */
+ padding-top: var(--header-height, 72px); 
+}
+
+/* B. Estilos del Header Fijo (fixed-nav-header) */
+.fixed-nav-header {
+ position: fixed;
+ top: 0; left: 0; width: 100%; height: var(--header-height, 72px);
+ background: var(--color-nav-bg); 
+ backdrop-filter: blur(8px);
+ box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+ z-index: 1000; display: flex; align-items: center;
+}
+.navbar-inicio {
+ max-width: var(--max-width); width: 100%; margin: 0 auto;
+ padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;
+}
+.navbar-inicio .logo-text {
+ font-size: 1.8rem; font-weight: 900; 
+ color: var(--color-text);
+ letter-spacing: 2px; margin: 0; 
+}
+
+.nav-links-inicio { display: flex; gap: 1.5rem; }
+.nav-link-item {
+color: var(--color-text-muted); text-decoration: none; font-weight: 500;
+ position: relative; padding: 0.5rem 0; transition: var(--transition-fast);
+}
+.nav-link-item:hover {
+ color: var(--color-primary); 
+ text-shadow: 0 0 5px var(--color-primary);
+}
+
+
+/* C. Estilos para Contenido General (INFO / INFO_RULETA / PERFIL) */
+section {
+  padding: 4rem 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease forwards;
+}
+.info, .perfil {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: min(95%, 900px);
+  margin: 3rem auto;
+  padding: 3rem;
+  border: 2px solid var(--color-primary-dark);
+  line-height: 1.8;
+}
+.info h2 { color: var(--color-primary); margin-top: 1.5rem; margin-bottom: 0.8rem; }
+.info details { border-bottom: 1px solid var(--color-bg-card-light); padding: 0.8rem 0; }
+.info summary { cursor: pointer; font-weight: 600; color: var(--color-text); }
+.info ul { margin-left: 2rem; }
+.info hr { border-color: var(--color-primary-dark); margin: 2rem 0; }
+.info strong { color: var(--color-primary); }
+
+/* D. Estilos del Footer */
+.footer-inicio {
+ text-align: center; padding: 1.5rem 1rem;
+ background: var(--color-bg-card);
+ border-top: 2px solid var(--color-primary-dark);
+ color: var(--color-text-muted); font-size: 0.9rem; 
+ box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.7);
+ margin-top: auto;
+}
+
+/* =======================================================
+   3. ESTILOS DE FORMULARIO (LOGIN & REGISTRO & DEPOSITO)
+   ======================================================= */
+
+.formulario {
+ background: var(--color-bg-card);
+ border-radius: var(--radius-lg);
+ box-shadow: var(--shadow-lg);
+ width: min(95%, 600px);
+ margin: 3rem auto;
+ padding: 3rem;
+ border: 2px solid var(--color-primary-dark);
+ animation: fadeInUp 0.6s ease forwards;
+}
+
+.formulario h1 {
+ text-align: center; margin-bottom: 2.5rem;
+ color: var(--color-primary); 
+ text-shadow: 0 0 10px rgba(0, 128, 128, 0.4); 
+}
+
+/* --- Input Box (CORRECCIÓN DE CONTRASTE) --- */
+.input-box { position: relative; margin-bottom: 2rem; }
+.input-box input {
+  /* Estas propiedades son críticas para el contraste */
+ width: 100%; padding: 0.8rem 1rem;
+ background-color: var(--color-bg-card-light);
+ border: 1px solid rgba(255, 255, 255, 0.1);
+ border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+ color: var(--color-text); /* CLAVE: Texto CLARO */
+ font-size: 1rem; border-radius: var(--radius-xs);
+ transition: var(--transition-fast); margin-bottom: 0.5rem;
+}
+.input-box input:focus {
+ border-bottom-color: var(--color-primary); 
+ box-shadow: 0 0 5px rgba(0, 128, 128, 0.5); 
+ outline: none;
+}
+
+/* --- Label (Etiqueta) --- */
+.input-box label {
+ position: absolute; top: 12px; left: 0;
+ color: var(--color-text-muted); /* Etiqueta por defecto es CLARA */
+ transition: var(--transition-fast); pointer-events: none; 
+}
+.input-box input:focus + label, .input-box input:not(:placeholder-shown) + label, .input-box input:valid + label {
+ top: -18px; font-size: 0.85rem; color: var(--color-primary); font-weight: 600;
+}
+
+
+/* --- Botón Submit (Registrarse / Iniciar sesión) --- */
+input[type="submit"], button[type="submit"] {
+ display: block; width: 100%; padding: 1rem 2.2rem;
+ border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; border: none;
+ text-transform: uppercase; margin-top: 1rem;
+ background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+ color: var(--color-bg-dark); /* Texto oscuro sobre botón claro */
+ box-shadow: 0 0 10px rgba(0, 128, 128, 0.4);
+}
+input[type="submit"]:hover, button[type="submit"]:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 0 20px rgba(0, 128, 128, 0.8);
+}
+
+/* --- Input de Fecha (Registro) --- */
+.input-date-style {
+  background: var(--color-bg-card-light); color: var(--color-text);
+  border: 2px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-sm);
+  padding: 0.6rem; width: 100%; font-size: 1rem; margin-top: 0.5rem;
+}
+.formulario label strong { color: var(--color-primary); }
+
+/* --- Enlace Olvidó su contraseña y Volver --- */
+.recordar { text-align: right; margin-top: -1rem; margin-bottom: 2rem; }
+.recordar a, .volver a { text-decoration: none; color: var(--color-text-muted); }
+.volver { margin-top: 1.5rem; text-align: center; }
+.volver a { 
+    display: block; width: 100%;
+    border: 2px solid var(--color-primary); color: var(--color-primary);
+    background: transparent; padding: 0.9rem 1.8rem; border-radius: var(--radius-sm);
+}
+.volver a:hover { background: var(--color-primary); color: var(--color-bg-dark); }
+
+/* --- Mensajes de Alerta --- */
+.alert { padding: 12px; margin-top: 15px; border-radius: var(--radius-sm); font-weight: 600; text-align: center; border: 1px solid transparent; }
+.alert-danger { background-color: var(--color-danger); color: var(--color-text); border-color: var(--color-danger); }
+.alert-success { background-color: var(--color-success); color: var(--color-bg-dark); border-color: var(--color-success); }
