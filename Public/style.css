@@ -377,7 +377,7 @@ ul {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: min(95%, 500px);
-    padding: 3rem;
+    padding: 2rem 3rem; /* Reducido para mejor proporción vertical */
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease forwards;
 }
@@ -728,8 +728,8 @@ ul {
     text-decoration: none;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
-    transition: var(--transition-fast);
     width: 100%; /* Por defecto para formularios */
+    transition: var(--transition-fast);
 }
 .btn.btn-inline {
     width: auto;
