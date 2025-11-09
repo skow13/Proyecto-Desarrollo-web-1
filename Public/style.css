@@ -368,6 +368,11 @@ ul {
 }
 
 .formulario {
+    /* CORRECCIÓN: Centrado y crecimiento dentro de un body flex */
+    flex-grow: 1; /* Permite que tome el espacio disponible */
+    margin: auto; /* Centra el elemento horizontal y verticalmente dentro del body */
+    
+    /* Estilos existentes */
     background: var(--color-bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
@@ -675,6 +680,42 @@ ul {
    ======================================================= */
 
 /* --- Botones --- */
+/* CORRECCIÓN: Estilo mejorado para los inputs de submit de formularios */
+.formulario input[type="submit"], 
+.formulario button[type="submit"] {
+    /* Herencia de la clase .btn */
+    display: block;
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: var(--transition-fast);
+    width: 100%; /* El botón ocupa todo el ancho y se ve centrado */
+    
+    /* Estilo del botón secundario (Dorado) */
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+    color: var(--color-text-dark);
+    box-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem; 
+}
+
+.formulario input[type="submit"]:hover,
+.formulario button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 183, 3, 0.8);
+}
+/* Fin de corrección de botones de formulario */
+
+
 .btn {
     display: inline-block;
     padding: 0.8rem 1.8rem;
