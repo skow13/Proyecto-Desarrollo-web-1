@@ -1,0 +1,62 @@
+<h1 style="color:white">Juego de la ruleta</h1>
+
+<div class="botones"> 
+  <a href="/Retiro">Realizar retiro</a>
+  <a href="/Deposito">Realizar depósito</a>
+  <a href="/Perfil">Ir al perfil</a>
+</div>
+
+<div class="contenedor-ruleta">
+  <img src="/ruleta_europea.png" alt="Ruleta Europea" class="ruleta">
+
+  <div class="panel-derecho">
+    <p class="saldo">Dinero disponible: ${{saldo}}</p>
+    <p class="estado">Estado: {{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</p>
+
+    <div class="tablas-apuestas">
+      <div class="ultimas-apuestas">
+        <h3 style="color:white">Últimas apuestas</h3>
+
+        {{#if apuestas}}
+        <table class="tabla-apuestas">
+          <thead>
+            <tr><th>#</th><th>Apuesta</th></tr>
+          </thead>
+          <tbody>
+            {{#each apuestas}}
+              <tr>
+                <td>{{@index}}</td>
+                <td class="{{this.color}}">{{this.detalle}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{else}}
+          <p>No hay apuestas recientes.</p>
+        {{/if}}
+      </div>
+
+      <div class="ultimos-resultados">
+        <h3 style="color:white">Últimos resultados</h3>
+
+        {{#if resultados}}
+        <table class="tabla-resultados">
+          <thead>
+            <tr><th>#</th><th>Resultado</th></tr>
+          </thead>
+          <tbody>
+            {{#each resultados}}
+              <tr>
+                <td>{{@index}}</td>
+                <td class="{{this.color}}">{{this.detalle}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{else}}
+          <p>No hay resultados aún.</p>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
