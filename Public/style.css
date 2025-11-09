@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 2.0 - Expandida y Mejorada
+   Versión 3.0 - Final de Estilización
    ======================================================= */
 
 /* =======================================================
@@ -532,7 +532,7 @@ ul {
     max-width: var(--max-width);
 }
 
-/* --- Contenedor de la Rueda --- */
+/* --- Contenedor de la Rueda (Antigua) --- */
 .roulette-wheel-container {
     flex: 1;
     display: grid;
@@ -580,29 +580,63 @@ ul {
 
 
 /* --- RUEDA.HANDLEBARS - Estilo de las tablas y contenedores */
-.contenedor-ruleta {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-    align-items: flex-start;
-}
-
-.ruleta {
-    flex: 2;
-    max-width: 60%; 
-    height: auto;
+.contenedor-ruleta-page {
+    /* Mismo estilo de tarjeta grande que .perfil, .info */
+    max-width: var(--max-width);
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--color-bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-display-area {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.roulette-visuals {
+    flex: 2; /* Ocupa más espacio */
+    display: flex;
+    flex-direction: column; /* Apila las imágenes verticalmente */
+    gap: 1.5rem;
+    align-items: center; /* Centra las imágenes */
+    padding: 1.5rem;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ruleta-small {
+    max-width: 300px; /* Tamaño más pequeño para la ruleta */
+    height: auto;
+    border-radius: var(--radius-full); /* Asegura que siga siendo redonda */
+    box-shadow: var(--shadow-glow-primary);
+    border: 5px solid var(--color-secondary); /* Borde dorado más grueso */
+}
+
+.tabla-ruleta-img {
+    max-width: 100%; /* La tabla ocupará el ancho disponible */
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--color-primary);
 }
 
 .panel-derecho {
-    flex: 1;
+    flex: 1; /* Ocupa el espacio restante */
+    min-width: 300px; /* Asegura un ancho mínimo para el panel */
     background: var(--color-bg-card);
     padding: 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .saldo, .estado {
@@ -646,7 +680,7 @@ ul {
 }
 
 
-/* --- Mesa de Apuestas --- */
+/* --- Mesa de Apuestas (General) --- */
 .betting-table {
     flex: 2;
     background: #013220; /* Verde oscuro de mesa */
@@ -1003,7 +1037,7 @@ ul {
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.perfil h1, .info h1 {
+.perfil h1, .info h1, .contenedor-ruleta-page h1 {
     color: var(--color-secondary);
     text-shadow: 0 0 5px rgba(255, 183, 3, 0.4);
     margin-bottom: 1.5rem;
@@ -1152,6 +1186,46 @@ details li {
     text-decoration: none;
 }
 
+/* --- AJUSTES ESPECÍFICOS PARA RULETA.HANDLEBARS --- */
+
+.game-display-area {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.roulette-visuals {
+    flex: 2; 
+    display: flex;
+    flex-direction: column; 
+    gap: 1.5rem;
+    align-items: center; 
+    padding: 1.5rem;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ruleta-small {
+    max-width: 300px; /* Tamaño más pequeño para la ruleta */
+    height: auto;
+    border-radius: var(--radius-full); 
+    box-shadow: var(--shadow-glow-primary);
+    border: 5px solid var(--color-secondary); 
+}
+
+.tabla-ruleta-img {
+    max-width: 100%; 
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--color-primary);
+}
+
+/* El panel derecho ya está cubierto por .panel-derecho en la sección 6, lo reutilizamos */
 
 /* =======================================================
    9. ANIMACIONES
@@ -1196,6 +1270,7 @@ details li {
    ======================================================= */
 
 @media (max-width: 992px) {
+    /* Ruleta Responsive */
     .game-area {
         flex-direction: column;
     }
@@ -1226,6 +1301,19 @@ details li {
     }
     .botones {
         justify-content: center;
+    }
+
+    /* Ruleta Visuals Responsive */
+    .game-display-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    .roulette-visuals, .panel-derecho {
+        width: 100%;
+        flex: unset; /* Reinicia el flex para que ocupen todo el ancho */
+    }
+    .ruleta-small {
+        max-width: 250px; 
     }
 }
 
@@ -1309,6 +1397,23 @@ details li {
         justify-content: center;
     }
 }
+
+@media (max-width: 576px) {
+    .roulette-visuals {
+        padding: 1rem;
+    }
+    .ruleta-small {
+        max-width: 200px; 
+    }
+    .panel-derecho {
+        padding: 1.5rem;
+    }
+    .tablas-apuestas {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
 
 @media (max-width: 480px) {
     .betting-grid {
