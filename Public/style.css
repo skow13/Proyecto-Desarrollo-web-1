@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 3.0 - Final de Estilización
+   Versión 3.1 - Ajuste de Formularios de Transacción
    ======================================================= */
 
 /* =======================================================
@@ -356,7 +356,7 @@ ul {
 }
 
 /* =======================================================
-   5. FORMULARIOS (LOGIN & REGISTRO)
+   5. FORMULARIOS (LOGIN, REGISTRO, DEPOSITO, RETIRO)
    ======================================================= */
 
 .form-container {
@@ -368,16 +368,16 @@ ul {
 }
 
 .formulario {
-    /* CORRECCIÓN: Centrado y crecimiento dentro de un body flex */
-    flex-grow: 1; /* Permite que tome el espacio disponible */
-    margin: auto; /* Centra el elemento horizontal y verticalmente dentro del body */
+    /* Centrado y crecimiento dentro de un body flex */
+    flex-grow: 1; 
+    margin: auto; 
     
-    /* Estilos existentes */
+    /* Estilos de Tarjeta */
     background: var(--color-bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: min(95%, 500px);
-    padding: 2rem 3rem; /* Reducido para mejor proporción vertical */
+    padding: 2rem 3rem; /* Ajustado para mejor proporción vertical */
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease forwards;
 }
@@ -387,6 +387,15 @@ ul {
     margin-bottom: 2.5rem;
     color: var(--color-secondary);
     text-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
+}
+
+/* Estilo para el párrafo de saldo actual en Depósito/Retiro */
+.formulario p {
+    color: var(--color-success);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 /* --- Input Box (Alto Contraste) --- */
@@ -594,18 +603,18 @@ ul {
 
 .game-display-area {
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    flex-wrap: wrap; 
     gap: 2rem;
     margin-top: 2rem;
     width: 100%;
 }
 
 .roulette-visuals {
-    flex: 2; /* Ocupa más espacio */
+    flex: 2; 
     display: flex;
-    flex-direction: column; /* Apila las imágenes verticalmente */
+    flex-direction: column; 
     gap: 1.5rem;
-    align-items: center; /* Centra las imágenes */
+    align-items: center; 
     padding: 1.5rem;
     background: var(--color-bg-card);
     border-radius: var(--radius-lg);
@@ -616,13 +625,13 @@ ul {
 .ruleta-small {
     max-width: 300px; /* Tamaño más pequeño para la ruleta */
     height: auto;
-    border-radius: var(--radius-full); /* Asegura que siga siendo redonda */
+    border-radius: var(--radius-full); 
     box-shadow: var(--shadow-glow-primary);
-    border: 5px solid var(--color-secondary); /* Borde dorado más grueso */
+    border: 5px solid var(--color-secondary); 
 }
 
 .tabla-ruleta-img {
-    max-width: 100%; /* La tabla ocupará el ancho disponible */
+    max-width: 100%; 
     height: auto;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
@@ -782,7 +791,7 @@ ul {
    ======================================================= */
 
 /* --- Botones --- */
-/* CORRECCIÓN: Estilo mejorado para los inputs de submit de formularios */
+/* Estilo para los inputs de submit de formularios (Login, Registro, Deposito, Retiro) */
 .formulario input[type="submit"], 
 .formulario button[type="submit"] {
     /* Herencia de la clase .btn */
@@ -798,7 +807,7 @@ ul {
     font-size: 0.95rem;
     letter-spacing: 0.5px;
     transition: var(--transition-fast);
-    width: 100%; /* El botón ocupa todo el ancho y se ve centrado */
+    width: 100%; 
     
     /* Estilo del botón secundario (Dorado) */
     background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
@@ -815,7 +824,6 @@ ul {
     transform: translateY(-2px);
     box-shadow: 0 0 20px rgba(255, 183, 3, 0.8);
 }
-/* Fin de corrección de botones de formulario */
 
 
 .btn {
@@ -830,7 +838,7 @@ ul {
     text-decoration: none;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
-    width: 100%; /* Por defecto para formularios */
+    width: 100%; 
     transition: var(--transition-fast);
 }
 .btn.btn-inline {
@@ -1225,7 +1233,15 @@ details li {
     border: 2px solid var(--color-primary);
 }
 
-/* El panel derecho ya está cubierto por .panel-derecho en la sección 6, lo reutilizamos */
+.panel-derecho {
+    flex: 1; /* Ocupa el espacio restante */
+    min-width: 300px; /* Asegura un ancho mínimo para el panel */
+    background: var(--color-bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
 /* =======================================================
    9. ANIMACIONES
