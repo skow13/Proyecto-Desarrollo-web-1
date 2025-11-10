@@ -11,61 +11,60 @@
 </header>
 
 <div class="contenedor-ruleta-principal">
-    
     <div class="panel-historial-lateral">
-        <p class="balance-status">Dinero disponible: ${{saldo}}</p>
-        <p class="balance-status" style="margin-bottom: 2rem;">Estado: {{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</p>
-        
-        <div class="historial-grid"> 
-            <div class="historial-columna">
-                <h3>Últimas apuestas</h3>
-                {{#if apuestas}}
-                <table class="tabla-apuestas">
-                    <thead>
-                        <tr><th>#</th><th>Apuesta</th></tr>
-                    </thead>
-                    <tbody>
-                        {{#each apuestas}}
-                            <tr>
-                                <td>{{@index}}</td>
-                                <td class="apuesta-estado {{this.color}}">{{this.detalle}}</td>
-                            </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-                {{else}}
-                    <p class="text-muted">No hay apuestas recientes.</p>
-                {{/if}}
-            </div>
+    <p class="balance-status">Dinero disponible: ${{saldo}}</p>
+    <p class="balance-status" style="margin-bottom: 2rem;">Estado: {{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</p>
+    
+    <div class="historial-grid"> 
+        <div class="historial-columna">
+            <h3>Últimas apuestas</h3>
+            {{#if apuestas}}
+            <table class="tabla-apuestas">
+                <thead>
+                    <tr><th>#</th><th>Apuesta</th></tr>
+                </thead>
+                <tbody>
+                    {{#each apuestas}}
+                        <tr>
+                            <td>{{@index}}</td>
+                            <td class="apuesta-estado {{this.color}}">
+                                {{this.detalle}}
+                                <br/>
+                                <span style="font-weight: normal; font-size: 0.75rem;">
+                                    {{this.montoGanado}}
+                                </span>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+                <p class="text-muted">No hay apuestas recientes.</p>
+            {{/if}}
+        </div>
 
-            <div class="historial-columna">
-    <h3>Últimas apuestas</h3>
-    {{#if apuestas}}
-    <table class="tabla-apuestas">
-        <thead>
-            <tr><th>#</th><th>Apuesta</th></tr>
-        </thead>
-        <tbody>
-            {{#each apuestas}}
-                <tr>
-                    <td>{{@index}}</td>
-                    <td class="apuesta-estado {{this.color}}">
-                        {{this.detalle}}
-                        <br/>
-                        <span style="font-weight: normal; font-size: 0.75rem;">
-                            {{this.montoGanado}} 
-                        </span>
-                    </td>
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
-    {{else}}
-        <p class="text-muted">No hay apuestas recientes.</p>
-    {{/if}}
-</div>
+        <div class="historial-columna">
+            <h3>Últimos resultados</h3>
+            {{#if resultados}}
+            <table class="tabla-resultados">
+                <thead>
+                    <tr><th>#</th><th>Resultado</th></tr>
+                </thead>
+                <tbody>
+                    {{#each resultados}}
+                        <tr>
+                            <td>{{@index}}</td>
+                            <td class="resultado-numero color-{{this.color}}">{{this.detalle}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+                <p class="text-muted">No hay resultados aún.</p>
+            {{/if}}
         </div>
     </div>
+</div>
     <div class="tarjeta-pagina-completa tarjeta-juego">
         <h1>Juego de la ruleta</h1>
 
