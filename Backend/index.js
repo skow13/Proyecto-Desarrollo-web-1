@@ -294,7 +294,6 @@ app.post('/transaccion', async (req, res) => {
 
 // -------------------- CERRAR SESIÓN --------------------
 app.get('/logout', (req, res) => {
-  // Eliminamos la cookie 'rut'
   res.clearCookie('rut'); 
   res.redirect('/Login');
 });
