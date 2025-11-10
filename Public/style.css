@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 4.0 - Fondo Global y Estilización Completa
+   Versión 4.1 - Ajuste de Claridad Global
    ======================================================= */
 
 /* =======================================================
@@ -106,7 +106,8 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Tono oscuro, ligero blur si se desea */
+    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.65 */
+    background: rgba(0, 0, 0, 0.65); 
     z-index: -1; /* Mueve la capa detrás de todo el contenido */
 }
 
@@ -395,8 +396,9 @@ ul {
     flex-grow: 1; 
     margin: auto; 
     
-    /* Estilos de Tarjeta (Fondo semi-transparente para ver el fondo global) */
-    background: rgba(20, 20, 20, 0.95); /* Usamos RGBA para transparencia */
+    /* Estilos de Tarjeta (Fondo semi-transparente para ver el fondo global) 
+       AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8); 
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: min(95%, 500px);
@@ -614,8 +616,9 @@ ul {
 
 /* --- RUEDA.HANDLEBARS - Estilo de las tablas y contenedores */
 .contenedor-ruleta-page {
-    /* Fondo semi-transparente para ver el fondo global */
-    background: rgba(20, 20, 20, 0.95); 
+    /* Fondo semi-transparente para ver el fondo global 
+       AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8); 
     max-width: var(--max-width);
     width: 90%;
     margin: 2rem auto;
@@ -640,7 +643,8 @@ ul {
     gap: 1.5rem;
     align-items: center; 
     padding: 1.5rem;
-    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
+    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8); 
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -665,7 +669,8 @@ ul {
 .panel-derecho {
     flex: 1; /* Ocupa el espacio restante */
     min-width: 300px; /* Asegura un ancho mínimo para el panel */
-    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
+    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8); 
     padding: 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
@@ -1060,8 +1065,9 @@ ul {
 
 /* Estilo general para Info, Perfil, Deposito, Retiro */
 .perfil, .info, .contenedor-ruleta-page {
-    /* Fondo semi-transparente para ver el fondo global */
-    background: rgba(20, 20, 20, 0.95);
+    /* Fondo semi-transparente para ver el fondo global 
+       AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8);
     max-width: var(--max-width);
     width: 90%;
     margin: 2rem auto;
@@ -1236,7 +1242,8 @@ details li {
     gap: 1.5rem;
     align-items: center; 
     padding: 1.5rem;
-    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
+    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8); 
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1261,7 +1268,8 @@ details li {
 .panel-derecho {
     flex: 1; /* Ocupa el espacio restante */
     min-width: 300px; /* Asegura un ancho mínimo para el panel */
-    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
+    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
+    background: rgba(20, 20, 20, 0.8); 
     padding: 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
