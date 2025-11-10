@@ -907,3 +907,132 @@ ul {
         flex-direction: column;
     }
 }
+
+/* --- NUEVO LAYOUT DE RULETA (2 COLUMNAS PRINCIPALES) --- */
+
+/* Contenedor Flex para el Historial Lateral y la Tarjeta del Juego */
+.contenedor-ruleta-principal {
+    display: flex;
+    max-width: var(--max-width);
+    width: 95%;
+    margin: 0 auto;
+    gap: 1.5rem;
+    min-height: calc(100vh - var(--header-height) - 4rem); /* Ajuste de altura */
+    padding: 1.5rem 0;
+}
+
+/* Panel Lateral (Historial) */
+.panel-historial-lateral {
+    flex: 0 0 280px; /* Ancho fijo de la columna izquierda */
+    padding: 1.5rem;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    align-self: flex-start; /* Se alinea arriba */
+}
+
+/* Reajuste de la tarjeta principal del juego para que tome el espacio restante */
+.tarjeta-juego {
+    flex: 1; 
+    padding: 2rem;
+    max-width: unset; /* Elimina la restricción previa de max-width */
+    margin: 0; /* Elimina el margen auto */
+}
+
+/* Alineación de Ruleta y Tapete (disposicion-juego-2col) */
+.disposicion-juego-2col {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    width: 100%;
+    align-items: flex-start;
+}
+.disposicion-juego-2col .game-col-left {
+    flex: 1;
+}
+.disposicion-juego-2col .game-col-center {
+    flex: 2.5; /* Tapete toma más espacio */
+}
+
+/* Historial: Alineación de tablas */
+.historial-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.historial-columna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.historial-columna h3 {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+}
+
+/* Estilos de las celdas de las tablas de historial */
+.tabla-apuestas td, .tabla-resultados td {
+    padding: 0.5rem 0.3rem; /* Menos padding */
+    font-size: 0.85rem;
+    height: 40px; /* Altura fija para alinear las filas */
+    line-height: 1.2;
+}
+.tabla-apuestas th, .tabla-resultados th {
+    padding: 0.8rem 0.3rem;
+}
+
+/* Clases de estado para las apuestas */
+.apuesta-estado.success {
+    color: var(--color-success) !important;
+    font-weight: 700;
+}
+.apuesta-estado.danger {
+    color: var(--color-danger) !important;
+    font-weight: 700;
+}
+
+/* Clases de color para los resultados */
+.resultado-numero.color-rojo {
+    color: var(--color-danger) !important;
+    background: rgba(217, 4, 41, 0.2);
+    border: 1px solid var(--color-danger);
+    border-radius: var(--radius-xs);
+}
+.resultado-numero.color-negro {
+    color: var(--color-text) !important;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-text-muted);
+    border-radius: var(--radius-xs);
+}
+.resultado-numero.color-verde {
+    color: var(--color-success) !important;
+    background: rgba(39, 174, 96, 0.2);
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius-xs);
+}
+
+
+/* --- Media Query para Responsive --- */
+@media (max-width: 992px) {
+    /* Mover el historial debajo del juego principal en tablet/móvil */
+    .contenedor-ruleta-principal {
+        flex-direction: column;
+        align-items: center;
+    }
+    .panel-historial-lateral {
+        order: 2; /* Poner abajo */
+        flex: 1;
+        width: 90%;
+        max-width: 600px;
+    }
+    .tarjeta-juego {
+        order: 1; /* Poner arriba */
+        width: 90%;
+    }
+    .historial-grid {
+        /* Volver a apilarlos verticalmente */
+        flex-direction: column; 
+    }
+}

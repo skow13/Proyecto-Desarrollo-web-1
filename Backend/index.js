@@ -38,7 +38,8 @@ fecha: { type: Date, default: Date.now },
 detalle: String,
 monto: Number,
 positivo: Boolean,
-juego: String
+juego: String,
+numeroGanador: { type: Number, default: null }
 }
 ]
 });
@@ -179,43 +180,41 @@ res.render('Login', { error: 'Error interno del servidor.' });
 });
 
 app.get('/Ruleta', async (req, res) => {
-const userRut = req.cookies.rut;
-if (!userRut) return res.redirect('/Login');
+    const userRut = req.cookies.rut;
+    if (!userRut) return res.redirect('/Login');
 
-try {
-const usuario = await Usuario.findOne({ rut: userRut });
-if (!usuario) {
-return res.redirect('/Login');
-}
-const transaccionesDeRuleta = usuario.transacciones.filter(t => t.juego === 'ruleta');
+    try {
+        const usuario = await Usuario.findOne({ rut: userRut });
+        if (!usuario) return res.redirect('/Login');
 
-const ultimosMovimientos = transaccionesDeRuleta
-.slice(-10)
-.reverse();
+        const transaccionesDeRuleta = usuario.transacciones
+            .filter(t => t.juego === 'ruleta')
+            .slice(-10) 
+            .reverse();
 
-function inferirColor(detalle) {
-if (detalle.includes('rojo')) return 'rojo';
-if (detalle.includes('negro')) return 'negro';
-if (detalle.includes('GANADOR')) return 'verde';
-return '';
-}
+        function inferirColorNumero(numero) {
+            return RUEDA[numero]?.color || '';
+        }
 
-const dataParaTabla = ultimosMovimientos.map(t => {
-return {
-detalle: t.detalle,
-color: inferirColor(t.detalle)
-};
-});
+        const ultimasApuestas = transaccionesDeRuleta.map(t => ({
+            detalle: t.detalle,
+            color: t.detalle.includes('ganadora') ? 'success' : 'danger' 
+        }));
 
-res.render('Ruleta', {
-saldo: usuario.saldo.toLocaleString('es-CL'),
-apuestas: dataParaTabla,
-resultados: dataParaTabla,
-});
-} catch (error) {
-console.error('Error al cargar la ruleta:', error);
-res.redirect('/Login');
-}
+        const ultimosResultados = transaccionesDeRuleta.map(t => ({
+            detalle: t.numeroGanador, 
+            color: inferirColorNumero(t.numeroGanador) 
+        }));
+
+        res.render('Ruleta', {
+            saldo: usuario.saldo.toLocaleString('es-CL'),
+            apuestas: ultimasApuestas,
+            resultados: ultimosResultados,
+        });
+    } catch (error) {
+        console.error('Error al cargar la ruleta:', error);
+        res.redirect('/Login');
+    }
 });
 
 app.post('/apuesta', async (req, res) => {
@@ -248,7 +247,8 @@ usuario.transacciones.push({
 detalle: detalle,
 monto: Math.abs(ganancia),
 positivo: positivo,
-juego: 'ruleta'
+juego: 'ruleta',
+numeroGanador: resultado.numero
 });
 
 await usuario.save();
