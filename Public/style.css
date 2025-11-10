@@ -63,8 +63,8 @@ ul{list-style:none}
 .profile-img-small{flex:1;min-width:250px;height:auto;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);border:3px solid var(--color-secondary)}
 .tabla-transacciones,.tabla-probabilidades,.tabla-apuestas,.tabla-resultados{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.95rem;box-shadow:var(--shadow-sm);text-align:center}
 .tabla-transacciones thead,.tabla-probabilidades thead,.tabla-apuestas thead,.tabla-resultados thead{background:var(--color-primary)}
-.tabla-transacciones th,.tabla-probabilidades th,.tabla-apuestas th,.tabla-resultados th{padding:1rem .5rem;color:var(--color-text);text-align:left;border-bottom:2px solid var(--color-primary-dark);background:var(--color-primary)}
-.tabla-transacciones td,.tabla-probabilidades td,.tabla-apuestas td,.tabla-resultados td{padding:.75rem .5rem;border-bottom:1px solid rgba(255,255,255,.1);background:var(--color-bg-card-light);color:var(--color-text-muted)}
+.tabla-transacciones th,.tabla-probabilidades th,.tabla-apuestas th,.tabla-resultados th{padding:1rem .5rem;color:var(--color-text);text-align:center;border-bottom:2px solid var(--color-primary-dark);background:var(--color-primary)}
+.tabla-transacciones td,.tabla-probabilidades td,.tabla-apuestas td,.tabla-resultados td{padding:.75rem .5rem;border-bottom:1px solid rgba(255,255,255,.1);background:var(--color-bg-card-light);color:var(--color-text-muted);text-align:center}
 .tabla-transacciones td:first-child,.tabla-probabilidades td:first-child,.tabla-apuestas td:first-child,.tabla-resultados td:first-child{color:var(--color-text)}
 .tabla-probabilidades th{text-align:right!important}
 .tabla-probabilidades td{text-align:right}
