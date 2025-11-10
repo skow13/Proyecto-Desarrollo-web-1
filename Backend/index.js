@@ -179,43 +179,40 @@ res.render('Login', { error: 'Error interno del servidor.' });
 }
 });
 
-app.get('/Ruleta', async (req, res) => {
-    const userRut = req.cookies.rut;
-    if (!userRut) return res.redirect('/Login');
-
-    try {
-        const usuario = await Usuario.findOne({ rut: userRut });
-        if (!usuario) return res.redirect('/Login');
-
-        const transaccionesDeRuleta = usuario.transacciones
-            .filter(t => t.juego === 'ruleta')
-            .slice(-5) 
-            .reverse();
-
-        function inferirColorNumero(numero) {
-            return RUEDA[numero]?.color || '';
+app.get('/Ruleta',async(req,res)=>{
+    const userRut=req.cookies.rut;
+    if(!userRut)return res.redirect('/Login');
+    try{
+        const usuario=await Usuario.findOne({rut:userRut});
+        if(!usuario){
+            return res.redirect('/Login');
         }
-
-const ultimasApuestas = transaccionesDeRuleta.map(t => {
-    const detalleCorto = t.detalle.replace('Apuesta ', '').replace(' ganadora', ' (GANÓ)').replace(' perdedora', ' (PERDIÓ)');
-    return {
-        detalle: detalleCorto,
-        color: t.detalle.includes('ganadora') ? 'success' : 'danger' 
-    };
-});
-
-        const ultimosResultados = transaccionesDeRuleta.map(t => ({
-            detalle: t.numeroGanador, 
-            color: inferirColorNumero(t.numeroGanador) 
-        }));
-
-        res.render('Ruleta', {
-            saldo: usuario.saldo.toLocaleString('es-CL'),
-            apuestas: ultimasApuestas,
-            resultados: ultimosResultados,
+        const transaccionesDeRuleta=usuario.transacciones.filter(t=>t.juego==='ruleta').slice(-5).reverse();
+        const ultimasApuestas=transaccionesDeRuleta.map(t=>{
+            const estado=t.detalle.includes('ganadora')?'GANÓ':'PERDIÓ';
+            const signo=t.positivo?'+':'-';
+            const tipoApuesta=t.detalle.replace('Apuesta ','').replace(' ganadora','').replace(' perdedora','');
+            return{
+                detalle:`${tipoApuesta} (${estado})`,
+                montoGanado:`${signo}$${t.monto.toLocaleString('es-CL')}`,
+                color:t.detalle.includes('ganadora')?'success':'danger'
+            };
         });
-    } catch (error) {
-        console.error('Error al cargar la ruleta:', error);
+        const ultimosResultados=transaccionesDeRuleta.map(t=>({
+            detalle:t.numeroGanador,
+            color:inferirColorNumero(t.numeroGanador)
+        }));
+        while(ultimasApuestas.length<5){
+            ultimasApuestas.push({});
+            ultimosResultados.push({});
+        }
+        res.render('Ruleta',{
+            saldo:usuario.saldo.toLocaleString('es-CL'),
+            apuestas:ultimasApuestas,
+            resultados:ultimosResultados,
+        });
+    }catch(error){
+        console.error('Error al cargar la ruleta:',error);
         res.redirect('/Login');
     }
 });
