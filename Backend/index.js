@@ -48,13 +48,13 @@ const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
 const RUEDA = {
 0: { color: 'verde' },
-1: { color: 'rojo' }, 2: { color: 'negro' }, 3: { color: 'rojo' }, 4: { color: 'negro' },
-5: { color: 'rojo' }, 6: { color: 'negro' }, 7: { color: 'rojo' }, 8: { color: 'negro' },
-9: { color: 'rojo' }, 10: { color: 'negro' }, 11: { color: 'negro' }, 12: { color: 'rojo' },
+1: { color: 'negro' }, 2: { color: 'rojo' }, 3: { color: 'negro' }, 4: { color: 'rojo' },
+5: { color: 'negro' }, 6: { color: 'rojo' }, 7: { color: 'negro' }, 8: { color: 'rojo' },
+9: { color: 'negro' }, 10: { color: 'rojo' }, 11: { color: 'negro' }, 12: { color: 'rojo' },
 13: { color: 'negro' }, 14: { color: 'rojo' }, 15: { color: 'negro' }, 16: { color: 'rojo' },
-17: { color: 'negro' }, 18: { color: 'rojo' }, 19: { color: 'rojo' }, 20: { color: 'negro' },
-21: { color: 'rojo' }, 22: { color: 'negro' }, 23: { color: 'rojo' }, 24: { color: 'negro' },
-25: { color: 'rojo' }, 26: { color: 'negro' }, 27: { color: 'rojo' }, 28: { color: 'negro' },
+17: { color: 'negro' }, 18: { color: 'rojo' }, 19: { color: 'negro' }, 20: { color: 'rojo' },
+21: { color: 'negro' }, 22: { color: 'rojo' }, 23: { color: 'negro' }, 24: { color: 'rojo' },
+25: { color: 'negro' }, 26: { color: 'rojo' }, 27: { color: 'negro' }, 28: { color: 'rojo' },
 29: { color: 'negro' }, 30: { color: 'rojo' }, 31: { color: 'negro' }, 32: { color: 'rojo' },
 33: { color: 'negro' }, 34: { color: 'rojo' }, 35: { color: 'negro' }, 36: { color: 'rojo' },
 };

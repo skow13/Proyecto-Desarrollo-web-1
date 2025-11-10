@@ -1036,3 +1036,86 @@ ul {
         flex-direction: column; 
     }
 }
+
+/* --- INFO ESPECÍFICO (Página de Información <details>) --- */
+
+details {
+  background-color: var(--color-bg-card-light); /* Fondo de la casilla */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+  border-radius: var(--radius-sm);             /* Esquinas redondeadas */
+  margin-bottom: 1rem;                        /* Espacio entre casillas */
+  overflow: hidden;                           /* Para respetar el borde redondeado */
+}
+
+summary {
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+  background-color: var(--color-bg-card); /* Fondo más oscuro para el título */
+  color: var(--color-secondary);          /* Color de acento (amarillo) */
+  cursor: pointer;
+  outline: none;
+  list-style: none; /* Ocultar marcador por defecto */
+  transition: background-color var(--transition-fast);
+}
+
+summary:hover {
+    background-color: #2a2a2a; /* Un hover sutil, un poco más claro */
+}
+
+/* Ocultar el marcador de flecha por defecto */
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::marker {
+  display: none;
+}
+
+/* Añadir marcador personalizado (flechas) */
+summary:before {
+  content: '▶ '; /* Icono cuando está cerrado */
+  margin-right: 0.5rem;
+  font-size: 0.8em;
+  color: var(--color-secondary);
+}
+
+details[open] > summary:before {
+  content: '▼ '; /* Icono cuando está abierto */
+}
+
+/* Estilo para el contenido que se despliega */
+details > p,
+details > div.contenido {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separador */
+  margin: 0;
+  color: var(--color-text-muted); /* Usar el color de párrafo global */
+}
+
+/* Estilo para la lista de desarrolladores */
+details ul {
+  margin-top: 1rem;
+  padding-left: 2rem;
+  color: var(--color-text-muted);
+}
+
+details li {
+  margin-bottom: 0.5rem;
+}
+
+/* Para resaltar el "proyecto académico" */
+details p strong em {
+    color: var(--color-text);
+}
+
+/* Asegurar que el link "Volver" se vea bien */
+.tarjeta-pagina-completa .volver {
+    margin-top: 2rem;
+    text-align: center;
+}
+.tarjeta-pagina-completa .volver a {
+    color: var(--color-secondary);
+    font-weight: 700;
+}
+.tarjeta-pagina-completa .volver a:hover {
+    color: var(--color-secondary-dark);
+}
