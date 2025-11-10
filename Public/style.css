@@ -113,7 +113,7 @@ ul{list-style:none}
 .disposicion-juego-2col .game-col-center{flex:2.5}
 .historial-grid{display:flex;gap:1rem;margin-top:1rem;width:100%}
 .historial-columna{flex:1 1 50%;display:flex;flex-direction:column}
-.historial-columna h3{text-align:center;font-size:1.1rem;color:var(--color-primary)}
+.historial-columna h3{text-align:center;font-size:1.1rem;color:var(--color-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:0;margin-bottom:.5rem;height:1.2em}
 .tabla-apuestas,.tabla-resultados{width:100%;border-collapse:collapse;margin-top:.5rem;table-layout:fixed}
 .tabla-apuestas th:first-child,.tabla-apuestas td:first-child,.tabla-resultados th:first-child,.tabla-resultados td:first-child{width:30px!important;max-width:30px!important;padding-left:0!important;padding-right:0!important}
 .tabla-apuestas th,.tabla-resultados th{padding:.5rem .3rem;font-size:.9rem}
