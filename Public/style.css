@@ -62,7 +62,7 @@ ul{list-style:none}
 .profile-image-container{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
 .profile-img-small{flex:1;min-width:250px;height:auto;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);border:3px solid var(--color-secondary)}
 .tabla-transacciones,.tabla-probabilidades,.tabla-apuestas,.tabla-resultados{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.95rem;box-shadow:var(--shadow-sm);text-align:center}
-.tabla-transacciones thead,.tabla-probabilidades thead{background:var(--color-primary)}
+.tabla-transacciones thead,.tabla-probabilidades thead,.tabla-apuestas thead,.tabla-resultados thead{background:var(--color-primary)}
 .tabla-transacciones th,.tabla-probabilidades th,.tabla-apuestas th,.tabla-resultados th{padding:1rem .5rem;color:var(--color-text);text-align:left;border-bottom:2px solid var(--color-primary-dark);background:var(--color-primary)}
 .tabla-transacciones td,.tabla-probabilidades td,.tabla-apuestas td,.tabla-resultados td{padding:.75rem .5rem;border-bottom:1px solid rgba(255,255,255,.1);background:var(--color-bg-card-light);color:var(--color-text-muted)}
 .tabla-transacciones td:first-child,.tabla-probabilidades td:first-child,.tabla-apuestas td:first-child,.tabla-resultados td:first-child{color:var(--color-text)}
@@ -106,7 +106,7 @@ ul{list-style:none}
 @media (max-width:576px){.game-col-left,.game-col-center,.game-col-right{padding:1rem}.ruleta-imagen-pequena{max-width:200px}}
 @media (max-width:480px){.profile-image-container{flex-direction:column}.profile-img-small{max-width:100%}.buttons-row{flex-direction:column}}
 .contenedor-ruleta-principal{display:flex;max-width:var(--max-width);width:95%;margin:0 auto;gap:1.5rem;min-height:calc(100vh - var(--header-height) - 4rem);padding:1.5rem 0}
-.panel-historial-lateral{flex:0 0 280px;padding:1.5rem;background:rgba(20,20,20,.8);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1);align-self:flex-start}
+.panel-historial-lateral{flex:0 0 320px;padding:1.5rem;background:rgba(20,20,20,.8);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1);align-self:flex-start}
 .tarjeta-juego{flex:1;padding:2rem;max-width:unset;margin:0}
 .disposicion-juego-2col{display:flex;gap:2rem;margin-top:1rem;width:100%;align-items:flex-start}
 .disposicion-juego-2col .game-col-left{flex:1}
@@ -115,6 +115,7 @@ ul{list-style:none}
 .historial-columna{flex:1 1 50%;display:flex;flex-direction:column}
 .historial-columna h3{text-align:center;font-size:1.1rem;color:var(--color-primary)}
 .tabla-apuestas,.tabla-resultados{width:100%;border-collapse:collapse;margin-top:.5rem;table-layout:fixed}
+.tabla-apuestas th:first-child,.tabla-apuestas td:first-child,.tabla-resultados th:first-child,.tabla-resultados td:first-child{width:30px!important;max-width:30px!important;padding-left:0!important;padding-right:0!important}
 .tabla-apuestas th,.tabla-resultados th{padding:.8rem .3rem;font-size:.9rem}
 .tabla-apuestas td,.tabla-resultados td{padding:.5rem .3rem;font-size:.85rem;height:40px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .apuesta-estado.success{color:var(--color-success)!important;font-weight:700}
