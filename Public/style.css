@@ -116,7 +116,7 @@ ul{list-style:none}
 .historial-columna h3{text-align:center;font-size:1.1rem;color:var(--color-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:0;margin-bottom:.5rem;height:1.2em}
 .tabla-apuestas,.tabla-resultados{width:100%;border-collapse:collapse;margin-top:.5rem;table-layout:fixed}
 .tabla-apuestas th:first-child,.tabla-apuestas td:first-child,.tabla-resultados th:first-child,.tabla-resultados td:first-child{width:30px!important;max-width:30px!important;padding-left:0!important;padding-right:0!important}
-.tabla-apuestas th,.tabla-resultados th{padding:.5rem .3rem;font-size:.9rem}
+.tabla-apuestas th,.tabla-resultados th{padding:.5rem .3rem;font-size:.9rem;height:40px;box-sizing:border-box}
 .tabla-apuestas td,.tabla-resultados td{padding:.5rem .3rem;font-size:.85rem;height:40px;line-height:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .apuesta-estado.success{color:var(--color-success)!important;font-weight:700}
 .apuesta-estado.danger{color:var(--color-danger)!important;font-weight:700}
