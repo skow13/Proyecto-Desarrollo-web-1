@@ -71,7 +71,7 @@ ul{list-style:none}
 .tabla-probabilidades td:first-child{text-align:left}
 .disposicion-juego-3col{display:flex;gap:2rem;margin-top:1rem;width:100%;align-items:flex-start}
 .game-col-left,.game-col-center,.game-col-right{padding:1.5rem;background:rgba(20,20,20,.8);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1)}
-.game-col-left{flex:1;display:flex;flex-direction:column;gap:1rem;align-items:center}
+.game-col-left{flex:1;display:flex;flex-direction:column;gap:1rem;align-items:center;position:relative}
 .game-col-center{flex:2;display:flex;flex-direction:column;align-items:center}
 .game-col-right{flex:1;display:flex;flex-direction:column;align-items:stretch}
 .ruleta-imagen-pequena{max-width:250px;height:auto;border-radius:var(--radius-full);box-shadow:var(--shadow-glow-primary);border:5px solid var(--color-secondary)}
@@ -123,6 +123,7 @@ ul{list-style:none}
 .resultado-numero.color-rojo{color:var(--color-danger)!important;background:rgba(217,4,41,.2);border:1px solid var(--color-danger);border-radius:var(--radius-xs)}
 .resultado-numero.color-negro{color:var(--color-text)!important;background:rgba(0,0,0,.5);border:1px solid var(--color-text-muted);border-radius:var(--radius-xs)}
 .resultado-numero.color-verde{color:var(--color-success)!important;background:rgba(39,174,96,.2);border:1px solid var(--color-success);border-radius:var(--radius-xs)}
+.ruleta-indicador{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:18px solid var(--color-danger);z-index:20;filter:drop-shadow(0 0 5px rgba(0,0,0,.8))}
 @media (max-width:992px){.contenedor-ruleta-principal{flex-direction:column;align-items:center}.panel-historial-lateral{order:2;flex:1;width:90%;max-width:600px}.tarjeta-juego{order:1;width:90%}.historial-grid{flex-direction:column}}
 details{background-color:var(--color-bg-card-light);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-sm);margin-bottom:1rem;overflow:hidden}
 summary{padding:1rem 1.5rem;font-weight:700;background-color:var(--color-bg-card);color:var(--color-secondary);cursor:pointer;outline:none;list-style:none;transition:background-color var(--transition-fast)}
