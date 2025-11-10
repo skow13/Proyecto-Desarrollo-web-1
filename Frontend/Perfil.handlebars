@@ -1,47 +1,70 @@
+<header class="fixed-nav-header">
+    <nav class="navbar-inicio">
+        <h1 class="logo-text">PrimeBet</h1>
+        <div class="nav-links-inicio">
+            <a href="/Ruleta" class="nav-link-item">Ir a la Ruleta</a>
+            <a href="/logout" class="nav-link-item" style="color: var(--color-danger);">Cerrar Sesión</a>
+        </div>
+    </nav>
+</header>
+
 <div class="perfil">
   <h1>Perfil de usuario</h1>
 
-  <section>
-    <ul>
-      <li><strong>Nombre:</strong> {{nombre}}</li>
-      <li><strong>Fecha de nacimiento:</strong> {{fechaNacimiento}}</li>
-      <li><strong>Nombre de usuario:</strong> {{usuario}}</li>
-      <li><strong>Correo electrónico:</strong> {{email}}</li>
-      <li><strong>Saldo actual:</strong> ${{saldo}}</li>
-    </ul>
-  </section>
+  <div class="perfil-content-wrapper">
+    <div class="perfil-data-section">
+      <section>
+        <h3>Datos de Cuenta</h3>
+        <ul>
+          <li><strong>Nombre:</strong> {{nombre}}</li>
+          <li><strong>Fecha de nacimiento:</strong> {{fechaNacimiento}}</li>
+          <li><strong>Nombre de usuario:</strong> {{usuario}}</li>
+          <li><strong>Correo electrónico:</strong> {{email}}</li>
+          <li><strong>Saldo actual:</strong> ${{saldo}}</li>
+        </ul>
+      </section>
 
-<h2>Últimas 5 transacciones:</h2>
+      <h2>Últimas 5 transacciones:</h2>
 
-<table class="tabla-transacciones">
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Detalle</th>
-      <th>Importe</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#if transacciones}}
-      {{#each transacciones}}
-        <tr>
-          <td>{{this.fecha}}</td>
-          <td>{{this.detalle}}</td>
-          <td style="color: {{#if this.positivo}}#00ff7f{{else}}#ff4d4d{{/if}};">
-            {{#if this.positivo}}+{{else}}-{{/if}} ${{this.monto}}
-          </td>
-        </tr>
-      {{/each}}
-    {{else}}
-      <tr>
-        <td colspan="3">No hay transacciones registradas aún.</td>
-      </tr>
-    {{/if}}
-  </tbody>
-</table>
-  <div class="botones">
-    <a href="/Ruleta" class="btn-outline btn-inline">Ir a la Ruleta</a>
-    <a href="/logout" class="btn-primary btn-inline">Cerrar Sesión</a>
+      <table class="tabla-transacciones">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Detalle</th>
+            <th>Importe</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#if transacciones}}
+            {{#each transacciones}}
+              <tr>
+                <td>{{this.fecha}}</td>
+                <td>{{this.detalle}}</td>
+                <td style="color: {{#if this.positivo}}#00ff7f{{else}}#ff4d4d{{/if}};">
+                  {{#if this.positivo}}+{{else}}-{{/if}} ${{this.monto}}
+                </td>
+              </tr>
+            {{/each}}
+          {{else}}
+            <tr>
+              <td colspan="3">No hay transacciones registradas aún.</td>
+            </tr>
+          {{/if}}
+        </tbody>
+      </table>
+      
+      <div class="botones">
+        <a href="/Ruleta" class="btn-secondary btn-inline">Ir a la Ruleta</a>
+        <a href="/logout" class="btn-primary btn-inline" style="background: var(--color-danger);">Cerrar Sesión</a>
+      </div>
+    </div>
+
+    <div class="perfil-images-section">
+      <h3>Elementos de Referencia</h3>
+      <div class="perfil-image-container">
+        <img src="/Ruleta.webp" alt="Ruleta Europea" class="perfil-img-ruleta">
+        <img src="/Tabla_Ruleta.webp" alt="Tapete de Ruleta" class="perfil-img-tabla">
+      </div>
+    </div>
   </div>
 </div>
-

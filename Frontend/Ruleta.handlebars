@@ -1,12 +1,17 @@
+<header class="fixed-nav-header">
+    <nav class="navbar-inicio">
+        <h1 class="logo-text">PrimeBet</h1>
+        <div class="nav-links-inicio">
+            <a href="/Retiro" class="nav-link-item">Realizar retiro</a>
+            <a href="/Deposito" class="nav-link-item">Realizar depósito</a>
+            <a href="/Perfil" class="nav-link-item">Ir al perfil</a>
+            <a href="/logout" class="nav-link-item" style="color: var(--color-danger);">Cerrar Sesión</a>
+        </div>
+    </nav>
+</header>
+
 <div class="contenedor-ruleta-page">
   <h1 style="color:var(--color-secondary);">Juego de la ruleta</h1>
-
-  <div class="botones-ruleta"> 
-    <a href="/Retiro" class="btn-primary btn-inline">Realizar retiro</a>
-    <a href="/Deposito" class="btn-primary btn-inline">Realizar depósito</a>
-    <a href="/Perfil" class="btn-outline btn-inline">Ir al perfil</a>
-    <a href="/logout" class="btn-primary btn-inline" style="background: var(--color-danger);">Cerrar Sesión</a>
-  </div>
 
   <div class="game-layout">
     
@@ -25,7 +30,7 @@
       <div class="panel-derecho">
         <p class="saldo">Dinero disponible: ${{saldo}}</p>
         <p class="estado">Estado: {{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</p>
-
+        
         <div class="tablas-apuestas">
           <div class="ultimas-apuestas">
             <h3 style="color:var(--color-primary);">Últimas apuestas</h3>

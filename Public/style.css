@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 4.2 - Layout de 3 Columnas y Header Global
+   Versión 4.2 - Layout de 3 Columnas y Header Individual
    ======================================================= */
 
 /* =======================================================
@@ -86,7 +86,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    /* CAMBIO CLAVE: Fondo de Ruleta Global para todas las vistas */
+    /* Fondo de Ruleta Global para todas las vistas */
     background-image: url('/Fondo_ruleta.jpg');
     background-size: cover;
     background-position: center;
@@ -158,7 +158,7 @@ ul {
 }
 
 /* =======================================================
-   3. HEADER FIJO Y NAVEGACIÓN (MEJORADO CON BÚSQUEDA)
+   3. HEADER FIJO Y NAVEGACIÓN (Implementación en cada vista)
    ======================================================= */
 
 .fixed-nav-header {
@@ -306,7 +306,7 @@ ul {
     flex-grow: 1; /* Ocupa el espacio restante */
     width: 100%;
     
-    /* CAMBIO CLAVE: Eliminamos el fondo de aquí, ahora está en el body */
+    /* Eliminamos el fondo de aquí, ahora está en el body */
     background-image: none;
     background-attachment: scroll; 
     
@@ -1272,7 +1272,7 @@ details li {
 .game-layout {
     display: flex;
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 100%;
     align-items: flex-start;
 }
@@ -1419,6 +1419,11 @@ details li {
     .botones {
         justify-content: center;
     }
+
+    /* Ruleta Controles */
+    .botones-ruleta {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1455,7 +1460,6 @@ details li {
     
     /* Ruleta Controles */
     .botones-ruleta {
-        justify-content: center;
         flex-wrap: wrap;
     }
     .tablas-apuestas {
