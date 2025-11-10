@@ -295,7 +295,7 @@ app.post('/transaccion', async (req, res) => {
 // -------------------- CERRAR SESIÓN --------------------
 app.get('/logout', (req, res) => {
   res.clearCookie('rut'); 
-  res.redirect('/Login');
+  res.redirect('/Inicio');
 });
 
 // -------------------- INICIAR SERVIDOR --------------------
