@@ -166,6 +166,103 @@ app.get('/Ruleta', async (req, res) => {
   }
 });
 
+// --- FUNCIONES DE LÓGICA DE RULETA ---
+
+// Ruleta Europea tiene 37 números: 0 (verde) y 1-36
+const RUEDA = {
+  0: { color: 'verde' },
+  1: { color: 'rojo' }, 2: { color: 'negro' }, 3: { color: 'rojo' }, 4: { color: 'negro' },
+  5: { color: 'rojo' }, 6: { color: 'negro' }, 7: { color: 'rojo' }, 8: { color: 'negro' },
+  9: { color: 'rojo' }, 10: { color: 'negro' }, 11: { color: 'negro' }, 12: { color: 'rojo' },
+  13: { color: 'negro' }, 14: { color: 'rojo' }, 15: { color: 'negro' }, 16: { color: 'rojo' },
+  17: { color: 'negro' }, 18: { color: 'rojo' }, 19: { color: 'rojo' }, 20: { color: 'negro' },
+  21: { color: 'rojo' }, 22: { color: 'negro' }, 23: { color: 'rojo' }, 24: { color: 'negro' },
+  25: { color: 'rojo' }, 26: { color: 'negro' }, 27: { color: 'rojo' }, 28: { color: 'negro' },
+  29: { color: 'negro' }, 30: { color: 'rojo' }, 31: { color: 'negro' }, 32: { color: 'rojo' },
+  33: { color: 'negro' }, 34: { color: 'rojo' }, 35: { color: 'negro' }, 36: { color: 'rojo' },
+};
+
+// Determina el resultado aleatorio (debe ser seguro)
+function generarResultado() {
+  const numeroGanador = Math.floor(Math.random() * 37); // Números del 0 al 36
+  return {
+    numero: numeroGanador,
+    color: RUEDA[numeroGanador].color
+  };
+}
+
+// SIMULACIÓN: Esta función es muy simplificada. En un juego real, 
+// esta lógica es compleja y depende del tipo de apuesta (pleno, color, etc.)
+function calcularGanancia(apuesta, resultado) {
+  // Solo simulamos la apuesta a "Rojo" o "Negro" (paga 1:1)
+  if (apuesta.tipo === resultado.color) {
+    // Gana si acierta el color Y no salió el 0
+    if (resultado.numero !== 0) {
+      return { ganancia: apuesta.monto, detalle: `Apuesta ${apuesta.tipo} ganadora` };
+    }
+  }
+  // Pierde
+  return { ganancia: -apuesta.monto, detalle: `Apuesta ${apuesta.tipo} perdedora` };
+}
+
+// --- NUEVA RUTA DE RULETA (Desarrollo Web 1 - Lógica simplificada) ---
+
+app.post('/apuesta', async (req, res) => {
+  const userRut = req.cookies.rut;
+  // En un juego real, aquí se recibirían los detalles de la apuesta:
+  // const { monto, tipo_apuesta, valor_apuesta } = req.body; 
+  // Para este ejemplo, usamos la estructura simplificada del Frontend:
+  const apuesta = req.body; 
+  const montoApuesta = Number(apuesta.monto);
+
+  if (!userRut) return res.status(401).json({ error: 'Usuario no autenticado' });
+
+  try {
+    const usuario = await Usuario.findOne({ rut: userRut });
+    if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
+
+    if (isNaN(montoApuesta) || montoApuesta <= 0) {
+      return res.status(400).json({ error: 'Monto de apuesta inválido' });
+    }
+    if (montoApuesta > usuario.saldo) {
+      return res.status(400).json({ error: 'Saldo insuficiente para apostar' });
+    }
+
+    // 1. Determinar el resultado de la ruleta (LÓGICA CRÍTICA)
+    const resultado = generarResultado();
+
+    // 2. Calcular el cambio de saldo (LÓGICA DE PAGO)
+    const { ganancia, detalle } = calcularGanancia(apuesta, resultado);
+    const nuevoSaldo = usuario.saldo + ganancia;
+    const positivo = ganancia >= 0;
+
+    usuario.saldo = nuevoSaldo;
+
+    usuario.transacciones.push({
+      detalle: detalle,
+      monto: Math.abs(ganancia),
+      positivo: positivo
+    });
+
+    await usuario.save();
+
+    res.json({
+      success: true,
+      resultado: { 
+        numero: resultado.numero, 
+        color: resultado.color 
+      },
+      saldo: nuevoSaldo.toLocaleString('es-CL'),
+      detalle: detalle
+    });
+
+  } catch (err) {
+    console.error('Error al procesar la apuesta:', err);
+    res.status(500).json({ error: 'Error interno del servidor al procesar la apuesta' });
+  }
+});
+
+
 app.get('/Deposito', async (req, res) => {
   try {
     const userRut = req.cookies.rut; 
