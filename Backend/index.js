@@ -179,9 +179,14 @@ res.render('Login', { error: 'Error interno del servidor.' });
 }
 });
 
+function inferirColorNumero(numero){
+    return RUEDA[numero]?.color||'';
+}
 app.get('/Ruleta',async(req,res)=>{
     const userRut=req.cookies.rut;
-    if(!userRut)return res.redirect('/Login');
+    if(!userRut){
+        return res.redirect('/Login');
+    }
     try{
         const usuario=await Usuario.findOne({rut:userRut});
         if(!usuario){
@@ -213,10 +218,9 @@ app.get('/Ruleta',async(req,res)=>{
         });
     }catch(error){
         console.error('Error al cargar la ruleta:',error);
-        res.redirect('/Login');
+        return res.redirect('/Login');
     }
 });
-
 app.post('/apuesta', async (req, res) => {
 const userRut = req.cookies.rut;
 const apuesta = req.body;
