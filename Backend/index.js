@@ -189,7 +189,7 @@ app.get('/Ruleta', async (req, res) => {
 
         const transaccionesDeRuleta = usuario.transacciones
             .filter(t => t.juego === 'ruleta')
-            .slice(-10) 
+            .slice(-5) 
             .reverse();
 
         function inferirColorNumero(numero) {
