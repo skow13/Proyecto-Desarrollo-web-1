@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 3.1 - Ajuste de Formularios de Transacción
+   Versión 4.0 - Fondo Global y Estilización Completa
    ======================================================= */
 
 /* =======================================================
@@ -86,9 +86,30 @@ body {
     display: flex;
     flex-direction: column;
 
+    /* CAMBIO CLAVE: Fondo de Ruleta Global para todas las vistas */
+    background-image: url('/Fondo_ruleta.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Efecto Parallax */
+
     /* Ajuste para el header fijo */
     padding-top: var(--header-height);
+    position: relative; /* Necesario para la capa oscura global */
 }
+
+/* CAPA OSCURA GLOBAL: Para mejorar el contraste del texto sobre el fondo */
+body::before {
+    content: '';
+    position: fixed; /* Fixed para cubrir todo el viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Tono oscuro, ligero blur si se desea */
+    z-index: -1; /* Mueve la capa detrás de todo el contenido */
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-headings);
@@ -283,11 +304,11 @@ ul {
 .hero-image-section {
     flex-grow: 1; /* Ocupa el espacio restante */
     width: 100%;
-    background-image: url('/Fondo_ruleta.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Efecto Parallax */
+    
+    /* CAMBIO CLAVE: Eliminamos el fondo de aquí, ahora está en el body */
+    background-image: none;
+    background-attachment: scroll; 
+    
     min-height: calc(100vh - var(--header-height));
     display: flex;
     justify-content: center;
@@ -305,7 +326,9 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+    /* Dejamos una capa más opaca solo para el hero */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+    z-index: 1; /* Asegura que esté sobre el fondo del body */
 }
 
 .hero-content-wrapper {
@@ -372,14 +395,15 @@ ul {
     flex-grow: 1; 
     margin: auto; 
     
-    /* Estilos de Tarjeta */
-    background: var(--color-bg-card);
+    /* Estilos de Tarjeta (Fondo semi-transparente para ver el fondo global) */
+    background: rgba(20, 20, 20, 0.95); /* Usamos RGBA para transparencia */
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: min(95%, 500px);
-    padding: 2rem 3rem; /* Ajustado para mejor proporción vertical */
+    padding: 2rem 3rem; 
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease forwards;
+    z-index: 10; /* Asegura que esté sobre el fondo global */
 }
 
 .formulario h1 {
@@ -590,12 +614,12 @@ ul {
 
 /* --- RUEDA.HANDLEBARS - Estilo de las tablas y contenedores */
 .contenedor-ruleta-page {
-    /* Mismo estilo de tarjeta grande que .perfil, .info */
+    /* Fondo semi-transparente para ver el fondo global */
+    background: rgba(20, 20, 20, 0.95); 
     max-width: var(--max-width);
     width: 90%;
     margin: 2rem auto;
     padding: 2rem;
-    background: var(--color-bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -616,7 +640,7 @@ ul {
     gap: 1.5rem;
     align-items: center; 
     padding: 1.5rem;
-    background: var(--color-bg-card);
+    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -641,7 +665,7 @@ ul {
 .panel-derecho {
     flex: 1; /* Ocupa el espacio restante */
     min-width: 300px; /* Asegura un ancho mínimo para el panel */
-    background: var(--color-bg-card);
+    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
     padding: 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
@@ -1036,11 +1060,12 @@ ul {
 
 /* Estilo general para Info, Perfil, Deposito, Retiro */
 .perfil, .info, .contenedor-ruleta-page {
+    /* Fondo semi-transparente para ver el fondo global */
+    background: rgba(20, 20, 20, 0.95);
     max-width: var(--max-width);
     width: 90%;
     margin: 2rem auto;
     padding: 2rem;
-    background: var(--color-bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1211,7 +1236,7 @@ details li {
     gap: 1.5rem;
     align-items: center; 
     padding: 1.5rem;
-    background: var(--color-bg-card);
+    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1236,7 +1261,7 @@ details li {
 .panel-derecho {
     flex: 1; /* Ocupa el espacio restante */
     min-width: 300px; /* Asegura un ancho mínimo para el panel */
-    background: var(--color-bg-card);
+    background: rgba(20, 20, 20, 0.95); /* Fondo semi-transparente */
     padding: 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
