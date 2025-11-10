@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 5.1 - Final (Ajuste de Footer de Inicio)
+   Versión 6.0 - NOMBRES SEMÁNTICOS OPTIMIZADOS
    ======================================================= */
 
 /* =======================================================
@@ -14,29 +14,29 @@
     /* A. Paleta de Colores Temática (Casino/Ruleta) */
     
     /* Fondos */
-    --color-bg-dark: #0a0a0a;       /* Negro casi puro para el fondo principal */
-    --color-bg-card: #141414;       /* Un gris muy oscuro para tarjetas/formularios */
-    --color-bg-card-light: #222;    /* Fondo para inputs */
-    --color-nav-bg: rgba(10, 10, 10, 0.85); /* Fondo de navegación semi-transparente */
+    --color-bg-dark: #0a0a0a;       
+    --color-bg-card: #141414;       
+    --color-bg-card-light: #222;    
+    --color-nav-bg: rgba(10, 10, 10, 0.85); 
 
     /* Colores Temáticos (Ruleta) */
-    --color-primary: #d90429;       /* Rojo vibrante (Ruleta) */
-    --color-primary-dark: #a4001e;    /* Rojo oscuro (Hover) */
+    --color-primary: #d90429;       
+    --color-primary-dark: #a4001e;    
     
-    --color-secondary: #ffb703;     /* Ámbar/Dorado (Premios, Acentos) */
-    --color-secondary-dark: #e8a200;  /* Dorado oscuro (Hover) */
+    --color-secondary: #ffb703;     
+    --color-secondary-dark: #e8a200;  
 
-    --color-tertiary: #2a9d8f;      /* Verde azulado (Tipo '00' o color alternativo) */
+    --color-tertiary: #2a9d8f;      
     
     /* Texto */
-    --color-text: #ecf0f1;          /* Texto principal (Blanco suave) */
-    --color-text-muted: #95a5a6;    /* Texto secundario (Gris claro) */
-    --color-text-dark: #0a0a0a;      /* Texto sobre fondos claros (botones) */
+    --color-text: #ecf0f1;          
+    --color-text-muted: #95a5a6;    
+    --color-text-dark: #0a0a0a;      
 
     /* Colores de Estado (Alertas) */
-    --color-success: #27ae60;       /* Verde (Éxito, '0' en ruleta) */
-    --color-danger: #e74c3c;        /* Rojo (Error) */
-    --color-warning: #f39c12;       /* Naranja (Advertencia) */
+    --color-success: #27ae60;       
+    --color-danger: #e74c3c;        
+    --color-warning: #f39c12;       
 
     /* B. Tipografía */
     --font-family-headings: 'Playfair Display', serif;
@@ -44,7 +44,7 @@
 
     /* C. Variables Estructurales */
     --header-height: 72px;
-    --max-width: 1300px; /* Un poco más ancho para sitios modernos */
+    --max-width: 1300px; 
     
     --radius-xs: 4px;
     --radius-sm: 8px;
@@ -83,31 +83,29 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
-    /* Quitamos display:flex y flex-direction:column aquí */
-
-    /* Fondo de Ruleta Global para todas las vistas */
+    
+    /* Fondo de Ruleta Global */
     background-image: url('/Fondo_ruleta.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Efecto Parallax */
+    background-attachment: fixed; 
 
     /* Ajuste para el header fijo */
     padding-top: var(--header-height);
-    position: relative; /* Necesario para la capa oscura global */
+    position: relative; 
 }
 
 /* CAPA OSCURA GLOBAL: Para mejorar el contraste del texto sobre el fondo */
 body::before {
     content: '';
-    position: fixed; /* Fixed para cubrir todo el viewport */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.65 */
     background: rgba(0, 0, 0, 0.65); 
-    z-index: -1; /* Mueve la capa detrás de todo el contenido */
+    z-index: -1; 
 }
 
 
@@ -149,18 +147,11 @@ ul {
     list-style: none;
 }
 
-.container {
-    max-width: var(--max-width);
-    width: 90%;
-    margin: 2rem auto;
-    padding: 1rem;
-}
-
 /* =======================================================
-   3. HEADER FIJO Y NAVEGACIÓN (Implementación en cada vista)
+   3. ENCABEZADO Y NAVEGACIÓN
    ======================================================= */
 
-.fixed-nav-header {
+.encabezado-fijo { /* Renombrado de fixed-nav-header */
     position: fixed;
     top: 0;
     left: 0;
@@ -182,7 +173,6 @@ ul {
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
-    /* CAMBIO CLAVE: Separa el logo de los enlaces */
     justify-content: space-between; 
     align-items: center;
 }
@@ -196,16 +186,14 @@ ul {
     text-shadow: 0 0 5px var(--color-secondary), 0 0 10px var(--color-primary);
     letter-spacing: 1px;
     margin: 0;
-    /* CAMBIO CLAVE: Asegura que el logo esté pegado a la izquierda */
     margin-right: auto; 
-    padding-right: 2rem; /* Espacio entre el logo y los links */
+    padding-right: 2rem;
 }
 
 /* --- Links de Navegación --- */
 .nav-links-inicio {
     display: flex;
     gap: 2rem;
-    /* CAMBIO CLAVE: Alinea los links a la derecha dentro de su contenedor */
     justify-content: flex-end;
 }
 
@@ -251,76 +239,22 @@ ul {
     transform: scaleX(1);
 }
 
-/* --- NUEVO: Contenedor de Búsqueda (Se mantiene) --- */
-.search-container {
-    display: flex;
-    align-items: center;
-    background: var(--color-bg-card-light);
-    border-radius: var(--radius-full);
-    padding: 0.3rem 0.3rem 0.3rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-fast);
-}
-.search-container:focus-within {
-    border-color: var(--color-secondary);
-    box-shadow: var(--shadow-glow-secondary);
-}
-.search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--color-text);
-    font-family: var(--font-family-body);
-    width: 180px;
-    transition: var(--transition-med);
-}
-.search-input:focus {
-    width: 250px;
-}
-.search-input::placeholder {
-    color: var(--color-text-muted);
-}
-.search-button {
-    background: var(--color-secondary);
-    border: none;
-    border-radius: var(--radius-full);
-    color: var(--color-text-dark);
-    width: 32px;
-    height: 32px;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-.search-button:hover {
-    background: var(--color-secondary-dark);
-    transform: scale(1.05);
-}
-/* (Necesitarías un ícono de SVG o FontAwesome aquí) */
-.search-button::before {
-    content: '🔍'; /* Placeholder para ícono */
-    font-size: 0.9rem;
-}
-
 
 /* =======================================================
-   4. SECCIÓN HERO (PÁGINA INICIO)
+   4. SECCIÓN PRINCIPAL (PÁGINA INICIO)
    ======================================================= */
 
-.hero-image-section {
-    flex-grow: 1; /* Ocupa el espacio restante */
+.seccion-principal-inicio { /* Renombrado de hero-image-section */
+    flex-grow: 1;
     width: 100%;
-    
-    /* Eliminamos el fondo de aquí, ahora está en el body */
     background-image: none;
     background-attachment: scroll; 
-    
     min-height: calc(100vh - var(--header-height));
     
-    /* CAMBIOS CLAVE PARA EL FOOTER */
+    /* SOLUCIÓN FOOTER: Flexbox para empujar el footer abajo */
     display: flex;
-    flex-direction: column; /* Apilar elementos verticalmente */
-    justify-content: space-between; /* Empuja el contenido y el footer a los extremos */
+    flex-direction: column; 
+    justify-content: space-between; 
     align-items: center;
     
     text-align: center;
@@ -328,20 +262,18 @@ ul {
     border-bottom: 4px solid var(--color-primary);
 }
 
-/* Capa de superposición para mejorar contraste */
-.hero-image-section::before {
+.seccion-principal-inicio::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Dejamos una capa más opaca solo para el hero */
     background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
-    z-index: 1; /* Asegura que esté sobre el fondo del body */
+    z-index: 1; 
 }
 
-.hero-content-wrapper {
+.contenido-principal-inicio { /* Renombrado de hero-content-wrapper */
     position: relative;
     z-index: 2;
     background: rgba(0, 0, 0, 0.4);
@@ -351,7 +283,7 @@ ul {
     backdrop-filter: blur(5px);
     animation: fadeInUp 1s ease forwards;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Nuevo: Asegura que el wrapper esté centrado y no crezca innecesariamente */
+    
     margin-top: auto; 
     margin-bottom: auto;
 }
@@ -391,8 +323,8 @@ ul {
     color: var(--color-text-dark);
 }
 
-/* Footer dentro de la sección hero */
-.hero-image-section .footer-inicio {
+/* Footer integrado en la sección hero */
+.seccion-principal-inicio .footer-inicio {
     padding: 1rem 0;
     width: 100%;
     text-align: center;
@@ -404,33 +336,38 @@ ul {
 
 
 /* =======================================================
-   5. FORMULARIOS (LOGIN, REGISTRO, DEPOSITO, RETIRO)
+   5. CONTENEDORES DE PÁGINA Y FORMULARIOS
    ======================================================= */
 
-/* Nuevo contenedor para centrar los formularios sin estirarlos */
-.form-center-wrapper {
+/* Contenedor principal que centra las tarjetas (Login, Perfil, Info, Ruleta) */
+.contenedor-pagina-centrado { /* Renombrado de page-container */
+    /* Flexbox para centrar contenido que no es 100vh (formularios) */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - var(--header-height)); /* Ocupa el espacio del viewport */
+    min-height: calc(100vh - var(--header-height)); 
     width: 100%;
+    padding: 1rem 0; /* Añadir padding vertical para móviles */
 }
 
-.formulario {
-    /* Eliminamos flex-grow y margin: auto (se deja en 0) */
-    margin: 0; 
-    
-    /* Estilos de Tarjeta (Fondo semi-transparente para ver el fondo global) */
-    background: rgba(20, 20, 20, 0.8); 
+/* Estilo unificado para la tarjeta principal de todas las vistas */
+.tarjeta-pagina-completa, .formulario { /* Renombrado de page-card */
+    /* Fondo semi-transparente para ver el fondo global */
+    background: rgba(20, 20, 20, 0.8);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    width: min(95%, 500px);
-    /* AJUSTE CLAVE: Padding vertical reducido a 1.5rem */
-    padding: 1.5rem 3rem; 
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease forwards;
-    z-index: 10; /* Asegura que esté sobre el fondo global */
+    z-index: 10;
+}
+
+/* Estilos de formulario (Login, Registro, Deposito, Retiro, Recuperar) */
+.formulario {
+    margin: 0; /* Asegura que no haya márgenes que interfieran con el centrado */
+    width: min(95%, 500px);
+    /* AJUSTE CLAVE: Padding vertical ajustado para mejor proporción */
+    padding: 1.5rem 3rem; 
 }
 
 .formulario h1 {
@@ -523,15 +460,6 @@ ul {
     cursor: pointer;
 }
 
-/* --- Botones del Formulario --- */
-/* (Usando la clase .btn genérica definida más abajo) */
-.form-actions {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 /* --- Enlaces (Recordar, Volver) --- */
 .recordar { 
     text-align: right; 
@@ -546,125 +474,124 @@ ul {
     margin-top: 1.5rem; 
     text-align: center; 
 }
-/* (El botón 'volver' usará .btn-outline) */
 
 /* =======================================================
-   6. PÁGINA DE LA RULETA (NUEVOS ESTILOS)
+   6. ESTILOS DE PÁGINAS LOGUEADAS (PERFIL, INFO, RULETA)
    ======================================================= */
 
-.roulette-page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    gap: 2rem;
-}
-
-.game-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--color-bg-card);
-    padding: 1rem 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.user-balance {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-.user-balance span {
-    color: var(--color-success);
-    margin-left: 0.5rem;
-}
-.game-title {
-    font-size: 2rem;
-    color: var(--color-primary);
-    text-shadow: 0 0 10px var(--color-primary);
-}
-
-.game-area {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    max-width: var(--max-width);
-}
-
-/* --- Contenedor de la Rueda (Antigua) --- */
-.roulette-wheel-container {
-    flex: 1;
-    display: grid;
-    place-items: center;
-    background: var(--color-bg-card);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-}
-.roulette-wheel {
-    /* (Aquí iría el canvas o la imagen de la ruleta) */
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, #333 0%, #111 100%);
-    border-radius: var(--radius-full);
-    border: 10px solid #c0a16b; /* Borde dorado */
-    display: grid;
-    place-items: center;
-    color: white;
-    font-size: 2rem;
-    font-weight: 700;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-    /* TODO: Añadir animación de giro */
-}
-.last-number {
-    margin-top: 1.5rem;
-    text-align: center;
-    font-size: 1.2rem;
-}
-.last-number span {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: var(--radius-full);
-    background: var(--color-primary);
-    color: var(--color-text);
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-    border: 2px solid var(--color-text);
-}
-.last-number span.green { background: var(--color-success); }
-.last-number span.black { background: var(--color-bg-dark); }
-
-
-/* --- RUEDA.HANDLEBARS - Estilo de las tablas y contenedores */
-.contenedor-ruleta-page {
-    /* Fondo semi-transparente para ver el fondo global */
-    background: rgba(20, 20, 20, 0.8); 
+.tarjeta-pagina-completa {
     max-width: var(--max-width);
     width: 90%;
-    margin: 2rem auto;
     padding: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+}
+.tarjeta-pagina-completa h1 {
+    color: var(--color-secondary);
+    text-shadow: 0 0 5px rgba(255, 183, 3, 0.4);
+    margin-bottom: 1.5rem;
+}
+.tarjeta-pagina-completa h2, .tarjeta-pagina-completa h3 {
+    color: var(--color-text);
 }
 
-/* Contenedor de Botones de Ruleta */
-.botones-ruleta {
-    margin: 1rem 0 2rem;
+
+/* --- PERFIL ESPECÍFICO --- */
+
+.profile-layout {
+    /* Contenedor flexible para la información y la tabla */
+    padding-top: 1rem;
+}
+
+.profile-info ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 2rem;
+}
+.profile-info ul li {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-muted);
+}
+.profile-info ul li strong {
+    color: var(--color-secondary);
+    font-weight: 700;
+}
+
+.buttons-row {
+    margin-top: 2rem;
     display: flex;
     gap: 1rem;
     justify-content: flex-start;
 }
-.botones-ruleta a {
+.buttons-row a {
     text-decoration: none;
 }
 
-/* Contenedor principal de 3 columnas (Ruleta, Tapete, Panel) */
-.game-layout {
+.image-card-footer {
+    max-width: 90%;
+    width: 1300px;
+    margin: 1rem auto 2rem; 
+    padding: 1.5rem;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.image-card-footer h3 {
+    margin-top: 0;
+    color: var(--color-primary);
+}
+.profile-image-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap; 
+}
+.profile-img-small {
+    flex: 1;
+    min-width: 250px;
+    height: auto;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--color-secondary);
+}
+
+
+/* --- TABLAS (Transacciones / Reglas) --- */
+.tabla-transacciones, .tabla-probabilidades, .tabla-apuestas, .tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+.tabla-transacciones thead, .tabla-probabilidades thead {
+    background: var(--color-primary);
+}
+.tabla-transacciones th, .tabla-probabilidades th, .tabla-apuestas th, .tabla-resultados th {
+    padding: 1rem 0.5rem;
+    color: var(--color-text);
+    text-align: left;
+    border-bottom: 2px solid var(--color-primary-dark);
+    background: var(--color-primary); /* Para unificar el header de tabla */
+}
+.tabla-transacciones td, .tabla-probabilidades td, .tabla-apuestas td, .tabla-resultados td {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-bg-card-light);
+    color: var(--color-text-muted);
+}
+.tabla-transacciones td:first-child, .tabla-probabilidades td:first-child, .tabla-apuestas td:first-child, .tabla-resultados td:first-child {
+    color: var(--color-text);
+}
+.tabla-probabilidades th { text-align: right !important; }
+.tabla-probabilidades td { text-align: right; }
+.tabla-probabilidades td:first-child { text-align: left; }
+
+
+/* --- RULETA ESPECÍFICA --- */
+
+.disposicion-juego-3col { /* Renombrado de game-layout-3col */
     display: flex;
     gap: 2rem;
     margin-top: 1rem;
@@ -672,12 +599,7 @@ ul {
     align-items: flex-start;
 }
 
-.ruleta-columna {
-    flex: 1; /* Ruleta a la izquierda (1/4 o 1/3) */
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+.game-col-left, .game-col-center, .game-col-right {
     padding: 1.5rem;
     background: rgba(20, 20, 20, 0.8); 
     border-radius: var(--radius-lg);
@@ -685,34 +607,37 @@ ul {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.tabla-columna {
+.game-col-left {
+    flex: 1; /* Ruleta a la izquierda (1/4 o 1/3) */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.game-col-center {
     flex: 2; /* Tapete al centro (1/2 o 2/4) */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
-    background: rgba(20, 20, 20, 0.8); 
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.panel-derecho-columna {
+.game-col-right {
     flex: 1; /* Panel a la derecha (1/4 o 1/3) */
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.ruleta-small {
-    max-width: 250px; /* Tamaño de la ruleta pequeña */
+.ruleta-imagen-pequena { /* Renombrado de roulette-wheel-img */
+    max-width: 250px; 
     height: auto;
     border-radius: var(--radius-full); 
     box-shadow: var(--shadow-glow-primary);
     border: 5px solid var(--color-secondary); 
 }
 
-.tabla-ruleta-img {
+.roulette-table-img {
     max-width: 100%; 
     height: auto;
     border-radius: var(--radius-md);
@@ -725,134 +650,30 @@ ul {
     width: 100%; 
 }
 
-.panel-derecho {
-    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
-    background: rgba(20, 20, 20, 0.8); 
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.saldo, .estado {
+.balance-status {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-secondary);
     margin-bottom: 1rem;
+    text-align: center;
 }
 
-.tablas-apuestas {
+.results-container {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
 }
 
-.ultimas-apuestas, .ultimos-resultados {
+.latest-bets, .latest-results {
     flex: 1;
 }
 
-.tabla-apuestas, .tabla-resultados {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0.5rem;
-    background: var(--color-bg-card-light);
-}
-.tabla-apuestas th, .tabla-resultados th {
-    background: var(--color-secondary-dark);
-    color: var(--color-text-dark);
-    padding: 0.5rem;
-}
-.tabla-apuestas td, .tabla-resultados td {
-    padding: 0.4rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.tabla-apuestas td.red, .tabla-resultados td.red {
-    color: var(--color-primary);
-}
-.tabla-apuestas td.black, .tabla-resultados td.black {
-    color: var(--color-text);
+.text-muted {
+    color: var(--color-text-muted);
 }
 
 
-/* --- Mesa de Apuestas (General) --- */
-.betting-table {
-    flex: 2;
-    background: #013220; /* Verde oscuro de mesa */
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-lg);
-    border: 5px solid #5a4629; /* Borde de madera */
-}
-.betting-grid {
-    display: grid;
-    grid-template-columns: repeat(14, 1fr); /* 12 números + 0 + columna 2a1 */
-    gap: 5px;
-}
-.bet-spot {
-    height: 50px;
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--color-text);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-xs);
-    cursor: pointer;
-    transition: var(--transition-fast);
-    position: relative;
-}
-.bet-spot:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px var(--color-secondary);
-    z-index: 10;
-}
-.bet-spot.red { background: var(--color-primary); }
-.bet-spot.black { background: var(--color-bg-dark); }
-.bet-spot.green { background: var(--color-success); grid-column: span 1; grid-row: span 3; }
-/* Números */
-.bet-spot.num { grid-column: span 1; }
-/* 2 a 1 */
-.bet-spot.col-bet { grid-column: span 1; background: #02573a; }
-/* Opciones de abajo */
-.bet-spot.option { grid-column: span 2; background: #02573a; }
-.bet-spot.option-lg { grid-column: span 4; background: #02573a; }
-.bet-spot.option-half { grid-column: span 6; background: #02573a; }
-
-/* --- Controles de Apuesta (Fichas y Girar) --- */
-.betting-controls {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.chip-selector {
-    display: flex;
-    gap: 0.5rem;
-}
-.chip {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-full);
-    border: 3px solid white;
-    cursor: pointer;
-    font-weight: 700;
-    display: grid;
-    place-items: center;
-    color: var(--color-text-dark);
-    font-size: 0.8rem;
-    transition: var(--transition-fast);
-    box-shadow: var(--shadow-sm);
-}
-.chip:hover, .chip.selected {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px var(--color-secondary);
-}
-.chip-1 { background: #4a90e2; }  /* Azul */
-.chip-5 { background: #d90429; }  /* Rojo */
-.chip-25 { background: #27ae60; } /* Verde */
-.chip-100 { background: #141414; color: white; } /* Negro */
-.chip-500 { background: #8e44ad; } /* Morado */
-
+/* --- Componentes --- */
 .btn-spin {
     padding: 1rem 2.5rem;
     font-size: 1.5rem;
@@ -871,15 +692,12 @@ ul {
     transform: scale(1.05);
 }
 
+
 /* =======================================================
    7. COMPONENTES GENERALES (Botones, Alertas, Modales)
    ======================================================= */
-
-/* --- Botones --- */
-/* Estilo para los inputs de submit de formularios (Login, Registro, Deposito, Retiro) */
 .formulario input[type="submit"], 
 .formulario button[type="submit"] {
-    /* Herencia de la clase .btn */
     display: block;
     padding: 0.8rem 1.8rem;
     border-radius: var(--radius-sm);
@@ -893,12 +711,9 @@ ul {
     letter-spacing: 0.5px;
     transition: var(--transition-fast);
     width: 100%; 
-    
-    /* Estilo del botón secundario (Dorado) */
     background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
     color: var(--color-text-dark);
     box-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
-    
     margin-left: auto;
     margin-right: auto;
     margin-top: 2rem; 
@@ -933,7 +748,6 @@ ul {
     transform: translateY(-2px);
 }
 
-/* Botón Primario (Rojo) */
 .btn-primary {
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     color: var(--color-text);
@@ -943,7 +757,6 @@ ul {
     box-shadow: 0 0 20px rgba(217, 4, 41, 0.8);
 }
 
-/* Botón Secundario (Dorado) */
 .btn-secondary {
     background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
     color: var(--color-text-dark);
@@ -953,7 +766,6 @@ ul {
     box-shadow: 0 0 20px rgba(255, 183, 3, 0.8);
 }
 
-/* Botón Outline (Dorado) */
 .btn-outline {
     background: transparent;
     border-color: var(--color-secondary);
@@ -964,7 +776,6 @@ ul {
     color: var(--color-text-dark);
 }
 
-/* --- Alertas --- */
 .alert {
     padding: 1rem 1.5rem;
     margin-top: 15px;
@@ -982,395 +793,6 @@ ul {
     background-color: rgba(39, 174, 96, 0.2);
     color: var(--color-success);
     border-color: var(--color-success);
-}
-
-/* --- Modales (NUEVO) --- */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    z-index: 2000;
-    display: grid;
-    place-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-fast);
-}
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-.modal-content {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-md);
-    padding: 2.5rem;
-    width: min(90%, 500px);
-    box-shadow: var(--shadow-lg);
-    border-top: 5px solid var(--color-secondary);
-    animation: slideInDown 0.4s ease;
-}
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-.modal-title {
-    font-size: 2rem;
-    color: var(--color-secondary);
-}
-.modal-close {
-    background: transparent;
-    border: none;
-    color: var(--color-text-muted);
-    font-size: 2rem;
-    cursor: pointer;
-}
-.modal-body {
-    font-size: 1.1rem;
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-}
-
-/* --- Tarjetas (NUEVO) --- */
-.card {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    overflow: hidden;
-    transition: var(--transition-fast);
-}
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-.card-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.card-header h3 {
-    margin: 0;
-}
-.card-body {
-    padding: 1.5rem;
-}
-
-/* =======================================================
-   8. FOOTER (MEJORADO)
-   ======================================================= */
-
-.main-footer {
-    padding: 3rem 2rem;
-    background: #000; /* Fondo negro sólido para el footer */
-    border-top: 4px solid var(--color-primary);
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-    margin-top: auto; /* Pega el footer abajo */
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.7);
-}
-.footer-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-.footer-column h4 {
-    font-family: var(--font-family-headings);
-    color: var(--color-secondary);
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-}
-.footer-column ul li {
-    margin-bottom: 0.5rem;
-}
-.footer-column ul li a {
-    color: var(--color-text-muted);
-}
-.footer-column ul li a:hover {
-    color: var(--color-text);
-    padding-left: 5px;
-}
-.social-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center; /* Centrar enlaces sociales en móviles */
-}
-.social-links a {
-    font-size: 1.5rem;
-    color: var(--color-text-muted);
-}
-.social-links a:hover {
-    color: var(--color-secondary);
-    transform: scale(1.1);
-}
-.footer-bottom {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* =======================================================
-   NUEVOS ESTILOS PARA VISTAS DE CONTENIDO (INFO, PERFIL, RULETA)
-   ======================================================= */
-
-/* Estilo general para Info, Perfil, Deposito, Retiro */
-.perfil, .info, .contenedor-ruleta-page {
-    /* Fondo semi-transparente para ver el fondo global */
-    background: rgba(20, 20, 20, 0.8);
-    max-width: var(--max-width);
-    width: 90%;
-    margin: 2rem auto;
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.perfil h1, .info h1, .contenedor-ruleta-page h1 {
-    color: var(--color-secondary);
-    text-shadow: 0 0 5px rgba(255, 183, 3, 0.4);
-    margin-bottom: 1.5rem;
-}
-.perfil h2, .perfil h3, .info h2, .info h3 {
-    color: var(--color-text);
-}
-
-
-/* --- ESTILOS DE LISTAS Y DETALLES (INFO/PERFIL) --- */
-.perfil ul {
-    list-style: disc;
-    margin-left: 1.5rem;
-    margin-bottom: 2rem;
-}
-.perfil ul li {
-    margin-bottom: 0.5rem;
-    color: var(--color-text-muted);
-}
-.perfil ul li strong {
-    color: var(--color-secondary);
-    font-weight: 700;
-}
-
-/* Para Info.handlebars */
-details {
-    margin-bottom: 1rem;
-    background: var(--color-bg-card-light);
-    border-radius: var(--radius-sm);
-    padding: 0 1rem;
-    border-left: 4px solid var(--color-primary);
-}
-summary {
-    cursor: pointer;
-    padding: 1rem 0;
-    font-weight: 700;
-    color: var(--color-secondary);
-    outline: none;
-    list-style: none; /* Oculta el triángulo predeterminado */
-}
-summary::before {
-    content: '▶'; 
-    margin-right: 0.75rem;
-    color: var(--color-primary);
-    transition: transform 0.2s ease;
-    display: inline-block;
-}
-details[open] > summary::before {
-    content: '▼';
-    transform: rotate(0deg);
-}
-details p, details ul {
-    padding: 0.5rem 0 1rem 0;
-    margin: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-details ul {
-    list-style: circle;
-    margin-left: 2rem;
-}
-details li {
-    margin-bottom: 0.5rem;
-}
-
-
-/* --- ESTILO DE TABLAS (PERFIL/INFO_RULETA) --- */
-.tabla-transacciones, .tabla-probabilidades {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    box-shadow: var(--shadow-sm);
-}
-.tabla-transacciones thead, .tabla-probabilidades thead {
-    background: var(--color-primary);
-}
-.tabla-transacciones th, .tabla-probabilidades th {
-    padding: 1rem 0.5rem;
-    color: var(--color-text);
-    text-align: left;
-    border-bottom: 2px solid var(--color-primary-dark);
-}
-.tabla-transacciones td, .tabla-probabilidades td {
-    padding: 0.75rem 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: var(--color-bg-card-light);
-    color: var(--color-text-muted);
-}
-.tabla-transacciones tbody tr:last-child td, .tabla-probabilidades tbody tr:last-child td {
-    border-bottom: none;
-}
-.tabla-transacciones td:first-child, .tabla-probabilidades td:first-child {
-    color: var(--color-text);
-}
-.tabla-probabilidades th { text-align: right !important; }
-.tabla-probabilidades td { text-align: right; }
-.tabla-probabilidades td:first-child { text-align: left; }
-
-
-/* --- PERFIL ESPECÍFICO (IMAGENES LADO A LADO) --- */
-/* Eliminamos estilos de columnas del perfil para arreglar el espacio vacío */
-.perfil-content-wrapper-simple {
-    /* Nueva clase para simplificar la vista sin columnas de imágenes */
-    display: block; 
-    padding-top: 1rem;
-}
-.perfil-content-wrapper {
-    /* Mantengo la regla anterior, pero asume que en Perfil.handlebars se usa la nueva */
-    display: flex;
-    gap: 3rem;
-    align-items: flex-start;
-}
-
-
-.perfil-data-section {
-    flex: 1; /* Ocupa todo el espacio disponible en la estructura original si se usa */
-    width: 100%;
-}
-
-.perfil-images-section {
-    flex: 1; /* Ocupa 1/3 del espacio */
-    padding: 1.5rem;
-    background: var(--color-bg-card-light);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-.perfil-images-section h3 {
-    margin-top: 0;
-    color: var(--color-primary);
-}
-
-.perfil-image-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.perfil-img-ruleta, .perfil-img-tabla {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-lg);
-    border: 3px solid var(--color-secondary);
-}
-
-.botones {
-    margin-top: 2rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-start;
-}
-.botones a {
-    text-decoration: none;
-}
-
-/* --- AJUSTES ESPECÍFICOS PARA RULETA.HANDLEBARS --- */
-
-.botones-ruleta {
-    margin: 1rem 0 2rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-start;
-}
-.botones-ruleta a {
-    text-decoration: none;
-}
-
-/* Contenedor principal de 3 columnas (Ruleta, Tapete, Panel) */
-.game-layout {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
-    width: 100%;
-    align-items: flex-start;
-}
-
-.ruleta-columna {
-    flex: 1; /* Ruleta a la izquierda (1/4 o 1/3) */
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    padding: 1.5rem;
-    background: rgba(20, 20, 20, 0.8); 
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.tabla-columna {
-    flex: 2; /* Tapete al centro (1/2 o 2/4) */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    background: rgba(20, 20, 20, 0.8); 
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.panel-derecho-columna {
-    flex: 1; /* Panel a la derecha (1/4 o 1/3) */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.ruleta-small {
-    max-width: 250px; /* Tamaño de la ruleta pequeña */
-    height: auto;
-    border-radius: var(--radius-full); 
-    box-shadow: var(--shadow-glow-primary);
-    border: 5px solid var(--color-secondary); 
-}
-
-.tabla-ruleta-img {
-    max-width: 100%; 
-    height: auto;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    border: 2px solid var(--color-primary);
-}
-
-.betting-controls-bottom {
-    margin-top: 1rem;
-    width: 100%; 
-}
-
-.panel-derecho {
-    /* AJUSTE DE CLARIDAD: Opacidad reducida a 0.8 */
-    background: rgba(20, 20, 20, 0.8); 
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* =======================================================
@@ -1417,45 +839,42 @@ details li {
 
 @media (max-width: 1200px) {
     /* Ajuste de columnas para que el tapete no sea tan ancho */
-    .ruleta-columna { flex: 1.5; }
-    .tabla-columna { flex: 3; }
-    .panel-derecho-columna { flex: 1.5; }
+    .game-col-left { flex: 1.5; }
+    .game-col-center { flex: 3; }
+    .game-col-right { flex: 1.5; }
 }
 
 @media (max-width: 992px) {
     /* Ruleta Visuals Responsive - Cambia a 2 columnas principales */
-    .game-layout {
+    .disposicion-juego-3col {
         flex-direction: column;
         align-items: center;
     }
-    .ruleta-columna, .tabla-columna, .panel-derecho-columna {
+    .game-col-left, .game-col-center, .game-col-right {
         width: 100%;
         flex: unset; 
     }
-    .ruleta-columna { order: 1; }
-    .tabla-columna { order: 2; }
-    .panel-derecho-columna { order: 3; }
-    .ruleta-small {
+    .game-col-left { order: 1; }
+    .game-col-center { order: 2; }
+    .game-col-right { order: 3; }
+    .ruleta-imagen-pequena {
         max-width: 300px; /* Tamaño un poco más grande en tablet */
     }
 
     /* Perfil Responsive */
-    .perfil-content-wrapper {
-        flex-direction: column;
+    .profile-image-container {
+        justify-content: center;
     }
-    .perfil-images-section {
-        order: -1; 
-        width: 100%;
+    .profile-img-small {
+        min-width: 150px;
+        max-width: 48%;
     }
-    .perfil-data-section {
-        width: 100%;
-    }
-    .botones {
+    .buttons-row {
         justify-content: center;
     }
 
     /* Ruleta Controles */
-    .botones-ruleta {
+    .nav-links-inicio {
         justify-content: center;
     }
 }
@@ -1465,7 +884,7 @@ details li {
     h2 { font-size: 2rem; }
 
     /* Header Responsive */
-    .fixed-nav-header {
+    .encabezado-fijo {
         height: auto;
     }
     .navbar-inicio {
@@ -1478,25 +897,13 @@ details li {
         flex-wrap: wrap;
         justify-content: center;
     }
-    .search-container {
-        width: 90%;
-    }
-    .search-input {
-        width: 100%;
-    }
-    .search-input:focus {
-        width: 100%;
-    }
     /* Ajustar padding del body para el header colapsado */
     body {
         padding-top: 180px; 
     }
     
-    /* Ruleta Controles */
-    .botones-ruleta {
-        flex-wrap: wrap;
-    }
-    .tablas-apuestas {
+    /* Tablas Ruleta */
+    .results-container {
         flex-direction: column;
         gap: 1.5rem;
     }
@@ -1508,32 +915,23 @@ details li {
 }
 
 @media (max-width: 576px) {
-    .ruleta-columna, .tabla-columna, .panel-derecho-columna {
+    .game-col-left, .game-col-center, .game-col-right {
         padding: 1rem;
     }
-    .ruleta-small {
+    .ruleta-imagen-pequena {
         max-width: 200px; 
     }
 }
 
 
 @media (max-width: 480px) {
-    .betting-grid {
-        grid-template-columns: repeat(4, 1fr); 
-        font-size: 0.8rem;
+    .profile-image-container {
+        flex-direction: column;
     }
-    .bet-spot {
-        height: 40px;
+    .profile-img-small {
+        max-width: 100%;
     }
-    .bet-spot.option { grid-column: span 4; }
-    .bet-spot.option-lg { grid-column: span 4; }
-    .bet-spot.option-half { grid-column: span 4; }
-    .bet-spot.col-bet { grid-column: span 4; }
-    .bet-spot.green { grid-column: span 4; }
-    .perfil-images-section {
-        padding: 1rem;
-    }
-    .botones {
+    .buttons-row {
         flex-direction: column;
     }
 }

@@ -1,4 +1,4 @@
-<header class="fixed-nav-header">
+<header class="encabezado-fijo">
     <nav class="navbar-inicio">
         <h1 class="logo-text">PrimeBet</h1>
         <div class="nav-links-inicio">
@@ -10,74 +10,75 @@
     </nav>
 </header>
 
-<div class="contenedor-ruleta-page">
-  <h1 style="color:var(--color-secondary);">Juego de la ruleta</h1>
+<div class="contenedor-pagina-centrado">
+  <div class="tarjeta-pagina-completa">
+    <h1>Juego de la ruleta</h1>
 
-  <div class="game-layout">
-    
-    <div class="ruleta-columna">
-      <img src="/Ruleta.webp" alt="Ruleta Europea" class="ruleta-small">
-      <div class="betting-controls-bottom">
-        <button class="btn-spin">INICIAR APUESTA</button>
+    <div class="disposicion-juego-3col">
+      
+      <div class="game-col-left">
+        <img src="/Ruleta.webp" alt="Ruleta Europea" class="ruleta-imagen-pequena">
+        <div class="betting-controls-bottom">
+          <button class="btn-spin">INICIAR APUESTA</button>
+        </div>
       </div>
-    </div>
 
-    <div class="tabla-columna">
-      <img src="/Tabla_Ruleta.webp" alt="Tapete de Ruleta" class="tabla-ruleta-img">
-    </div>
+      <div class="game-col-center">
+        <img src="/Tabla_Ruleta.webp" alt="Tapete de Ruleta" class="roulette-table-img">
+      </div>
 
-    <div class="panel-derecho-columna">
-      <div class="panel-derecho">
-        <p class="saldo">Dinero disponible: ${{saldo}}</p>
-        <p class="estado">Estado: {{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</p>
-        
-        <div class="tablas-apuestas">
-          <div class="ultimas-apuestas">
-            <h3 style="color:var(--color-primary);">Últimas apuestas</h3>
+      <div class="game-col-right">
+        <div class="game-panel">
+          <p class="balance-status">Dinero disponible: ${{saldo}}</p>
+          <p class="balance-status">Estado: {{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</p>
+          
+          <div class="results-container">
+            <div class="latest-bets">
+              <h3>Últimas apuestas</h3>
 
-            {{#if apuestas}}
-            <table class="tabla-apuestas">
-              <thead>
-                <tr><th>#</th><th>Apuesta</th></tr>
-              </thead>
-              <tbody>
-                {{#each apuestas}}
-                  <tr>
-                    <td>{{@index}}</td>
-                    <td class="{{this.color}}">{{this.detalle}}</td>
-                  </tr>
-                {{/each}}
-              </tbody>
-            </table>
-            {{else}}
-              <p style="color:var(--color-text-muted);">No hay apuestas recientes.</p>
-            {{/if}}
-          </div>
+              {{#if apuestas}}
+              <table class="tabla-apuestas">
+                <thead>
+                  <tr><th>#</th><th>Apuesta</th></tr>
+                </thead>
+                <tbody>
+                  {{#each apuestas}}
+                    <tr>
+                      <td>{{@index}}</td>
+                      <td class="{{this.color}}">{{this.detalle}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              {{else}}
+                <p class="text-muted">No hay apuestas recientes.</p>
+              {{/if}}
+            </div>
 
-          <div class="ultimos-resultados">
-            <h3 style="color:var(--color-primary);">Últimos resultados</h3>
+            <div class="latest-results">
+              <h3>Últimos resultados</h3>
 
-            {{#if resultados}}
-            <table class="tabla-resultados">
-              <thead>
-                <tr><th>#</th><th>Resultado</th></tr>
-              </thead>
-              <tbody>
-                {{#each resultados}}
-                  <tr>
-                    <td>{{@index}}</td>
-                    <td class="{{this.color}}">{{this.detalle}}</td>
-                  </tr>
-                {{/each}}
-              </tbody>
-            </table>
-            {{else}}
-              <p style="color:var(--color-text-muted);">No hay resultados aún.</p>
-            {{/if}}
+              {{#if resultados}}
+              <table class="tabla-resultados">
+                <thead>
+                  <tr><th>#</th><th>Resultado</th></tr>
+                </thead>
+                <tbody>
+                  {{#each resultados}}
+                    <tr>
+                      <td>{{@index}}</td>
+                      <td class="{{this.color}}">{{this.detalle}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              {{else}}
+                <p class="text-muted">No hay resultados aún.</p>
+              {{/if}}
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
