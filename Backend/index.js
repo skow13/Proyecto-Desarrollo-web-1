@@ -288,7 +288,7 @@ app.post('/transaccion', async (req, res) => {
 
 app.get('/logout', (req, res) => {
   res.clearCookie('rut'); 
-  res.redirect('/Login');
+  res.redirect('/Inicio');
 });
 
 app.listen(port, () => {
