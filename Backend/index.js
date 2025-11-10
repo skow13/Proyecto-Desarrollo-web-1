@@ -28,7 +28,6 @@ const UsuarioSchema = new mongoose.Schema({
   nombre: String,
   email: String,
   usuario: String,
-  // 1. Añadimos el campo RUT
   rut: { type: String, unique: true, required: true }, 
   password: String,
   fechaNacimiento: Date,
@@ -45,7 +44,6 @@ const UsuarioSchema = new mongoose.Schema({
 
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
 
-//rutas
 app.get('/', (req, res) => res.redirect('Inicio'));
 app.get('/Login', (req, res) => res.render('Login'));
 app.get('/Registro', (req, res) => res.render('Registro'));
@@ -55,7 +53,6 @@ app.get('/Info', (req, res) => res.render('Info'));
 app.get('/Info_ruleta', (req, res) => res.render('Info_ruleta'));
 
 app.post('/register', async (req, res) => {
-  // 2. Capturamos el RUT en el registro
   const { nombre, email, usuario, password, repassword, birthdate, rut } = req.body; 
 
   if (password !== repassword) {
@@ -63,7 +60,6 @@ app.post('/register', async (req, res) => {
   }
 
   try {
-    // Verificamos si el RUT ya existe
     const existe = await Usuario.findOne({ rut }); 
     if (existe) {
       return res.render('Registro', { error: 'El RUT ya se encuentra registrado' });
@@ -74,7 +70,7 @@ app.post('/register', async (req, res) => {
       nombre,
       email,
       usuario,
-      rut, // Guardamos el RUT
+      rut, 
       password: hashedPassword,
       fechaNacimiento: birthdate,
       saldo: 0,
@@ -90,18 +86,15 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  // 3. Autenticación por RUT
   const { rut, password } = req.body; 
 
   try {
-    // Buscamos al usuario por RUT
     const user = await Usuario.findOne({ rut }); 
     if (!user) return res.render('Login', { error: 'RUT no encontrado' });
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.render('Login', { error: 'Contraseña incorrecta' });
-    
-    // 4. Guardamos el RUT en la cookie (reemplazando al 'usuario')
+
     res.cookie('rut', user.rut, { httpOnly: false }); 
     res.redirect('/Perfil');
   } catch (err) {
@@ -112,23 +105,27 @@ app.post('/login', async (req, res) => {
 
 app.get('/Perfil', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     if (!userRut) return res.redirect('/Login');
 
-    // Buscamos al usuario por RUT
     const usuario = await Usuario.findOne({ rut: userRut }); 
     if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
-    
-    // El resto de la lógica de perfil se mantiene igual
+
     const ultimasTransacciones = usuario.transacciones
       .slice(-5)
       .reverse()
       .map(t => ({
-        fecha: new Date(t.fecha).toLocaleString('es-CL'),
+        fecha: new Date(t.fecha).toLocaleString('es-CL', {
+            timeZone: 'America/Santiago', 
+            hour12: true,
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }),
         detalle: t.detalle || 'Sin detalle',
-        monto: t.monto?.toLocaleString('es-CL') || 0,
-        positivo: t.positivo
       }));
 
     res.render('Perfil', {
@@ -149,7 +146,6 @@ app.get('/Perfil', async (req, res) => {
 
 app.get('/Ruleta', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     if (!userRut) return res.redirect('/Login');
 
@@ -168,7 +164,6 @@ app.get('/Ruleta', async (req, res) => {
 
 app.get('/Deposito', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     if (!userRut) return res.redirect('/Login');
 
@@ -186,7 +181,6 @@ app.get('/Deposito', async (req, res) => {
 
 app.post('/Deposito', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     const { monto } = req.body;
     const usuario = await Usuario.findOne({ rut: userRut });
@@ -214,7 +208,6 @@ app.post('/Deposito', async (req, res) => {
 
 app.get('/Retiro', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     if (!userRut) return res.redirect('/Login');
 
@@ -232,7 +225,6 @@ app.get('/Retiro', async (req, res) => {
 
 app.post('/Retiro', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     const { monto } = req.body;
     const usuario = await Usuario.findOne({ rut: userRut });
@@ -261,10 +253,8 @@ app.post('/Retiro', async (req, res) => {
   }
 });
 
-// Transacción (Actualizar para usar 'rut')
 app.post('/transaccion', async (req, res) => {
   try {
-    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     const { detalle, monto, positivo } = req.body;
 
@@ -292,13 +282,11 @@ app.post('/transaccion', async (req, res) => {
   }
 });
 
-// -------------------- CERRAR SESIÓN --------------------
 app.get('/logout', (req, res) => {
   res.clearCookie('rut'); 
   res.redirect('/Inicio');
 });
 
-// -------------------- INICIAR SERVIDOR --------------------
 app.listen(port, () => {
   console.log(`💫 Servidor corriendo en http://localhost:${port}`);
   console.log('🟢 Vistas configuradas en:', path.join(__dirname, '../Frontend'));
