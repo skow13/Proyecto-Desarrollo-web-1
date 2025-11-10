@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 5.0 - Ajuste de Altura de Formularios
+   Versión 5.1 - Final (Ajuste de Footer de Inicio)
    ======================================================= */
 
 /* =======================================================
@@ -83,8 +83,7 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
-    /* CAMBIO CLAVE: Quitamos display:flex y flex-direction:column aquí */
-    /* Lo moveremos al wrapper de formulario */
+    /* Quitamos display:flex y flex-direction:column aquí */
 
     /* Fondo de Ruleta Global para todas las vistas */
     background-image: url('/Fondo_ruleta.jpg');
@@ -317,9 +316,13 @@ ul {
     background-attachment: scroll; 
     
     min-height: calc(100vh - var(--header-height));
+    
+    /* CAMBIOS CLAVE PARA EL FOOTER */
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Apilar elementos verticalmente */
+    justify-content: space-between; /* Empuja el contenido y el footer a los extremos */
     align-items: center;
+    
     text-align: center;
     position: relative;
     border-bottom: 4px solid var(--color-primary);
@@ -348,6 +351,9 @@ ul {
     backdrop-filter: blur(5px);
     animation: fadeInUp 1s ease forwards;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Nuevo: Asegura que el wrapper esté centrado y no crezca innecesariamente */
+    margin-top: auto; 
+    margin-bottom: auto;
 }
 
 .hero-section-title {
@@ -385,6 +391,18 @@ ul {
     color: var(--color-text-dark);
 }
 
+/* Footer dentro de la sección hero */
+.hero-image-section .footer-inicio {
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    position: relative; 
+    z-index: 2; 
+}
+
+
 /* =======================================================
    5. FORMULARIOS (LOGIN, REGISTRO, DEPOSITO, RETIRO)
    ======================================================= */
@@ -400,19 +418,19 @@ ul {
 }
 
 .formulario {
-    /* Eliminamos flex-grow y margin: auto */
+    /* Eliminamos flex-grow y margin: auto (se deja en 0) */
     margin: 0; 
     
     /* Estilos de Tarjeta (Fondo semi-transparente para ver el fondo global) */
     background: rgba(20, 20, 20, 0.8); 
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    /* Mantenemos el ancho máximo y el padding */
     width: min(95%, 500px);
-    padding: 2rem 3rem; 
+    /* AJUSTE CLAVE: Padding vertical reducido a 1.5rem */
+    padding: 1.5rem 3rem; 
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease forwards;
-    z-index: 10; 
+    z-index: 10; /* Asegura que esté sobre el fondo global */
 }
 
 .formulario h1 {
