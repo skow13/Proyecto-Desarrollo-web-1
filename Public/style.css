@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 4.2 - Layout de 3 Columnas y Header Individual
+   Versión 4.3 - Ajuste de Header y Perfil
    ======================================================= */
 
 /* =======================================================
@@ -183,7 +183,8 @@ ul {
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
-    justify-content: space-between;
+    /* CAMBIO CLAVE: Separa el logo de los enlaces */
+    justify-content: space-between; 
     align-items: center;
 }
 
@@ -196,12 +197,17 @@ ul {
     text-shadow: 0 0 5px var(--color-secondary), 0 0 10px var(--color-primary);
     letter-spacing: 1px;
     margin: 0;
+    /* CAMBIO CLAVE: Asegura que el logo esté pegado a la izquierda */
+    margin-right: auto; 
+    padding-right: 2rem; /* Espacio entre el logo y los links */
 }
 
 /* --- Links de Navegación --- */
 .nav-links-inicio {
     display: flex;
     gap: 2rem;
+    /* CAMBIO CLAVE: Alinea los links a la derecha dentro de su contenedor */
+    justify-content: flex-end;
 }
 
 .nav-link-item {
@@ -246,7 +252,7 @@ ul {
     transform: scaleX(1);
 }
 
-/* --- NUEVO: Contenedor de Búsqueda --- */
+/* --- NUEVO: Contenedor de Búsqueda (Se mantiene) --- */
 .search-container {
     display: flex;
     align-items: center;
@@ -641,7 +647,7 @@ ul {
 .game-layout {
     display: flex;
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 100%;
     align-items: flex-start;
 }
@@ -738,7 +744,6 @@ ul {
 }
 .tabla-apuestas td, .tabla-resultados td {
     padding: 0.4rem;
-    text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .tabla-apuestas td.red, .tabla-resultados td.red {
@@ -1208,14 +1213,23 @@ details li {
 
 
 /* --- PERFIL ESPECÍFICO (IMAGENES LADO A LADO) --- */
+/* Eliminamos estilos de columnas del perfil para arreglar el espacio vacío */
+.perfil-content-wrapper-simple {
+    /* Nueva clase para simplificar la vista sin columnas de imágenes */
+    display: block; 
+    padding-top: 1rem;
+}
 .perfil-content-wrapper {
+    /* Mantengo la regla anterior, pero asume que en Perfil.handlebars se usa la nueva */
     display: flex;
     gap: 3rem;
     align-items: flex-start;
 }
 
+
 .perfil-data-section {
-    flex: 2; /* Ocupa 2/3 del espacio */
+    flex: 1; /* Ocupa todo el espacio disponible en la estructura original si se usa */
+    width: 100%;
 }
 
 .perfil-images-section {
