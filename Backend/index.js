@@ -135,50 +135,60 @@ res.render('Login', { error: 'Error interno del servidor' });
 });
 
 app.get('/Perfil', async (req, res) => {
-try {
-const userRut = req.cookies.rut;
-if (!userRut) return res.redirect('/Login');
+    try {
+        const userRut = req.cookies.rut; 
+        if (!userRut) return res.redirect('/Login');
 
-const usuario = await Usuario.findOne({ rut: userRut });
-if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
+        const usuario = await Usuario.findOne({ rut: userRut }); 
+        if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
 
-const dateOptions = {
-timeZone: 'America/Santiago',
-hour12: true,
-day: '2-digit',
-month: '2-digit',
-year: 'numeric',
-hour: '2-digit',
-minute: '2-digit',
-second: '2-digit'
-};
+        const dateOptions = {
+            timeZone: 'America/Santiago', 
+            hour12: true,
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        const transaccionesMonetarias = usuario.transacciones.filter(t => t.juego !== 'ruleta');
+        const transaccionesApuestas = usuario.transacciones.filter(t => t.juego === 'ruleta');
+        const ultimasTransacciones = transaccionesMonetarias
+            .slice(-5)
+            .reverse()
+            .map(t => ({
+                fecha: new Date(t.fecha).toLocaleString('es-CL', dateOptions),
+                detalle: t.detalle || 'Sin detalle',
+                monto: t.monto?.toLocaleString('es-CL') || 0, 
+                positivo: t.positivo 
+            }));
+        const ultimasApuestas = transaccionesApuestas
+            .slice(-5)
+            .reverse()
+            .map(t => ({
+                fecha: new Date(t.fecha).toLocaleString('es-CL', dateOptions),
+                detalle: t.detalle || 'Sin detalle',
+                monto: t.monto?.toLocaleString('es-CL') || 0, 
+                positivo: t.positivo 
+            }));
 
-const ultimasTransacciones = usuario.transacciones
-.slice(-5)
-.reverse()
-.map(t => ({
-fecha: new Date(t.fecha).toLocaleString('es-CL', dateOptions),
-detalle: t.detalle || 'Sin detalle',
-monto: t.monto?.toLocaleString('es-CL') || 0,
-positivo: t.positivo
-}));
-
-res.render('Perfil', {
-nombre: usuario.nombre,
-usuario: usuario.usuario,
-email: usuario.email,
-fechaNacimiento: usuario.fechaNacimiento
-? usuario.fechaNacimiento.toLocaleDateString('es-CL')
-: 'No registrada',
-saldo: usuario.saldo.toLocaleString('es-CL'),
-transacciones: ultimasTransacciones
+        res.render('Perfil', {
+            nombre: usuario.nombre,
+            usuario: usuario.usuario,
+            email: usuario.email,
+            fechaNacimiento: usuario.fechaNacimiento
+                ? usuario.fechaNacimiento.toLocaleDateString('es-CL')
+                : 'No registrada',
+            saldo: usuario.saldo.toLocaleString('es-CL'),
+            transacciones: ultimasTransacciones, 
+            apuestas: ultimasApuestas           
+        });
+    } catch (err) {
+        console.error('Error al cargar perfil:', err);
+        res.render('Login', { error: 'Error interno del servidor.' });
+    }
 });
-} catch (err) {
-console.error('Error al cargar perfil:', err);
-res.render('Login', { error: 'Error interno del servidor.' });
-}
-});
-
 function inferirColorNumero(numero){
     return RUEDA[numero]?.color||'';
 }
