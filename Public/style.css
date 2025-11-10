@@ -106,7 +106,7 @@ ul{list-style:none}
 @media (max-width:576px){.game-col-left,.game-col-center,.game-col-right{padding:1rem}.ruleta-imagen-pequena{max-width:200px}}
 @media (max-width:480px){.profile-image-container{flex-direction:column}.profile-img-small{max-width:100%}.buttons-row{flex-direction:column}}
 .contenedor-ruleta-principal{display:flex;max-width:var(--max-width);width:95%;margin:0 auto;gap:1.5rem;min-height:calc(100vh - var(--header-height) - 4rem);padding:1.5rem 0}
-.panel-historial-lateral{flex:0 0 320px;padding:1.5rem;background:rgba(20,20,20,.8);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1);align-self:flex-start}
+.panel-historial-lateral{flex:0 0 360px;padding:1.5rem;background:rgba(20,20,20,.8);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1);align-self:flex-start}
 .tarjeta-juego{flex:1;padding:2rem;max-width:unset;margin:0}
 .disposicion-juego-2col{display:flex;gap:2rem;margin-top:1rem;width:100%;align-items:flex-start}
 .disposicion-juego-2col .game-col-left{flex:1}

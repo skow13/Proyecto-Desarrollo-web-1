@@ -196,10 +196,13 @@ app.get('/Ruleta', async (req, res) => {
             return RUEDA[numero]?.color || '';
         }
 
-        const ultimasApuestas = transaccionesDeRuleta.map(t => ({
-            detalle: t.detalle,
-            color: t.detalle.includes('ganadora') ? 'success' : 'danger' 
-        }));
+const ultimasApuestas = transaccionesDeRuleta.map(t => {
+    const detalleCorto = t.detalle.replace('Apuesta ', '').replace(' ganadora', ' (GANÓ)').replace(' perdedora', ' (PERDIÓ)');
+    return {
+        detalle: detalleCorto,
+        color: t.detalle.includes('ganadora') ? 'success' : 'danger' 
+    };
+});
 
         const ultimosResultados = transaccionesDeRuleta.map(t => ({
             detalle: t.numeroGanador, 
