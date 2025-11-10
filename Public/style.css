@@ -1,6 +1,6 @@
 /* =======================================================
    HOJA DE ESTILOS PRINCIPAL - PROYECTO RULETA
-   Versión 4.3 - Ajuste de Header y Perfil
+   Versión 5.0 - Ajuste de Altura de Formularios
    ======================================================= */
 
 /* =======================================================
@@ -83,8 +83,8 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    /* CAMBIO CLAVE: Quitamos display:flex y flex-direction:column aquí */
+    /* Lo moveremos al wrapper de formulario */
 
     /* Fondo de Ruleta Global para todas las vistas */
     background-image: url('/Fondo_ruleta.jpg');
@@ -389,28 +389,30 @@ ul {
    5. FORMULARIOS (LOGIN, REGISTRO, DEPOSITO, RETIRO)
    ======================================================= */
 
-.form-container {
-    flex-grow: 1;
+/* Nuevo contenedor para centrar los formularios sin estirarlos */
+.form-center-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 1rem;
+    min-height: calc(100vh - var(--header-height)); /* Ocupa el espacio del viewport */
+    width: 100%;
 }
 
 .formulario {
-    /* Centrado y crecimiento dentro de un body flex */
-    flex-grow: 1; 
-    margin: auto; 
+    /* Eliminamos flex-grow y margin: auto */
+    margin: 0; 
     
     /* Estilos de Tarjeta (Fondo semi-transparente para ver el fondo global) */
     background: rgba(20, 20, 20, 0.8); 
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    /* Mantenemos el ancho máximo y el padding */
     width: min(95%, 500px);
     padding: 2rem 3rem; 
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease forwards;
-    z-index: 10; /* Asegura que esté sobre el fondo global */
+    z-index: 10; 
 }
 
 .formulario h1 {
