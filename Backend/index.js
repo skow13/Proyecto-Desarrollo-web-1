@@ -105,28 +105,51 @@ app.post('/login', async (req, res) => {
 
 app.get('/Perfil', async (req, res) => {
   try {
+    // Buscamos por la nueva cookie 'rut'
     const userRut = req.cookies.rut; 
     if (!userRut) return res.redirect('/Login');
 
+    // Buscamos al usuario por RUT
     const usuario = await Usuario.findOne({ rut: userRut }); 
     if (!usuario) return res.render('Login', { error: 'Usuario no encontrado' });
+    
+    // Objeto de opciones para forzar la hora de Chile
+    const dateOptions = {
+        timeZone: 'America/Santiago', 
+        hour12: true,
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    };
 
     const ultimasTransacciones = usuario.transacciones
       .slice(-5)
       .reverse()
       .map(t => ({
-        fecha: new Date(t.fecha).toLocaleString('es-CL', {
-            timeZone: 'America/Santiago', 
-            hour12: true,
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        }),
+        fecha: new Date(t.fecha).toLocaleString('es-CL', dateOptions),
         detalle: t.detalle || 'Sin detalle',
+        monto: t.monto?.toLocaleString('es-CL') || 0, 
+        positivo: t.positivo
       }));
+
+    res.render('Perfil', {
+      nombre: usuario.nombre,
+      usuario: usuario.usuario,
+      email: usuario.email,
+      fechaNacimiento: usuario.fechaNacimiento
+        ? usuario.fechaNacimiento.toLocaleDateString('es-CL')
+        : 'No registrada',
+      saldo: usuario.saldo.toLocaleString('es-CL'),
+      transacciones: ultimasTransacciones
+    });
+  } catch (err) {
+    console.error('Error al cargar perfil:', err);
+    res.render('Login', { error: 'Error interno del servidor.' });
+  }
+});
 
     res.render('Perfil', {
       nombre: usuario.nombre,
