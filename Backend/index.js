@@ -242,7 +242,8 @@ app.post('/apuesta', async (req, res) => {
     usuario.transacciones.push({
       detalle: detalle,
       monto: Math.abs(ganancia),
-      positivo: positivo
+      positivo: positivo,
+      juego: 'ruleta'
     });
 
     await usuario.save();
