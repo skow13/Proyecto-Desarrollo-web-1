@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nuevoMonto = dineroActual - valorApuesta;
         actualizarDinero(nuevoMonto); 
         
-        console.log('✅ Apuesta acumulada:', celdaId, 'Total:', apuestasActuales[celdaId].total);
+        console.log('Apuesta acumulada:', celdaId, 'Total:', apuestasActuales[celdaId].total);
         
 
         const fichaVisual = document.createElement('div');
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         celda.appendChild(fichaVisual);
 
-        statusText.textContent = `✅ Apuesta de $${valorApuesta.toLocaleString('es-CL')} registrada (Total: $${apuestasActuales[celdaId].total.toLocaleString('es-CL')})`;
+        statusText.textContent = `Apuesta de $${valorApuesta.toLocaleString('es-CL')} registrada (Total: $${apuestasActuales[celdaId].total.toLocaleString('es-CL')})`;
         statusText.style.color = 'var(--color-success)';
         setTimeout(() => {
             statusText.style.color = '';
@@ -202,9 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
             celda.addEventListener('dragenter', dragEnter);
             celda.addEventListener('drop', drop);
         });
-        console.log(`✅ Eventos de drop agregados a ${todasLasCeldas.length} celdas`);
+        console.log(`Eventos de drop agregados a ${todasLasCeldas.length} celdas`);
     } else {
-        console.error('❌ No se encontró el tapete de ruleta');
+        console.error('No se encontró el tapete de ruleta');
     }
     
     window.iniciarApuesta = async function() {
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return {
                 tipo: info.tipo,      
                 valor: info.valor,    
-                monto: apuestasActuales[celdaId].total // ✅ Usar el total acumulado
+                monto: apuestasActuales[celdaId].total
             };
         });
         
@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(' Rotando ruleta a:', finalRotation, 'grados');
 
             if (!ruletaImg) {
-                console.error('❌ No se encontró la imagen de la ruleta');
+                console.error('No se encontró la imagen de la ruleta');
                 return;
             }
 
@@ -292,8 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 6000); 
             
         } catch (error) {
-            console.error('❌ Error en el proceso de apuesta:', error);
-            statusText.textContent = '❌ Error de conexión con el servidor';
+            console.error('Error en el proceso de apuesta:', error);
+            statusText.textContent = 'Error de conexión con el servidor';
             statusText.style.color = 'var(--color-danger)';
             spinButton.disabled = false;
             spinButton.textContent = 'INICIAR APUESTA';
@@ -302,7 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function actualizarHistorial(data) {
-        // Actualizar dinero
         if (data.nuevoSaldo !== undefined) {
             actualizarDinero(data.nuevoSaldo);
         }
@@ -361,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.limpiarApuestas = function() {
         let dineroADevolver = 0;
         Object.values(apuestasActuales).forEach(apuesta => {
-            dineroADevolver += apuesta.total; // ✅ Usar el total acumulado
+            dineroADevolver += apuesta.total;
         });
         
         if (dineroADevolver > 0) {
@@ -371,8 +370,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         limpiarApuestasVisuales();
         statusText.textContent = '🗑️ Apuestas limpiadas';
-        console.log('✅ Apuestas limpiadas, dinero devuelto:', dineroADevolver);
+        console.log('Apuestas limpiadas, dinero devuelto:', dineroADevolver);
     }
 
-    console.log('✅ Sistema de ruleta inicializado correctamente');
+    console.log('Sistema de ruleta inicializado correctamente');
 });
