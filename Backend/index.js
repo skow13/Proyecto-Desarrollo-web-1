@@ -285,11 +285,19 @@ app.get('/Ruleta',async(req,res)=>{
         const historialRondas = transaccionesDeRuleta.map(t => {
             const estado = t.positivo ? 'GANÓ' : 'PERDIÓ';
             const signo = t.positivo ? '+' : '-';
+
+            const detalleLimpio = t.detalle.split('|').map(s => {
+                return s.replace(/\s(Gana|Pierde)\s\(\S+\)$/g, '').trim();
+            }).join(' | ');
+
+            const netoLimpio = `${estado}: ${signo}$${t.monto.toLocaleString('es-CL')}`;
+
+
             return {
-                apuestaDetalle: t.detalle,
+                apuestaDetalle: detalleLimpio,
                 numeroGanador: t.numeroGanador,
                 colorGanador: inferirColorNumero(t.numeroGanador),
-                montoNeto: `(${estado}: ${signo}$${t.monto.toLocaleString('es-CL')})`,
+                montoNeto: netoLimpio,
                 positivo: t.positivo
             };
         });
