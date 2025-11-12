@@ -132,7 +132,7 @@ function calcularGananciasTotales(apuestas, resultado) {
 
     apuestas.forEach(apuesta => {
     const pagoRatio = PAGOS[apuesta.tipo] || 0; 
-    const detalle = `Apuesta $${apuesta.monto.toLocaleString('es-CL')} a ${apuesta.tipo}: ${apuesta.valor}`;
+    const detalle = `$${apuesta.monto.toLocaleString('es-CL')} a ${apuesta.tipo}: ${apuesta.valor}`;
     
     if (esGanadora(apuesta, resultado)) {
 
