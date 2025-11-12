@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     
     const ruletaImg = document.querySelector('.ruleta-imagen-pequena');
@@ -239,10 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('📥 Respuesta del servidor:', data);
             
             if (!response.ok || !data.success) {
-                statusText.textContent = `❌ Error: ${data.error || 'Desconocido'}`;
+                statusText.textContent = `Error: ${data.error || 'Desconocido'}`;
                 statusText.style.color = 'var(--color-danger)';
                 if (data.saldo) {
-                    actualizarDinero(Number(data.saldo.replace('$', '').replace(/\./g, '').replace(',', '.'))); 
+                    const saldoLimpio = data.saldo.replace('$', '').replace(/\./g, '').replace(',', '.');
+                    actualizarDinero(Number(saldoLimpio)); 
                 }
                 spinButton.disabled = false;
                 spinButton.textContent = 'INICIAR APUESTA';
@@ -302,58 +302,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function actualizarHistorial(data) {
-        if (data.nuevoSaldo !== undefined) {
-            actualizarDinero(data.nuevoSaldo);
+        if (data.saldo !== undefined) {
+            const nuevoSaldoNum = Number(data.saldo.replace('$', '').replace(/\./g, ''));
+            if (!isNaN(nuevoSaldoNum)) {
+                actualizarDinero(nuevoSaldoNum);
+            }
         }
 
-        const tablaResultados = document.querySelector('.tabla-resultados tbody');
-        if (tablaResultados && data.resultado) {
+        const tablaHistorial = document.querySelector('.tabla-historial-final tbody'); 
+        
+        if (tablaHistorial && data.resultado) {
             const colorClass = data.resultado.color === 'rojo' ? 'color-rojo' : 
                               data.resultado.color === 'verde' ? 'color-verde' : 'color-negro';
             
+            const positivo = data.gananciaNeta >= 0;
+            const signo = positivo ? '+' : '';
+            const estado = positivo ? 'GANÓ' : 'PERDIÓ';
+
+            const detalleCompleto = data.detalle;
+            
+            const apuestaDetalle = detalleCompleto.split('|').map(s => {
+                return s.replace(/\s(Gana|Pierde)\s\(\S+\)$/g, '').trim();
+            }).join(' | ');
+
+            const montoNeto = `${estado}: ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')}`;
+
             const nuevaFila = document.createElement('tr');
             nuevaFila.innerHTML = `
-                <td>0</td>
-                <td class="resultado-numero ${colorClass}">${data.resultado.numero}</td>
-            `;
-            tablaResultados.insertBefore(nuevaFila, tablaResultados.firstChild);
-            
-
-            while (tablaResultados.children.length > 5) {
-                tablaResultados.removeChild(tablaResultados.lastChild);
-            }
-            
-
-            Array.from(tablaResultados.children).forEach((fila, idx) => {
-                fila.children[0].textContent = idx;
-            });
-        }
-
-
-        const tablaApuestas = document.querySelector('.tabla-apuestas tbody');
-        if (tablaApuestas && data.detalle) {
-            const colorClass = data.gananciaNeta >= 0 ? 'success' : 'danger';
-            const signo = data.gananciaNeta >= 0 ? '+' : '';
-            const estado = data.gananciaNeta >= 0 ? 'GANÓ' : 'PERDIÓ';
-            
-            const nuevaFila = document.createElement('tr');
-            nuevaFila.innerHTML = `
-                <td>0</td>
-                <td class="apuesta-estado ${colorClass}">
-                    ${data.detalle} <strong>(${estado}: ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')})</strong>
+                <td class="apuesta-detalle-limpio">${apuestaDetalle}</td>
+                <td style="text-align: center;">
+                    <span class="resultado-numero ${colorClass}">${data.resultado.numero}</span>
+                </td>
+                <td style="text-align: right;">
+                    <span style="font-weight: bold; font-size: 0.9rem; color: var(--color-${positivo ? 'success' : 'danger'});">
+                        ${montoNeto}
+                    </span>
                 </td>
             `;
-            tablaApuestas.insertBefore(nuevaFila, tablaApuestas.firstChild);
-            
-            // Mantener solo 5 apuestas
-            while (tablaApuestas.children.length > 5) {
-                tablaApuestas.removeChild(tablaApuestas.lastChild);
+
+            tablaHistorial.insertBefore(nuevaFila, tablaHistorial.firstChild);
+            while (tablaHistorial.children.length > 5) {
+                tablaHistorial.removeChild(tablaHistorial.lastChild);
             }
-            
-            // Actualizar índices
-            Array.from(tablaApuestas.children).forEach((fila, idx) => {
-                fila.children[0].textContent = idx;
-            });
         }
     }
 
