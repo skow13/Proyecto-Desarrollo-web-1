@@ -12,60 +12,44 @@
 
 <div class="contenedor-ruleta-principal">
     
-    <div class="panel-historial-lateral">
-        <p class="balance-status">Dinero disponible: <span id="dinero-disponible">${{saldo}}</span></p>
-        <p class="balance-status" style="margin-bottom: 2rem;">Estado: <span id="estado-apuesta">{{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</span></p>
-        
-        <div class="historial-grid"> 
-            <div class="historial-columna">
-                <h3>Últimas apuestas</h3>
-                {{#if apuestas}}
-                <table class="tabla-apuestas">
-                    <thead>
-                        <tr><th>Resultado</th><th>Total Neto</th></tr>
-                    </thead>
-                    <tbody>
-                        {{#each apuestas}}
-                            <tr>
-                                <td class="apuesta-estado {{this.color}}">
-                                    {{this.detalle}}
-                                </td>
-                                <td style="text-align: right;">
-                                    <span style="font-weight: bold; font-size: 0.9rem;">
-                                        {{this.montoGanado}}
-                                    </span>
-                                </td>
-                            </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-                {{else}}
-                    <p class="text-muted">No hay apuestas recientes.</p>
-                {{/if}}
-            </div>
-
-            <div class="historial-columna">
-                <h3>Últimos resultados</h3>
-                {{#if resultados}}
-                <table class="tabla-resultados">
-                    <thead>
-                        <tr><th>#</th><th>Resultado</th></tr>
-                    </thead>
-                    <tbody>
-                        {{#each resultados}}
-                            <tr>
-                                <td>{{@index}}</td>
-                                <td class="resultado-numero color-{{this.color}}">{{this.detalle}}</td>
-                            </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-                {{else}}
-                    <p class="text-muted">No hay resultados aún.</p>
-                {{/if}}
-            </div>
-        </div>
+<div class="panel-historial-lateral">
+    <p class="balance-status">Dinero disponible: <span id="dinero-disponible">${{saldo}}</span></p>
+    <p class="balance-status" style="margin-bottom: 2rem;">Estado: <span id="estado-apuesta">{{#if estado}}{{estado}}{{else}}Esperando apuesta{{/if}}</span></p>
+    
+    <h3>Historial de Últimas Rondas</h3>
+    
+    {{#if apuestas}}
+    <div style="overflow-x: auto;">
+        <table class="tabla-historial-unificada" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Ronda #</th>
+                    <th style="width: 50%;">Detalle Apuesta</th>
+                    <th style="width: 25%; text-align: right;">Total Neto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each apuestas}}
+                    <tr>
+                        <td style="text-align: center;">
+                            <span class="resultado-numero color-{{../resultados.[@index].color}}">{{../resultados.[@index].detalle}}</span>
+                        </td>
+                        <td class="apuesta-estado {{this.color}}">
+                            {{this.detalle}}
+                        </td>
+                        <td style="text-align: right; font-weight: bold; font-size: 0.95rem; color: {{#if this.positivo}}var(--color-success){{else}}var(--color-danger){{/if}};">
+                            {{this.montoGanado}}
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
+    {{else}}
+        <p class="text-muted" style="text-align: center;">No hay apuestas o resultados recientes.</p>
+    {{/if}}
+
+</div>
 
     <div class="tarjeta-pagina-completa tarjeta-juego">
         <h1>Juego de la ruleta</h1>

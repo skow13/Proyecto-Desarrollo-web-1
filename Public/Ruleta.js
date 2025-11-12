@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dineroTexto = document.getElementById('dinero-disponible').textContent.replace('$', '').trim();
     const dineroLimpio = dineroTexto.replace(/\./g, '').replace(',', '.').replace('US', ''); 
     const numero = Number(dineroLimpio);
-    return isNaN(numero) ? 0 : numero; // ✅ Protección contra NaN
+    return isNaN(numero) ? 0 : numero;
 }
 
     function actualizarDinero(nuevoMonto) {
