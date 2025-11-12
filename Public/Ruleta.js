@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             setTimeout(() => {
                 const signo = data.gananciaNeta >= 0 ? '+' : '';
-                statusText.textContent = ` GANADOR: ${numeroGanador} (${data.resultado.color}). Neto: ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')}`;
+                statusText.textContent = ` GANADOR: ${numeroGanador} (${data.resultado.color}). ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')}`;
                 statusText.style.color = data.gananciaNeta >= 0 ? 'var(--color-success)' : 'var(--color-danger)';
 
 
