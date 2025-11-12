@@ -208,7 +208,7 @@ details p strong em{color:var(--color-text)}.tarjeta-pagina-completa .volver{mar
     width: 100%;
     border-collapse: collapse;
     margin-top: .5rem;
-    table-layout: fixed;
+    table-layout: auto; 
 }
 .tabla-historial-final thead {
     background: var(--color-primary);
@@ -231,6 +231,8 @@ details p strong em{color:var(--color-text)}.tarjeta-pagina-completa .volver{mar
     color: var(--color-text) !important; 
     font-weight: 500;
     text-align: left !important;
+    white-space: normal;
+    word-break: break-word;
 }
 .tabla-historial-final td .resultado-numero {
     display: inline-block;
@@ -242,6 +244,24 @@ details p strong em{color:var(--color-text)}.tarjeta-pagina-completa .volver{mar
     border-radius: var(--radius-xs);
     white-space: nowrap;
 }
+.tabla-historial-final tr td:nth-child(1) {
+    width: 50%;
+}
+.tabla-historial-final tr th:nth-child(2),
+.tabla-historial-final tr td:nth-child(2),
+.tabla-historial-final tr th:nth-child(3),
+.tabla-historial-final tr td:nth-child(3) {
+    width: 25%;
+    min-width: 80px;
+}
+
+.tabla-historial-final tr td:nth-child(2) {
+    text-align: center; 
+}
+.tabla-historial-final tr td:nth-child(3) {
+    text-align: right; 
+}
+
 .tabla-historial-final td:first-child {
     color: var(--color-text);
 }
