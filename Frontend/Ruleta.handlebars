@@ -18,27 +18,31 @@
     
     <h3>Historial de Últimas Rondas</h3>
     
-    {{#if apuestas}}
+    {{#if historial}}
     <div style="overflow-x: auto;">
-        <table class="tabla-historial-unificada" style="width: 100%; border-collapse: collapse;">
+        <table class="tabla-historial-final" style="width: 100%; border-collapse: collapse;">
             <thead>
                 <tr>
-                    <th style="width: 25%;">Ronda #</th>
-                    <th style="width: 50%;">Detalle Apuesta</th>
-                    <th style="width: 25%; text-align: right;">Total Neto</th>
+                    <th style="width: 50%;">Apuesta</th>
+                    <th style="width: 25%; text-align: center;">Resultado</th>
+                    <th style="width: 25%; text-align: right;">Neto</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each apuestas}}
+                {{#each historial}}
                     <tr>
+                        <td class="apuesta-detalle-limpio">
+                           {{this.apuestaDetalle}}
+                        </td>
                         <td style="text-align: center;">
-                            <span class="resultado-numero color-{{../resultados.[@index].color}}">{{../resultados.[@index].detalle}}</span>
+                            {{#if this.numeroGanador}}
+                                <span class="resultado-numero color-{{this.colorGanador}}">{{this.numeroGanador}}</span>
+                            {{/if}}
                         </td>
-                        <td class="apuesta-estado {{this.color}}">
-                            {{this.detalle}}
-                        </td>
-                        <td style="text-align: right; font-weight: bold; font-size: 0.95rem; color: {{#if this.positivo}}var(--color-success){{else}}var(--color-danger){{/if}};">
-                            {{this.montoGanado}}
+                        <td style="text-align: right;">
+                            <span style="font-weight: bold; font-size: 0.9rem; color: {{#if this.positivo}}var(--color-success){{else}}var(--color-danger){{/if}};">
+                                {{this.montoNeto}}
+                            </span>
                         </td>
                     </tr>
                 {{/each}}
@@ -48,7 +52,6 @@
     {{else}}
         <p class="text-muted" style="text-align: center;">No hay apuestas o resultados recientes.</p>
     {{/if}}
-
 </div>
 
     <div class="tarjeta-pagina-completa tarjeta-juego">

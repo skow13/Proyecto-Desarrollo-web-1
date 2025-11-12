@@ -114,11 +114,41 @@ ul{list-style:none}
 .historial-grid{display:flex;gap:1rem;margin-top:1rem;width:100%}
 .historial-columna{flex:1 1 50%;display:flex;flex-direction:column}
 .historial-columna h3{text-align:center;font-size:1rem;color:var(--color-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:0;margin-bottom:.7rem;padding:0.3rem 0}
-.tabla-apuestas,.tabla-resultados{width:100%;border-collapse:collapse;margin-top:.5rem;table-layout: auto;}
-.tabla-apuestas th:first-child,.tabla-apuestas td:first-child,.tabla-resultados th:first-child,.tabla-resultados td:first-child{width: 70% !important;max-width: unset !important;padding-left: .5rem !important;padding-right: .5rem !important;text-align: left;}
-.tabla-apuestas th,.tabla-resultados th{padding: .75rem .5rem;font-size:.95rem;height:auto;box-sizing:border-box;white-space: nowrap;}
-.tabla-apuestas td,.tabla-resultados td{padding: .7rem .5rem;font-size:.9rem;height:auto; line-height:1.3; white-space: normal; overflow:hidden;text-overflow:ellipsis;text-align: center;}
-.tabla-apuestas td:first-child {text-align: left;font-weight: 500;color: var(--color-text);}
+.tabla-apuestas,.tabla-resultados{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:.5rem;
+    table-layout: auto;
+}
+.tabla-apuestas th:first-child,.tabla-apuestas td:first-child,.tabla-resultados th:first-child,.tabla-resultados td:first-child{
+    width: 70% !important;
+    max-width: unset !important;
+    padding-left: .5rem !important;
+    padding-right: .5rem !important;
+    text-align: left;
+}
+.tabla-apuestas th,.tabla-resultados th{
+    padding: .75rem .5rem;
+    font-size:.95rem;
+    height:auto;
+    box-sizing:border-box;
+    white-space: nowrap;
+}
+.tabla-apuestas td,.tabla-resultados td{
+    padding: .7rem .5rem;
+    font-size:.9rem;
+    height:auto;
+    line-height:1.3;
+    white-space: normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-align: center;
+}
+.tabla-apuestas td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text);
+}
 .apuesta-estado.success{color:var(--color-success)!important;font-weight:700}
 .apuesta-estado.danger{color:var(--color-danger)!important;font-weight:700}
 .resultado-numero.color-rojo{color:var(--color-danger)!important;background:rgba(217,4,41,.2);border:1px solid var(--color-danger);border-radius:var(--radius-xs)}
@@ -137,12 +167,7 @@ details[open]>summary:before{content:'▼ '}
 details>p,details>div.contenido{padding:1.5rem;border-top:1px solid rgba(255,255,255,.1);margin:0;color:var(--color-text-muted)}
 details ul{margin-top:1rem;padding-left:2rem;color:var(--color-text-muted)}
 details li{margin-bottom:.5rem}
-details p strong em{color:var(--color-text)}
-.tarjeta-pagina-completa .volver{margin-top:2rem;text-align:center}
-.tarjeta-pagina-completa .volver a{color:var(--color-secondary);font-weight:700}
-.tarjeta-pagina-completa .volver a:hover{color:var(--color-secondary-dark)}
-.game-col-center{padding:10px;background-color:#0c6a38;border:5px solid #333;box-shadow:0 0 20px rgba(0,0,0,0.5) inset;overflow:auto;position:relative;flex:2.8}
-.game-col-left{flex:1.2}
+details p strong em{color:var(--color-text)}.tarjeta-pagina-completa .volver{margin-top:2rem;text-align:center}.tarjeta-pagina-completa .volver a{color:var(--color-secondary);font-weight:700}.tarjeta-pagina-completa .volver a:hover{color:var(--color-secondary-dark)}.game-col-center{padding:10px;background-color:#0c6a38;border:5px solid #333;box-shadow:0 0 20px rgba(0,0,0,0.5) inset;overflow:auto;position:relative;flex:2.8}.game-col-left{flex:1.2}
 #tapete-ruleta{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;font-weight:bold;color:white}
 #tapete-ruleta td{border:2px solid #555;padding:0;text-align:center;height:40px;cursor:grab;position:relative;box-sizing:border-box;line-height:40px;min-width:40px;z-index:2;user-select:none;-webkit-user-select:none}
 .zero{background-color:#0c6a38;color:gold;font-size:1.2em}
@@ -178,8 +203,45 @@ details p strong em{color:var(--color-text)}
 @media (max-width:992px){.disposicion-juego-2col{flex-direction:column;align-items:center}.game-col-left,.game-col-center{width:100%;max-width:600px;flex:unset}}
 @media (max-width:768px){.ficha-compacta,.ficha-mejorada{width:50px;height:50px}.ficha-compacta span,.ficha-mejorada span{font-size:0.7rem;bottom:-18px}.fichas-container-compacto{gap:10px}.botones-accion{flex-direction:column}.btn-spin,.btn-limpiar-compacto{width:100%}}
 @media (max-width:576px){.ficha-compacta,.ficha-mejorada{width:45px;height:45px}}
-.tabla-historial-unificada th {padding: .75rem .5rem;font-size: .95rem;white-space: nowrap;text-align: left;}
-.tabla-historial-unificada td {padding: .7rem .5rem;font-size: .9rem;line-height: 1.3;white-space: normal;text-align: left;border-bottom: 1px solid rgba(255,255,255,.1);background: var(--color-bg-card-light);color: var(--color-text-muted);}
-.tabla-historial-unificada td:first-child {color: var(--color-text);}
-.tabla-historial-unificada td .resultado-numero {display: inline-block;min-width: 24px;padding: 2px 5px;text-align: center;font-weight: 700;line-height: 1;white-space: nowrap;}
-.tabla-historial-unificada td:first-child {text-align: center;}
+
+.tabla-historial-final {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: .5rem;
+    table-layout: fixed;
+}
+.tabla-historial-final thead {
+    background: var(--color-primary);
+}
+.tabla-historial-final th {
+    padding: .75rem .5rem;
+    font-size: .95rem;
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-primary-dark);
+}
+.tabla-historial-final td {
+    padding: .7rem .5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    background: var(--color-bg-card-light);
+    color: var(--color-text-muted);
+    font-size: .9rem;
+    line-height: 1.3;
+}
+.apuesta-detalle-limpio {
+    color: var(--color-text) !important; 
+    font-weight: 500;
+    text-align: left !important;
+}
+.tabla-historial-final td .resultado-numero {
+    display: inline-block;
+    min-width: 24px;
+    padding: 2px 5px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: var(--radius-xs);
+    white-space: nowrap;
+}
+.tabla-historial-final td:first-child {
+    color: var(--color-text);
+}
