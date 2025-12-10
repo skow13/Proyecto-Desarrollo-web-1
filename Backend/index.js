@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 const exphbs = require("express-handlebars");
+
 const authRoutes = require("./routes/auth.routes.js");
 const userRoutes = require("./routes/user.routes.js");
 const ruletaRoutes = require("./routes/ruleta.routes.js");
