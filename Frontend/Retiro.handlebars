@@ -1,23 +1,39 @@
+<header class="encabezado-fijo">
+    <nav class="navbar-inicio">
+        <h1 class="logo-text">PrimeBet</h1>
+        <div class="nav-links-inicio">
+            <a href="/Ruleta" class="nav-link-item">Ir a ruleta</a>
+            <a href="/Perfil" class="nav-link-item">Ir al perfil</a>
+            <a href="/logout" class="nav-link-item" style="color: var(--color-danger);">Cerrar Sesión</a>
+        </div>
+    </nav>
+</header>
+
 <div class="contenedor-pagina-centrado">
   <div class="formulario">
-    <h1>Retiro</h1>
-    <p>Saldo actual: ${{saldo}}</p>
-
-    <form action="/Retiro" method="POST">
+    <h1>Realizar Retiro</h1>
+    
+    <p style="text-align: center; margin-bottom: 1.5rem;">
+      Saldo disponible: <strong id="saldo-actual">$0</strong>
+    </p>
+    
+    <form id="form-retiro" onsubmit="procesarRetiro(event)">
       <div class="input-box">
-        <input type="number" name="monto" required min="1">
+        <input type="number" name="monto" id="monto" min="1" step="1" required>
         <label>Monto a retirar</label>
       </div>
       
-      <input type="submit" value="Retirar">
+      <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+        Solo puedes retirar hasta tu saldo disponible
+      </p>
+      
+      <input type="submit" value="Confirmar Retiro">
       
       <div class="volver">
-        <a href="/Ruleta" class="btn-outline">Volver a la Ruleta</a>
+        <a href="/Perfil" class="btn-outline">Volver al perfil</a>
       </div>
     </form>
-
-    {{#if error}}
-      <p class="alert alert-danger">{{error}}</p>
-    {{/if}}
   </div>
 </div>
+
+<script src="/transacciones.js"></script>

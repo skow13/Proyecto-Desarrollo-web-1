@@ -1,4 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    
+    if (!protegerRuta()) {
+        return;
+    }
+    await cargarSaldoInicial();
     
     const ruletaImg = document.querySelector('.ruleta-imagen-pequena');
     const spinButton = document.querySelector('.btn-spin');
@@ -25,6 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let apuestasActuales = {};
+
+    async function cargarSaldoInicial() {
+        try {
+            const saldo = await obtenerSaldo();
+            actualizarDinero(saldo);
+        } catch (error) {
+            console.error('Error al cargar saldo:', error);
+        }
+    }
 
     function obtenerDinero() {
         const dineroTexto = document.getElementById('dinero-disponible').textContent.replace('$', '').trim();
@@ -84,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = e.dataTransfer.getData('text/plain');
         if (!data) {
-            console.log(' No hay datos en el drop');
+            console.log('No hay datos en el drop');
             return;
         }
 
@@ -92,23 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             fichaInfo = JSON.parse(data);
         } catch (err) {
-            console.error(' Error parseando datos:', err);
+            console.error('Error parseando datos:', err);
             return;
         }
         
         const celda = e.target.closest('td');
 
         if (!celda || !celda.id) {
-            console.log(' No se encontró celda válida');
+            console.log('No se encontró celda válida');
             return;
         }
         
         const celdaId = celda.id;
-        console.log(' Drop en celda:', celdaId);
+        console.log('Drop en celda:', celdaId);
 
         if (!MAPEO_APUESTAS[celdaId]) {
-            console.log(' Celda no válida para apostar');
-            statusText.textContent = ' Zona no válida para apostar';
+            console.log('Celda no válida para apostar');
+            statusText.textContent = 'Zona no válida para apostar';
             statusText.style.color = 'var(--color-danger)';
             setTimeout(() => {
                 statusText.style.color = '';
@@ -117,14 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-    
         let valorApuesta = 0;
         let dineroActual = obtenerDinero(); 
 
         if (fichaInfo.tipo === 'allin') {
             valorApuesta = dineroActual;
             if (valorApuesta <= 0) {
-                statusText.textContent = ' No tienes dinero para All-In';
+                statusText.textContent = 'No tienes dinero para All-In';
                 statusText.style.color = 'var(--color-danger)';
                 setTimeout(() => {
                     statusText.style.color = '';
@@ -137,8 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (dineroActual < valorApuesta) {
-            console.log(' Saldo insuficiente');
-            statusText.textContent = ' Saldo insuficiente';
+            console.log('Saldo insuficiente');
+            statusText.textContent = 'Saldo insuficiente';
             statusText.style.color = 'var(--color-danger)';
             setTimeout(() => {
                 statusText.style.color = '';
@@ -146,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
             return;
         }
-
 
         if (!apuestasActuales[celdaId]) {
             apuestasActuales[celdaId] = { total: 0, fichas: [] };
@@ -158,11 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarDinero(nuevoMonto); 
         
         console.log('Apuesta acumulada:', celdaId, 'Total:', apuestasActuales[celdaId].total);
-        
 
         const fichaVisual = document.createElement('div');
         fichaVisual.className = fichaInfo.tipo === 'allin' ? 'ficha-visual-allin' : 'ficha-visual-normal';
-
 
         let textoFicha;
         if (fichaInfo.tipo === 'allin') {
@@ -174,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         fichaVisual.innerText = textoFicha;
         fichaVisual.dataset.valor = valorApuesta;
-        
 
         const numFichas = apuestasActuales[celdaId].fichas.length;
         fichaVisual.style.zIndex = 100 + numFichas;
@@ -221,40 +230,22 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
         
-        console.log(' Enviando apuestas:', apuestasParaEnviar);
+        console.log('Enviando apuestas:', apuestasParaEnviar);
         
         spinButton.disabled = true;
         spinButton.textContent = 'GIRANDO...';
-        statusText.textContent = ' Giro en curso...';
+        statusText.textContent = 'Giro en curso...';
 
         try {
-            const response = await fetch('/apuesta', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ apuestas: apuestasParaEnviar })
-            });
-
-            const data = await response.json();
-            console.log('📥 Respuesta del servidor:', data);
+            const data = await apostarRuleta(apuestasParaEnviar);
             
-            if (!response.ok || !data.success) {
-                statusText.textContent = `Error: ${data.error || 'Desconocido'}`;
-                statusText.style.color = 'var(--color-danger)';
-                if (data.saldo) {
-                    const saldoLimpio = data.saldo.replace('$', '').replace(/\./g, '').replace(',', '.');
-                    actualizarDinero(Number(saldoLimpio)); 
-                }
-                spinButton.disabled = false;
-                spinButton.textContent = 'INICIAR APUESTA';
-                limpiarApuestasVisuales(); 
-                return;
-            }
+            console.log('Respuesta del servidor:', data);
 
             const numeroGanador = data.resultado.numero;
 
             const index = ruletaNumbers.indexOf(numeroGanador);
             if (index === -1) {
-                console.error(' Número ganador no encontrado en ruletaNumbers');
+                console.error('Número ganador no encontrado en ruletaNumbers');
                 return;
             }
 
@@ -264,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const girosCompletos = 5 * 360; 
             const finalRotation = girosCompletos + targetGrados;
 
-            console.log(' Rotando ruleta a:', finalRotation, 'grados');
+            console.log('Rotando ruleta a:', finalRotation, 'grados');
 
             if (!ruletaImg) {
                 console.error('No se encontró la imagen de la ruleta');
@@ -276,9 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             setTimeout(() => {
                 const signo = data.gananciaNeta >= 0 ? '+' : '';
-                statusText.textContent = ` GANADOR: ${numeroGanador} (${data.resultado.color}). ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')}`;
+                statusText.textContent = `GANADOR: ${numeroGanador} (${data.resultado.color}). ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')}`;
                 statusText.style.color = data.gananciaNeta >= 0 ? 'var(--color-success)' : 'var(--color-danger)';
-
 
                 actualizarHistorial(data);
 
@@ -296,20 +286,19 @@ document.addEventListener('DOMContentLoaded', () => {
             
         } catch (error) {
             console.error('Error en el proceso de apuesta:', error);
-            statusText.textContent = 'Error de conexión con el servidor';
+            statusText.textContent = error.message || 'Error de conexión con el servidor';
             statusText.style.color = 'var(--color-danger)';
             spinButton.disabled = false;
             spinButton.textContent = 'INICIAR APUESTA';
+            
+            await cargarSaldoInicial();
+            limpiarApuestasVisuales();
         }
     }
 
-
     function actualizarHistorial(data) {
         if (data.saldo !== undefined) {
-            const nuevoSaldoNum = Number(data.saldo.replace('$', '').replace(/\./g, ''));
-            if (!isNaN(nuevoSaldoNum)) {
-                actualizarDinero(nuevoSaldoNum);
-            }
+            actualizarDinero(data.saldo);
         }
 
         const tablaHistorial = document.querySelector('.tabla-historial-final tbody'); 
@@ -322,10 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const signo = positivo ? '+' : '';
             const estado = positivo ? 'GANÓ' : 'PERDIÓ';
 
-            const detalleCompleto = data.detalle;
+            const detalleCompleto = data.detalle || '';
             
             const apuestaDetalle = detalleCompleto.split('|').map(s => {
-                return s.replace(/\s(Gana|Pierde)\s\(\S+\)$/g, '').trim();
+                return s.replace(/\s(Gana|Pierde)\s\([^)]+\)$/g, '').trim();
             }).join(' | ');
 
             const montoNeto = `${estado}: ${signo}$${Math.abs(data.gananciaNeta).toLocaleString('es-CL')}`;
@@ -349,7 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 tablaHistorial.removeChild(tablaHistorial.lastChild);
             }
         }
-
     }
 
     window.limpiarApuestas = function() {
@@ -364,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         limpiarApuestasVisuales();
-        statusText.textContent = '🗑️ Apuestas limpiadas';
+        statusText.textContent = 'Apuestas limpiadas';
         console.log('Apuestas limpiadas, dinero devuelto:', dineroADevolver);
     }
 

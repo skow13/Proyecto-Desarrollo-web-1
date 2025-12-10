@@ -1,33 +1,29 @@
 <div class="contenedor-pagina-centrado">
   <div class="formulario">
     <h1>Inicio de sesión</h1>
-    <form action="/login" method="POST">
+    <form id="form-login" onsubmit="iniciarSesion(event)">
       <div class="input-box">
-        <input type="text" name="rut" required>
-        <label>RUT (Ej: 12.345.678-9)</label>
+        <input type="email" name="email" id="email" required>
+        <label>Correo electrónico</label>
       </div>
-
       <div class="input-box">
-        <input type="password" name="password" required>
+        <input type="password" name="password" id="password" required>
         <label>Contraseña</label>
       </div>
-
       <div class="recordar">
         <a href="/Recuperarc">¿Olvidó su contraseña?</a>
       </div>
-
       <input type="submit" value="Iniciar sesión">
-
       <div class="volver">
         <a href="/Inicio" class="btn-outline">Volver al inicio</a>
       </div>
     </form>
-
-    {{#if error}}
-      <p class="alert alert-danger">{{error}}</p>
-    {{/if}}
-    {{#if success}}
-      <p class="alert alert-success">{{success}}</p>
-    {{/if}}
   </div>
 </div>
+
+<script>
+// Redirigir si ya está autenticado
+if (estaAutenticado()) {
+  window.location.href = '/Ruleta';
+}
+</script>
